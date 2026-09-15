@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "D:/xpredict_softwares/esp-flow/.claude/hooks/load-project-context.mjs"
+            ],
+            "timeout": 10,
+            "statusMessage": "Loading ESP-Flow project rules"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+/* The canvas takes the space the symbol table leaves, and never less than a
+   rung's worth — flex-basis matches the design's 60%. */
+.canvas {
+  flex: 1 1 60%;
+  min-height: var(--min-canvas);
+  min-width: 0;
+  overflow: auto;
+  background-color: var(--canv);
+}
+
+/* A quiet 16px line grid — present enough to judge alignment, never loud enough
+   to compete with the line work. */
+.grid {
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.zoomWrap {
+  transform-origin: 0 0;
+  width: max-content;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+  user-select: none;
+}
+
+.hit {
+  cursor: pointer;
+  transition: fill var(--t-fast) linear;
+}
+
+.insertBtn {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.insertBtn:hover {
+  opacity: 1;
+}
+
+.ring {
+  pointer-events: none;
+}
+
+.caret {
+  pointer-events: none;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret {
+    animation: none;
+  }
+}

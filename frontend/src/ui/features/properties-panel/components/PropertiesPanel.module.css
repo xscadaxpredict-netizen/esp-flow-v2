@@ -1,0 +1,113 @@
+.body {
+  padding: var(--sp-3);
+}
+
+.empty,
+.note {
+  margin: 0;
+  color: var(--tx3);
+  font-size: var(--fs-meta);
+  line-height: 1.4;
+}
+
+.note {
+  margin: -2px 0 var(--sp-5);
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+
+.label {
+  color: var(--tx2);
+  font-size: var(--fs-meta);
+}
+
+.input {
+  width: 100%;
+  height: 20px;
+  padding: 0 5px;
+  background: var(--input);
+  border: var(--border);
+  color: var(--tx);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+}
+
+.input:disabled {
+  color: var(--tx3);
+  cursor: not-allowed;
+}
+
+/* Read-only mirrors read as data, not as a disabled field you might unlock. */
+.readonly {
+  height: 20px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom-color: var(--bord);
+  color: var(--tx2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.acWrap {
+  position: relative;
+}
+
+.ac {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  right: 0;
+  z-index: 60;
+  max-height: 176px;
+  overflow: auto;
+  background: var(--panel2);
+  border: var(--border-strong);
+  box-shadow: var(--shadow-menu);
+}
+
+.acRow {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--sp-2);
+  align-items: center;
+  width: 100%;
+  height: 22px;
+  padding: 0 var(--sp-2);
+  color: var(--tx);
+  font-size: var(--fs-meta);
+  text-align: left;
+}
+
+.acRow:hover {
+  background: var(--selbg);
+}
+
+.acName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.acAddr {
+  color: var(--addr);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+}
+
+.acType {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+}

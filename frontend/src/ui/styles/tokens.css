@@ -1,0 +1,162 @@
+/**
+ * ESP-Flow design tokens.
+ *
+ * Source of truth: documentation/Design feedback needed/design_handoff_espflow_ide/README.md
+ * Dark is the default theme; light is opted into with [data-theme="light"] on <html>.
+ * Every colour in the UI must come from one of these keys — no literal hex in components.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ── surfaces ─────────────────────────────────────────────── */
+  --bg: #0e1114;
+  --panel: #171b21;
+  --panel2: #1d222a;
+  --head: #131720;
+
+  /* ── borders ──────────────────────────────────────────────── */
+  --bord: #2a313a;
+  --bord2: #3d4650;
+
+  /* ── text ─────────────────────────────────────────────────── */
+  --tx: #dde3ea;
+  --tx2: #9aa5b1;
+  --tx3: #6e7882;
+
+  /* ── accent / selection ───────────────────────────────────── */
+  --acc: #4b90d6;
+  --accs: rgba(75, 144, 214, 0.18);
+  --selbg: #1b3350;
+
+  /* ── canvas & specialised surfaces ────────────────────────── */
+  --canv: #0b0e12;
+  --grid: #191f27;
+  --gutter: #0e1216;
+  --input: #0b0e12;
+  --log: #090c0f;
+  --fbfill: #151b22;
+
+  /* ── signal colours (reserved — never decorative) ─────────── */
+  --green: #3fd67f;
+  --red: #f0655c;
+  --amber: #e0a83c;
+  --cmt: #6f9a80;
+
+  /* ── ladder line work ─────────────────────────────────────── */
+  --ink: #8e99a4;
+  --dead: #454e58;
+  --lab: #dde3ea;
+  --addr: #9aa5b1;
+
+  --shadow: rgba(0, 0, 0, 0.55);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #e5e8ec;
+  --panel: #f3f4f7;
+  --panel2: #fbfbfd;
+  --head: #e9ebef;
+
+  --bord: #ccd2d9;
+  --bord2: #a9b1ba;
+
+  --tx: #1b2126;
+  --tx2: #525c66;
+  --tx3: #7c858f;
+
+  --acc: #1a68b8;
+  --accs: rgba(26, 104, 184, 0.14);
+  --selbg: #cadff6;
+
+  --canv: #fcfcfb;
+  --grid: #e7eaed;
+  --gutter: #eef0f3;
+  --input: #ffffff;
+  --log: #f8f9fa;
+  --fbfill: #ffffff;
+
+  --green: #0f7a41;
+  --red: #c0342a;
+  --amber: #8f5c05;
+  --cmt: #3f7a58;
+
+  --ink: #414b55;
+  --dead: #aab2ba;
+  --lab: #1b2126;
+  --addr: #525c66;
+
+  --shadow: rgba(0, 0, 0, 0.22);
+}
+
+/**
+ * Non-colour tokens. These do not change between themes.
+ * Everything is small and tight on purpose — this is a dense engineering tool.
+ */
+:root {
+  /* ── type ─────────────────────────────────────────────────── */
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --fs-body: 11.5px;
+  --fs-head: 11px;
+  --fs-meta: 10px;
+  --fs-mono: 10.5px;
+
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-bold: 600;
+
+  /* ── spacing (4px base) ───────────────────────────────────── */
+  --sp-1: 3px;
+  --sp-2: 6px;
+  --sp-3: 7px;
+  --sp-4: 8px;
+  --sp-5: 9px;
+  --sp-6: 11px;
+
+  /* ── region sizing ────────────────────────────────────────── */
+  --h-title: 26px;
+  --h-menubar: 24px;
+  --h-toolbar-row: 28px;
+  --h-statusbar: 22px;
+  --h-panel-head: 22px;
+  --h-menu-row: 22px;
+  --h-palette-row: 28px;
+  --h-table-row: 20px;
+  --h-tab: 26px;
+  --h-breadcrumb: 22px;
+  --sz-toolbtn: 22px;
+
+  /* ── panel defaults & floors ──────────────────────────────── */
+  --w-left: 238px;
+  --w-right: 296px;
+  --h-bottom: 150px;
+  --h-symbols: 65px;
+  --min-left: 96px;
+  --min-right: 150px;
+  --min-bottom: 64px;
+  --min-symbols: 43px;
+  --min-canvas: 150px;
+
+  /* ── chrome ───────────────────────────────────────────────── */
+  --radius: 0;
+  --border: 1px solid var(--bord);
+  --border-strong: 1px solid var(--bord2);
+  --shadow-menu: 0 10px 26px var(--shadow);
+  --shadow-modal: 0 18px 48px rgba(0, 0, 0, 0.6);
+  --scrim: rgba(0, 0, 0, 0.42);
+
+  /* ── motion: an engineering tool, nothing lingers ─────────── */
+  --t-fast: 90ms;
+  --t-base: 120ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-fast: 0ms;
+    --t-base: 0ms;
+  }
+}

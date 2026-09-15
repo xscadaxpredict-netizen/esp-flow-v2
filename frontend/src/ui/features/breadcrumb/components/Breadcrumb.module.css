@@ -1,0 +1,64 @@
+.strip {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: var(--h-breadcrumb);
+  padding: 0 var(--sp-4);
+  background: var(--panel);
+  border-bottom: var(--border);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+  user-select: none;
+  overflow: hidden;
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+}
+
+.crumb {
+  color: var(--tx3);
+}
+
+.crumbCurrent {
+  color: var(--tx);
+  font-family: var(--font-mono);
+}
+
+.chev {
+  color: var(--bord2);
+}
+
+.hint {
+  flex: 1;
+  min-width: 0;
+  color: var(--tx2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chipEdit,
+.chipOnline {
+  flex: none;
+  padding: 2px var(--sp-3);
+  border: 1px solid;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+}
+
+.chipEdit {
+  border-color: var(--bord2);
+  color: var(--tx2);
+}
+
+.chipOnline {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green) 12%, transparent);
+  color: var(--green);
+}

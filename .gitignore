@@ -1,0 +1,30 @@
+@'
+# Node
+node_modules/
+dist/
+coverage/
+*.log
+
+# Environment and secrets
+.env
+.env.*
+
+# Personal Claude Code settings (the shared settings.json and hooks ARE committed)
+.claude/settings.local.json
+
+# Python / Django (backend)
+__pycache__/
+*.pyc
+.venv/
+venv/
+db.sqlite3
+
+# PlatformIO (firmware)
+.pio/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+'@ | Set-Content -Encoding ascii .gitignore

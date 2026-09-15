@@ -1,0 +1,87 @@
+.strip {
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  height: var(--h-tab);
+  background: var(--head);
+  border-bottom: var(--border);
+  overflow-x: auto;
+  overflow-y: hidden;
+  user-select: none;
+  scrollbar-width: none;
+}
+
+.strip::-webkit-scrollbar {
+  height: 0;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  border-right: var(--border);
+  background: transparent;
+  color: var(--tx3);
+  white-space: nowrap;
+}
+
+.tab:hover {
+  background: var(--panel);
+  color: var(--tx2);
+}
+
+/* The active tab joins the canvas below it: no bottom border, accent on top. */
+.tabActive {
+  position: relative;
+  background: var(--panel);
+  color: var(--tx);
+}
+
+.tabActive::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--acc);
+}
+
+.tabMain {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  padding: 0 var(--sp-2) 0 var(--sp-4);
+  color: inherit;
+  font-size: var(--fs-body);
+}
+
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kind {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  margin-right: var(--sp-2);
+  color: var(--tx3);
+}
+
+.close:hover {
+  background: var(--bord);
+  color: var(--tx);
+}

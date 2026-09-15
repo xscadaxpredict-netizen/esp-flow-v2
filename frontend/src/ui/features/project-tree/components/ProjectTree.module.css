@@ -1,0 +1,64 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 22px;
+  padding-right: var(--sp-2);
+  color: var(--tx2);
+  font-size: var(--fs-body);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.row:hover {
+  background: var(--panel2);
+  color: var(--tx);
+}
+
+.rowSelected {
+  background: var(--selbg);
+  color: var(--tx);
+}
+
+.chev {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 11px;
+  color: var(--tx3);
+}
+
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 14px;
+  color: var(--tx2);
+}
+
+.accent {
+  color: var(--acc);
+}
+
+.amber {
+  color: var(--amber);
+}
+
+.muted {
+  color: var(--tx3);
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tag {
+  flex: none;
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: 9px;
+}

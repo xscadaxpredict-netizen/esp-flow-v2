@@ -1,0 +1,32 @@
+The whole behaviour comes from one data model plus seven rules.
+
+Model: a network is a series/parallel tree — a series node (elements left to right), a parallel node (stacked levels), each level itself a series. Every branch is a structural change, never a drawing trick.
+
+Rule 1 — width is intrinsic. A series is the sum of its children's widths; a parallel is the max of its levels'. Levels narrower than their block get a filler wire out to the shared rejoin node, so all levels start at the block's left node and end at its right node.
+
+Rule 2 — a branch spans exactly its parent. Branching wraps the clicked node in a parallel whose second level is the new element, so the child starts at its parent's width — 1 for a lone contact.
+
+Rule 3 — "parent" means the parent's displayed span. If the clicked element is the entire line inside a block, its span is the block's width, so the child is added as a new level of that block (directly below the clicked level) and inherits that width, rather than nesting a narrower parallel inside it.
+
+Rule 4 — widening is a side effect, never bookkeeping. Inserting an element inside a block splices it into that level's series; the block's max-width recomputes and every other level's filler wire stretches automatically. That's why a child grows to 2 then 3 as you add contacts beside its parent, and why insertions outside the block don't affect it.
+
+Rule 5 — a click on a shared position means the shallower line. Every series ends in a trailing insertion slot at the right edge of its allotted width. When a parallel block is the last child of its parent series, the parent's slot and the block's first level's slot land on the same point, because level 0 shares the parent's row: one region, two meanings. The shallower path wins, so the click means "after the block", not "inside its first level". Extending a level stays reachable by clicking beside an element already in it — the two intents are separated by where you click, not by a mode. Levels below row 0 never collide, since their row differs.
+
+Rule 6 — an output ends its line. A coil terminates the line it sits on. Nothing may follow it: no contact, no function block, no second coil in series. A coil is drawn immediately after the last contact of its own line, in the next column, and the line simply stops there — nothing is drawn to its right, and there is no right power rail at all, as in ISPSoft. So coils in the same rung need not share a column, and a line that ends in a coil has no trailing insertion slot. A coil is transparent to power: it is written by the flow that reaches it and never gates that flow.
+
+Rule 7 — outputs branch as a block whose every leg terminates. Several outputs with the same condition are a block whose legs hold nothing but their coils; outputs with different conditions are the same block with contacts added to the legs. A block may not mix legs that terminate with legs that rejoin, and an output block is always the last child of its line, with no rejoin node on its right. A single output needs no block at all — the coil is simply the last element of the rung.
+
+The editor enforces rule 7 when you place an output, not only when it checks the finished rung: a coil may only end a line from which power can actually reach the rail. Every sibling leg of the block holding that line must already end in an output, that block must be the last thing on the line holding it, and so on outward. So the way to build an output branch is to place the first coil, branch it, and then grow each leg leftward with contacts — never to drop a coil into one leg of a block that rejoins and carries on.
+
+Deletion runs the same rules backwards: remove the element, drop a level left empty, and collapse a parallel left with one level back into its parent series.
+
+After a deletion the selection follows the neighbour on the left — the one on the right when the deleted element was first in its line, that line's trailing slot when no element is left beside it, and the rung's own slot when pruning carried that line away. An output is an element like any other, so deleting one lands on the contact beside it.
+
+Constraints — not rules of the shape, but what the editor holds fixed or refuses:
+
+- A function block occupies two cells and cannot be branched.
+- Branching a coil requires a coil, and branching a contact requires a contact — a new leg must terminate exactly as its siblings do.
+- A program keeps at least one network; the last one cannot be deleted.
+- A rung is never drawn narrower than six columns.
+- Only the left power rail is drawn. A rung with no output yet runs an open wire past its last element and is labelled as having none.
+- Where the design prototype and ISPSoft disagree on ladder canvas geometry, ISPSoft wins. Decided 2026-09-12. The prototype still governs every other region of the IDE. What ISPSoft actually does, read from Delta's own manual, is recorded in ispsoft-behaviour.md beside this file.

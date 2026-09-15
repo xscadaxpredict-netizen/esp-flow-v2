@@ -1,0 +1,558 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  height: 100%;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.spacer {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── tab strip ──────────────────────────────────────────────── */
+
+.tabs {
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  height: 24px;
+  background: var(--head);
+  border-bottom: var(--border);
+  user-select: none;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 100%;
+  padding: 0 10px;
+  border-right: 1px solid var(--bord);
+  border-bottom: 2px solid transparent;
+  color: var(--tx2);
+  font-size: var(--fs-body);
+}
+
+.tab:hover {
+  color: var(--tx);
+}
+
+.tabActive {
+  background: var(--panel);
+  border-bottom-color: var(--acc);
+  color: var(--tx);
+  font-weight: var(--fw-medium);
+}
+
+.badge,
+.badgeProblems {
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+}
+
+.badge {
+  background: var(--panel2);
+  color: var(--tx3);
+}
+
+.badgeProblems {
+  background: color-mix(in srgb, var(--red) 16%, transparent);
+  color: var(--red);
+}
+
+.tabsRight {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0 var(--sp-3);
+}
+
+.summary {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+}
+
+.hide {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: var(--tx3);
+}
+
+.hide:hover {
+  background: var(--panel2);
+  border-color: var(--bord);
+  color: var(--tx);
+}
+
+/* ── compile: progress column beside the log ────────────────── */
+
+.compile {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.progressCol {
+  width: 290px;
+  flex: 0 1 290px;
+  min-width: 196px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-4) 10px var(--sp-2);
+  border-right: 1px solid var(--bord);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.progressHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.stageTitle {
+  color: var(--tx);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+}
+
+.stageStep {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  white-space: nowrap;
+}
+
+.elapsed {
+  color: var(--tx);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: var(--fw-bold);
+}
+
+.track {
+  flex: none;
+  height: 6px;
+  background: var(--input);
+  border: var(--border);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  background: var(--acc);
+  transition: width 0.2s linear;
+}
+
+/* A finished build reads green; an in-flight one reads accent. */
+.fillDone {
+  background: var(--green);
+}
+
+.stages {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 1px;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 19px;
+  padding: 0 3px;
+  color: var(--tx3);
+  font-size: var(--fs-body);
+}
+
+.stageDone {
+  color: var(--tx2);
+}
+
+.stageActive {
+  color: var(--acc);
+  font-weight: var(--fw-medium);
+}
+
+.stageIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 13px;
+}
+
+.stageLabel {
+  flex: 1;
+}
+
+.stageTime {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  opacity: 0.75;
+}
+
+.buildRow {
+  flex: none;
+  display: flex;
+  gap: 5px;
+}
+
+.buildBtn {
+  flex: 1;
+  height: 22px;
+  background: var(--acc);
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  font-size: var(--fs-head);
+  font-weight: var(--fw-medium);
+}
+
+.buildBtn:disabled {
+  background: var(--bord2);
+  color: var(--tx3);
+  cursor: default;
+}
+
+.cancelBtn {
+  height: 22px;
+  padding: 0 var(--sp-5);
+  background: var(--panel2);
+  border: 1px solid var(--bord2);
+  border-radius: 2px;
+  color: var(--tx2);
+  font-size: var(--fs-head);
+  font-weight: var(--fw-medium);
+}
+
+.cancelBtn:disabled {
+  border-color: var(--bord);
+  color: var(--dead);
+  cursor: default;
+}
+
+/* ── log ────────────────────────────────────────────────────── */
+
+.log {
+  flex: 1;
+  min-width: 0;
+  padding: 5px var(--sp-4);
+  background: var(--log);
+  overflow: auto;
+}
+
+.logLine,
+.logWarn,
+.logOk {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+.logLine {
+  color: var(--tx2);
+}
+
+.logWarn {
+  color: var(--amber);
+}
+
+.logOk {
+  color: var(--green);
+}
+
+.logTime {
+  flex: none;
+  width: 52px;
+  color: var(--tx3);
+}
+
+.spinner {
+  flex: none;
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--acc);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+
+/* ── shared table shell for Problems and Search Results ─────── */
+
+.tabBody {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.filters {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 var(--sp-3);
+  background: var(--panel);
+  border-bottom: 1px solid var(--bord);
+  overflow: hidden;
+}
+
+.filterLabel {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+}
+
+.filterDivider {
+  width: 1px;
+  height: 13px;
+  margin: 0 3px;
+  background: var(--bord);
+}
+
+.chip {
+  height: 17px;
+  padding: 0 var(--sp-3);
+  border: var(--border);
+  border-radius: 2px;
+  color: var(--tx2);
+  font-size: var(--fs-mono);
+}
+
+.chip:hover {
+  border-color: var(--bord2);
+  color: var(--tx);
+}
+
+.chipOn {
+  background: var(--accs);
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+.count {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+}
+
+.probGrid {
+  display: grid;
+  grid-template-columns: 96px 92px 1fr 190px;
+}
+
+.xrefGrid {
+  display: grid;
+  grid-template-columns: 120px 74px 1fr 150px;
+}
+
+.probHead {
+  flex: none;
+  height: 21px;
+  background: var(--panel2);
+  border-bottom: var(--border);
+  color: var(--tx2);
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+}
+
+.hCell,
+.hCellLast {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sp-3);
+}
+
+.hCell {
+  border-right: 1px solid var(--bord);
+}
+
+.rows {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.probRow,
+.xrefRow {
+  height: 23px;
+  border-bottom: 1px solid var(--bord);
+  color: var(--tx);
+  font-size: var(--fs-body);
+}
+
+.probRow {
+  cursor: pointer;
+}
+
+.rowHover {
+  background: var(--selbg);
+}
+
+/* Alternating tint on a read-only list makes long rows easier to track. */
+.zebra {
+  background: color-mix(in srgb, var(--tx) 2%, transparent);
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 var(--sp-3);
+  min-width: 0;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 23px;
+}
+
+.mono {
+  color: var(--tx2);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+
+.monoSym {
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.sevLabel {
+  font-weight: var(--fw-medium);
+}
+
+.sevError {
+  color: var(--red);
+}
+
+.sevWarning {
+  color: var(--amber);
+}
+
+.sevInfo {
+  color: var(--acc);
+}
+
+.jump {
+  flex: none;
+  transition: opacity var(--t-fast) linear;
+}
+
+.accessR,
+.accessW {
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-bold);
+}
+
+.accessR {
+  background: var(--panel2);
+  color: var(--tx2);
+}
+
+/* A write is the interesting half of a cross-reference — double-coil bugs
+   are found by scanning this column. */
+.accessW {
+  background: color-mix(in srgb, var(--amber) 16%, transparent);
+  color: var(--amber);
+}
+
+.none {
+  padding: var(--sp-5) var(--sp-4);
+  color: var(--tx3);
+  font-size: var(--fs-meta);
+}
+
+/* ── collapsed rail ─────────────────────────────────────────── */
+
+.collapsed {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 100%;
+  height: 22px;
+  padding: 0 var(--sp-5);
+  background: var(--head);
+  border-top: var(--border);
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  text-align: left;
+}
+
+.collapsed:hover {
+  color: var(--tx2);
+}
+
+/* ── Search Results header ──────────────────────────────────── */
+
+.xrefHead {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 24px;
+  padding: 0 var(--sp-3);
+  background: var(--panel);
+  border-bottom: 1px solid var(--bord);
+  color: var(--tx2);
+  font-size: var(--fs-head);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.xrefSym {
+  color: var(--tx);
+  font-family: var(--font-mono);
+}
+
+.xrefMeta {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

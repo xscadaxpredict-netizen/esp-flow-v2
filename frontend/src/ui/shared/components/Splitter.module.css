@@ -1,0 +1,43 @@
+.vertical,
+.horizontal {
+  flex: none;
+  background: transparent;
+  transition: background var(--t-fast) linear;
+}
+
+.vertical {
+  width: 4px;
+  cursor: col-resize;
+}
+
+.horizontal {
+  height: 4px;
+  cursor: row-resize;
+}
+
+.vertical:hover,
+.horizontal:hover {
+  background: var(--acc);
+}
+
+/* A gripped splitter is taller and carries a visible handle, so a 6px strip
+   between two dense tables is findable without hunting for the cursor change. */
+.gripped {
+  height: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel);
+  border-bottom: var(--border);
+}
+
+.gripped:hover {
+  background: var(--accs);
+}
+
+.grip {
+  width: 26px;
+  height: 3px;
+  border-top: 1px dotted var(--bord2);
+  border-bottom: 1px dotted var(--bord2);
+}

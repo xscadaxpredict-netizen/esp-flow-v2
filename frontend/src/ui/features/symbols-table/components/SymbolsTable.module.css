@@ -1,0 +1,128 @@
+.wrap {
+  flex: none;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 28px;
+  padding: 0 var(--sp-4);
+  background: var(--head);
+  border-bottom: var(--border);
+}
+
+.headMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  height: 100%;
+  color: var(--tx2);
+  text-align: left;
+}
+
+.title {
+  flex: none;
+  color: var(--tx);
+  font-size: var(--fs-head);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.meta {
+  min-width: 0;
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-head);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action {
+  flex: none;
+  color: var(--acc);
+  font-family: var(--font-mono);
+  font-size: var(--fs-head);
+  white-space: nowrap;
+}
+
+.action:hover {
+  text-decoration: underline;
+}
+
+.scroll {
+  min-height: 0;
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 21px;
+  padding: 0 var(--sp-3);
+  background: var(--panel2);
+  border-bottom: var(--border);
+  border-right: 1px solid var(--bord);
+  color: var(--tx2);
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.th:nth-child(1) { width: 88px; }
+.th:nth-child(2) { width: 128px; }
+.th:nth-child(3) { width: 80px; }
+.th:nth-child(4) { width: 72px; }
+.th:nth-child(5) { width: 64px; }
+
+.tr:hover {
+  background: var(--panel2);
+}
+
+.td {
+  height: var(--h-table-row);
+  padding: 0 var(--sp-3);
+  border-bottom: 1px solid var(--bord);
+  border-right: 1px solid var(--bord);
+  color: var(--tx);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  color: var(--addr);
+}
+
+.cls {
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+}
+
+.cmt {
+  color: var(--cmt);
+  border-right: none;
+}

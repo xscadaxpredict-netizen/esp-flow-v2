@@ -1,0 +1,132 @@
+.bar {
+  position: relative;
+  z-index: 30;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: var(--h-title);
+  padding: 0 var(--sp-2);
+  background: var(--head);
+  border-bottom: var(--border);
+  user-select: none;
+}
+
+.launcherWrap {
+  position: relative;
+  display: flex;
+}
+
+.iconBtn {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 20px;
+  border: 1px solid transparent;
+  color: var(--tx2);
+  transition: background var(--t-fast) linear;
+}
+
+.iconBtn:hover {
+  background: var(--panel2);
+  border-color: var(--bord);
+  color: var(--tx);
+}
+
+.launcherMenu {
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+  z-index: 80;
+  min-width: 208px;
+  padding: 3px 0;
+  background: var(--panel2);
+  border: var(--border-strong);
+  box-shadow: var(--shadow-menu);
+}
+
+.launcherHead {
+  padding: 4px 8px;
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.launcherItem {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  height: var(--h-menu-row);
+  padding: 0 var(--sp-4);
+  color: var(--tx);
+  font-size: var(--fs-body);
+  text-align: left;
+}
+
+.launcherItem:hover {
+  background: var(--selbg);
+}
+
+.wordmark {
+  color: var(--tx);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.01em;
+}
+
+.divider {
+  width: 1px;
+  height: 12px;
+  background: var(--bord2);
+}
+
+.doc {
+  color: var(--tx2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dirty {
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-left: auto;
+}
+
+.saveState {
+  color: var(--tx3);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--acc);
+  color: #fff;
+  font-size: 9px;
+  font-weight: var(--fw-bold);
+}
+
+@media (max-width: 1100px) {
+  .saveState {
+    display: none;
+  }
+}

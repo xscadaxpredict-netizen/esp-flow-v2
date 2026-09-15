@@ -1,0 +1,29 @@
+.wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-6);
+  background: var(--canv);
+  text-align: center;
+}
+
+.icon {
+  color: var(--tx3);
+}
+
+.title {
+  color: var(--tx2);
+  font-size: 12.5px;
+  font-weight: var(--fw-medium);
+}
+
+.detail {
+  max-width: 420px;
+  color: var(--tx3);
+  font-size: var(--fs-meta);
+  line-height: 1.5;
+}

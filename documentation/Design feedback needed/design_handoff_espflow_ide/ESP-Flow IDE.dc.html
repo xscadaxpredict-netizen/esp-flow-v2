@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics=""><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"><style>
+html,body{margin:0;padding:0;width:100%;height:100%;max-width:100%;overflow:hidden;background:#0e1114}
+*{box-sizing:border-box}
+a{color:#4b90d6;text-decoration:none}a:hover{color:#79b0e8}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--bord2,#3d4650);border-radius:0}
+::-webkit-scrollbar-track{background:transparent}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.noscroll{scrollbar-width:none;-ms-overflow-style:none}
+.noscroll::-webkit-scrollbar{width:0;height:0;display:none}
+</style></helmet>
+<div style="{{ rootStyle }}">
+
+<!-- 1 TITLE BAR -->
+<div style="height:30px;flex:none;min-width:0;overflow:hidden;display:flex;align-items:center;gap:10px;justify-content:flex-start;padding:0 8px;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+  <button onClick="{{ toggleLauncher }}" title="Platform apps" style="width:22px;height:20px;padding:0;line-height:0;display:grid;place-items:center;background:transparent;border:1px solid transparent;border-radius:3px;cursor:pointer;color:var(--tx2,#9aa5b1)" style-hover="background:var(--panel2,#1d222a);border-color:var(--bord,#2a313a);color:var(--tx,#dde3ea)">
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="4" height="4"></rect><rect x="6" y="1" width="4" height="4"></rect><rect x="11" y="1" width="4" height="4"></rect><rect x="1" y="6" width="4" height="4"></rect><rect x="6" y="6" width="4" height="4"></rect><rect x="11" y="6" width="4" height="4"></rect><rect x="1" y="11" width="4" height="4"></rect><rect x="6" y="11" width="4" height="4"></rect><rect x="11" y="11" width="4" height="4"></rect></svg>
+  </button>
+  <div style="display:flex;align-items:center;gap:6px;min-width:0;flex:1 1 auto">
+    <span style="flex:none;font:600 11px/1.6 'IBM Plex Sans',sans-serif;letter-spacing:.09em;color:var(--acc,#4b90d6)">ESP&#8209;FLOW</span>
+    <span style="flex:none;width:1px;height:12px;background:var(--bord,#2a313a)"></span>
+    <span style="flex:1 1 auto;font:500 11.5px/1.6 'IBM Plex Sans',sans-serif;color:var(--tx,#dde3ea);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;min-width:0">BottlingLine_v3 &#8211; [Prog0 : Ladder Diagram]</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:3px;margin-right:6px;flex:0 1 auto;overflow:hidden">
+    <span style="font:500 9.5px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--tx3,#6e7882);margin-right:4px">SCENARIOS</span>
+    <sc-for list="{{ scenarios }}" as="s" hint-placeholder-count="10">
+      <button onClick="{{ s.on }}" onMouseEnter="{{ s.enter }}" onMouseLeave="{{ hideTip }}" style="{{ s.style }}">{{ s.n }}</button>
+    </sc-for>
+  </div>
+  <button onClick="{{ toggleTheme }}" style="height:20px;padding:0 8px;font:500 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1);background:var(--panel2,#1d222a);border:1px solid var(--bord,#2a313a);border-radius:3px;cursor:pointer" style-hover="color:var(--tx,#dde3ea)">{{ themeLabel }}</button>
+  <div style="display:flex;align-items:center;gap:6px;margin-left:2px;padding-left:8px;border-left:1px solid var(--bord,#2a313a)">
+    <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">saved 14:22</span>
+    <span style="width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:var(--acc,#4b90d6);color:#fff;font:600 9px/1 'IBM Plex Sans',sans-serif">RK</span>
+  </div>
+</div>
+
+<!-- 2 MENU BAR -->
+<div style="height:24px;flex:none;min-width:0;display:flex;align-items:stretch;padding:0 4px;background:var(--panel,#171b21);border-bottom:1px solid var(--bord,#2a313a);position:relative;z-index:60">
+  <sc-for list="{{ menus }}" as="m" hint-placeholder-count="8">
+    <button onClick="{{ m.on }}" onMouseEnter="{{ m.hover }}" style="{{ m.style }}">{{ m.label }}</button>
+  </sc-for>
+  <div style="flex:1"></div>
+  <button onClick="{{ openPalette }}" style="align-self:center;height:17px;display:flex;align-items:center;gap:6px;padding:0 7px;background:var(--panel2,#1d222a);border:1px solid var(--bord,#2a313a);border-radius:3px;cursor:pointer;color:var(--tx3,#6e7882);font:400 10px/1 'IBM Plex Sans',sans-serif" style-hover="color:var(--tx2,#9aa5b1)">
+    <svg width="9" height="9" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M4 4l4 4-4 4M9 12h4"></path></svg>
+    <span>Command palette</span>
+    <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">Ctrl+Shift+P</span>
+  </button>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="{{ menuPanelStyle }}">
+      <sc-for list="{{ menuItems }}" as="it" hint-placeholder-count="9">
+        <sc-if value="{{ it.sep }}" hint-placeholder-val="{{ false }}">
+          <div style="height:1px;margin:4px 0;background:var(--bord,#2a313a)"></div>
+        </sc-if>
+        <sc-if value="{{ it.l }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ it.on }}" style="{{ it.style }}">
+            <span style="width:16px;display:grid;place-items:center;color:var(--tx2,#9aa5b1)"><svg width="12" height="12" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="square"><path d="{{ it.d }}"></path></svg></span>
+            <span style="flex:1;text-align:left">{{ it.l }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx3,#6e7882)">{{ it.k }}</span>
+          </button>
+        </sc-if>
+      </sc-for>
+    </div>
+  </sc-if>
+</div>
+
+<!-- 3 TOOLBARS -->
+<div style="flex:none;min-width:0;overflow:hidden;background:var(--panel,#171b21);border-bottom:1px solid var(--bord,#2a313a);padding:1px 4px;display:flex;flex-direction:column;gap:1px">
+  <sc-for list="{{ toolRows }}" as="row" hint-placeholder-count="2">
+    <div style="min-height:28px;display:flex;align-items:center;gap:0;flex-wrap:wrap;min-width:0">
+      <sc-for list="{{ row.groups }}" as="g" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:1px;padding:0 5px;border-right:1px solid var(--bord,#2a313a)">
+          <span style="font:500 9px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;color:var(--tx3,#6e7882);margin-right:4px;writing-mode:horizontal-tb">{{ g.label }}</span>
+          <sc-for list="{{ g.items }}" as="b" hint-placeholder-count="8">
+            <button onClick="{{ b.on }}" onMouseEnter="{{ b.enter }}" onMouseLeave="{{ hideTip }}" style="{{ b.style }}">
+              <svg width="16" height="16" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.35" fill="none" stroke-linecap="square"><path d="{{ b.d }}"></path><text x="8" y="10.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="6.5" font-weight="600" stroke="none" fill="currentColor">{{ b.t }}</text></svg>
+            </button>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </sc-for>
+</div>
+
+<!-- MAIN ROW -->
+<div style="flex:1 1 auto;min-height:150px;min-width:0;display:flex;align-items:stretch">
+
+  <!-- 4 PROJECT PANEL -->
+  <div style="{{ leftPanelStyle }}">
+    <div style="height:24px;flex:none;display:flex;align-items:center;gap:6px;padding:0 6px;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+      <span style="font:600 10px/1 'IBM Plex Sans',sans-serif;letter-spacing:.07em;color:var(--tx2,#9aa5b1);text-transform:uppercase">Project</span>
+      <div style="flex:1"></div>
+      <svg width="11" height="11" viewBox="0 0 16 16" stroke="var(--tx3,#6e7882)" stroke-width="1.4" fill="none"><path d="M3 8h10M8 3v10"></path></svg>
+      <svg width="11" height="11" viewBox="0 0 16 16" stroke="var(--tx3,#6e7882)" stroke-width="1.4" fill="none"><path d="M3 4h10M3 8h10M3 12h6"></path></svg>
+    </div>
+    <div style="flex:1;overflow:auto;padding:2px 0">
+      <sc-for list="{{ treeRows }}" as="n" hint-placeholder-count="16">
+        <div onClick="{{ n.on }}" onContextMenu="{{ n.ctx }}" style="{{ n.style }}">
+          <span style="width:11px;flex:none;display:grid;place-items:center;color:var(--tx3,#6e7882)"><svg width="9" height="9" viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" fill="none"><path d="{{ n.chev }}"></path></svg></span>
+          <span style="width:14px;flex:none;display:grid;place-items:center;color:{{ n.iconColor }}"><svg width="12" height="12" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="square"><path d="{{ n.d }}"></path></svg></span>
+          <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.5">{{ n.label }}</span>
+          <span style="font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ n.tag }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div onMouseDown="{{ dragLeft }}" style="width:4px;flex:none;cursor:col-resize;background:var(--panel,#171b21);border-right:1px solid var(--bord,#2a313a);display:flex;align-items:center;justify-content:center" style-hover="background:var(--accs,rgba(75,144,214,.18))">
+    <div style="width:2px;height:22px;border-left:1px dotted var(--bord2,#3d4650);border-right:1px dotted var(--bord2,#3d4650)"></div>
+  </div>
+
+  <!-- 5 WORK EDIT AREA -->
+  <div ref="{{ colRef }}" style="flex:1;min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column;background:var(--bg,#0e1114)">
+    <div class="noscroll" style="height:26px;flex:none;min-width:0;overflow-x:auto;overflow-y:hidden;display:flex;align-items:stretch;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+        <button onClick="{{ t.on }}" style="{{ t.style }}">
+          <span style="width:12px;display:grid;place-items:center;color:var(--tx3,#6e7882)"><svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.3" fill="none"><path d="{{ t.d }}"></path></svg></span>
+          <span style="min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ t.label }}</span>
+          <span style="color:var(--amber,#e0a83c);font-family:'IBM Plex Mono',monospace">{{ t.dirty }}</span>
+          <span style="color:var(--tx3,#6e7882);font-size:11px">×</span>
+        </button>
+      </sc-for>
+      <div style="flex:1;border-bottom:1px solid var(--bord,#2a313a)"></div>
+    </div>
+
+    <!-- breadcrumb -->
+    <div style="height:22px;flex:none;display:flex;align-items:center;gap:5px;padding:0 8px;background:var(--panel,#171b21);border-bottom:1px solid var(--bord,#2a313a);white-space:nowrap;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3,#6e7882)">
+      <span style="flex:none">Project</span><span style="flex:none">/</span><span style="flex:none">Programs</span><span style="flex:none">/</span>
+      <span style="flex:none;color:var(--tx2,#9aa5b1)">Prog0</span><span style="flex:none">/</span>
+      <span style="flex:none;color:var(--tx,#dde3ea);font-weight:500">{{ crumbNet }}</span>
+      <span style="flex:none;width:1px;height:12px;background:var(--bord,#2a313a)"></span>
+      <span style="flex:1 1 auto;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--acc,#4b90d6)">{{ toolHint }}</span>
+      <span style="flex:none;font-family:'IBM Plex Mono',monospace;font-size:10px">{{ crumbMode }}</span>
+    </div>
+
+    <!-- local symbols -->
+    <div style="flex:none;min-width:0;display:flex;flex-direction:column;overflow:hidden;background:var(--panel,#171b21)">
+      <div onClick="{{ toggleSym }}" style="flex:none;height:28px;display:flex;align-items:center;gap:8px;padding:0 8px;cursor:pointer;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+        <svg width="11" height="11" viewBox="0 0 16 16" stroke="var(--tx2,#9aa5b1)" stroke-width="2" fill="none"><path d="{{ symChev }}"></path></svg>
+        <span style="font:600 11px/1.4 'IBM Plex Sans',sans-serif;letter-spacing:.07em;color:var(--tx,#dde3ea);text-transform:uppercase;white-space:nowrap">Local Symbols</span>
+        <span style="font:400 11px/1.4 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Prog0 · {{ declCount }} declared{{ symTightNote }}</span>
+        <div style="flex:1;min-width:8px"></div>
+        <span style="font:400 11px/1.4 'IBM Plex Mono',monospace;color:var(--acc,#4b90d6);white-space:nowrap">+ New symbol</span>
+      </div>
+      <sc-if value="{{ symOpen }}" hint-placeholder-val="{{ true }}">
+        <div class="noscroll" style="{{ symTableStyle }}">
+          <sc-for list="{{ symHead }}" as="h" hint-placeholder-count="6">
+            <div style="height:21px;display:flex;align-items:center;padding:0 7px;background:var(--panel2,#1d222a);border-bottom:1px solid var(--bord,#2a313a);border-right:1px solid var(--bord,#2a313a);font:600 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1);overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ h }}</div>
+          </sc-for>
+          <sc-for list="{{ symCells }}" as="c" hint-placeholder-count="24">
+            <div style="{{ c.style }}">{{ c.v }}</div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ symOpen }}" hint-placeholder-val="{{ true }}">
+      <div onMouseDown="{{ dragSym }}" title="Drag to resize the symbol table" style="flex:none;height:6px;cursor:row-resize;background:var(--panel,#171b21);border-bottom:1px solid var(--bord,#2a313a);display:flex;align-items:center;justify-content:center" style-hover="background:var(--accs,rgba(75,144,214,.18))">
+        <div style="height:3px;width:26px;border-top:1px dotted var(--bord2,#3d4650);border-bottom:1px dotted var(--bord2,#3d4650)"></div>
+      </div>
+    </sc-if>
+
+    <!-- ladder canvas -->
+    <div onMouseMove="{{ canvasMove }}" onMouseUp="{{ canvasDrop }}" style="flex:1 1 auto;flex-basis:60%;min-height:0;overflow:auto;position:relative;background-color:var(--canv,#0b0e12);background-image:linear-gradient(to right,var(--grid,#1a2028) 1px,transparent 1px),linear-gradient(to bottom,var(--grid,#1a2028) 1px,transparent 1px);background-size:16px 16px">
+      <div style="{{ canvasInner }}">
+      <svg width="{{ svgW }}" height="{{ svgH }}" viewBox="{{ svgBox }}" style="display:block;font-family:'IBM Plex Sans',sans-serif" preserveAspectRatio="xMinYMin meet">
+        <sc-for list="{{ plates }}" as="p" hint-placeholder-count="6">
+          <rect x="{{ p.x }}" y="{{ p.y }}" width="{{ p.w }}" height="{{ p.h }}" fill="{{ p.fill }}" stroke="{{ p.stroke }}" stroke-width="1" stroke-dasharray="{{ p.dash }}"></rect>
+        </sc-for>
+        <sc-for list="{{ wires }}" as="w" hint-placeholder-count="24">
+          <line x1="{{ w.x1 }}" y1="{{ w.y1 }}" x2="{{ w.x2 }}" y2="{{ w.y2 }}" stroke="{{ w.stroke }}" stroke-width="{{ w.sw }}" stroke-dasharray="{{ w.dash }}"></line>
+        </sc-for>
+        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="4">
+          <circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="3" fill="{{ d.fill }}"></circle>
+        </sc-for>
+        <sc-for list="{{ glyphs }}" as="g" hint-placeholder-count="12">
+          <path d="{{ g.d }}" stroke="{{ g.stroke }}" stroke-width="{{ g.sw }}" fill="none"></path>
+        </sc-for>
+        <sc-if value="{{ selRing }}" hint-placeholder-val="{{ true }}">
+          <g style="pointer-events:none">
+            <rect x="{{ selRing.x }}" y="{{ selRing.y }}" width="{{ selRing.w }}" height="{{ selRing.h }}" fill="none" stroke="var(--acc,#4b90d6)" stroke-width="1.3" stroke-dasharray="4 2"></rect>
+            <rect x="{{ selRing.hx1 }}" y="{{ selRing.hy1 }}" width="5" height="5" fill="var(--acc,#4b90d6)"></rect>
+            <rect x="{{ selRing.hx2 }}" y="{{ selRing.hy1 }}" width="5" height="5" fill="var(--acc,#4b90d6)"></rect>
+            <rect x="{{ selRing.hx1 }}" y="{{ selRing.hy2 }}" width="5" height="5" fill="var(--acc,#4b90d6)"></rect>
+            <rect x="{{ selRing.hx2 }}" y="{{ selRing.hy2 }}" width="5" height="5" fill="var(--acc,#4b90d6)"></rect>
+          </g>
+        </sc-if>
+        <sc-if value="{{ caret }}" hint-placeholder-val="{{ true }}">
+          <line x1="{{ caret.x }}" y1="{{ caret.y1 }}" x2="{{ caret.x }}" y2="{{ caret.y2 }}" stroke="var(--acc,#4b90d6)" stroke-width="2" style="animation:blink 1s steps(1) infinite"></line>
+        </sc-if>
+        <sc-for list="{{ hits }}" as="h" hint-placeholder-count="45">
+          <rect x="{{ h.x }}" y="{{ h.y }}" width="{{ h.w }}" height="{{ h.h }}" fill="{{ h.fill }}" stroke="{{ h.stroke }}" stroke-width="1" stroke-dasharray="{{ h.dash }}" onClick="{{ h.on }}" onMouseEnter="{{ h.enter }}" onMouseMove="{{ h.move }}" onMouseLeave="{{ h.leave }}" style="cursor:{{ h.cursor }}"></rect>
+        </sc-for>
+        <sc-for list="{{ netBtns }}" as="b" hint-placeholder-count="2">
+          <g onClick="{{ b.on }}" style="cursor:pointer">
+            <rect x="{{ b.x }}" y="{{ b.y }}" width="{{ b.w }}" height="{{ b.h }}" rx="2" fill="{{ b.fill }}" stroke="{{ b.stroke }}" stroke-width="1" stroke-dasharray="4 3"></rect>
+          </g>
+        </sc-for>
+      </svg>
+      <div style="position:absolute;inset:0;pointer-events:none">
+        <sc-for list="{{ labels }}" as="l" hint-placeholder-count="30">
+          <div style="{{ l.css }}">{{ l.text }}</div>
+        </sc-for>
+      </div>
+      </div>
+
+      <!-- inline canvas autocomplete -->
+      <sc-if value="{{ acOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:216px;top:454px;width:266px;background:var(--panel2,#1d222a);border:1px solid var(--bord2,#3d4650);box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:20">
+          <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a);font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx,#dde3ea)">Mot<span style="width:1px;height:11px;background:var(--acc,#4b90d6);margin-left:1px;animation:blink 1s steps(1) infinite"></span></div>
+          <sc-for list="{{ acItems }}" as="a" hint-placeholder-count="4">
+            <div style="{{ a.style }}">
+              <span style="font:400 11px/1 'IBM Plex Mono',monospace;flex:1">{{ a.name }}</span>
+              <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ a.addr }}</span>
+              <span style="font:500 10px/1 'IBM Plex Mono',monospace;color:var(--acc,#4b90d6);width:38px;text-align:right">{{ a.type }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- 6/7 RIGHT PANELS -->
+  <div onMouseDown="{{ dragRight }}" style="width:4px;flex:none;cursor:col-resize;background:var(--panel,#171b21);border-left:1px solid var(--bord,#2a313a);display:flex;align-items:center;justify-content:center" style-hover="background:var(--accs,rgba(75,144,214,.18))">
+    <div style="width:2px;height:22px;border-left:1px dotted var(--bord2,#3d4650);border-right:1px dotted var(--bord2,#3d4650)"></div>
+  </div>
+  <div style="{{ rightPanelStyle }}">
+    <!-- library -->
+    <div style="{{ libPanelStyle }}">
+      <div onClick="{{ toggleLib }}" style="height:26px;flex:none;display:flex;align-items:center;gap:7px;padding:0 7px;cursor:pointer;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+        <svg width="11" height="11" viewBox="0 0 16 16" stroke="var(--tx2,#9aa5b1)" stroke-width="2" fill="none"><path d="{{ libChev }}"></path></svg>
+        <span style="font:600 10.5px/1.5 'IBM Plex Sans',sans-serif;letter-spacing:.07em;color:var(--tx,#dde3ea);text-transform:uppercase;white-space:nowrap">Library</span>
+        <div style="flex:1;min-width:6px"></div>
+        <span style="font:400 9.5px/1.5 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882);white-space:nowrap">{{ libHint }}</span>
+      </div>
+      <sc-if value="{{ libOpen }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:1;min-height:0;overflow:auto">
+        <sc-for list="{{ libRows }}" as="r" hint-placeholder-count="20">
+          <div onClick="{{ r.on }}" onMouseDown="{{ r.down }}" style="{{ r.style }}">
+            <span style="width:11px;flex:none;display:grid;place-items:center;color:var(--tx3,#6e7882)"><svg width="9" height="9" viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" fill="none"><path d="{{ r.chev }}"></path></svg></span>
+            <span style="width:14px;flex:none;display:grid;place-items:center;color:{{ r.iconColor }}"><svg width="12" height="12" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.3" fill="none"><path d="{{ r.d }}"></path></svg></span>
+            <span style="flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:1.5">{{ r.label }}</span>
+            <span style="font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ r.tag }}</span>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
+    <!-- properties -->
+    <div style="flex:0 1 262px;min-height:112px;display:flex;flex-direction:column;background:var(--panel,#171b21)">
+      <div style="height:24px;flex:none;display:flex;align-items:stretch;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+        <div style="display:flex;align-items:center;padding:0 8px;font:600 10px/1 'IBM Plex Sans',sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--tx,#dde3ea);border-bottom:2px solid var(--acc,#4b90d6);margin-bottom:-1px">Properties</div>
+        <div style="display:flex;align-items:center;padding:0 8px;font:500 10px/1 'IBM Plex Sans',sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3,#6e7882);cursor:pointer">Watch</div>
+        <div style="flex:1"></div>
+        <div style="display:flex;align-items:center;padding:0 7px;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ propKind }}</div>
+      </div>
+      <div style="flex:1;overflow:auto;padding:6px 8px;position:relative;min-width:0">
+        <div style="{{ propGridStyle }}">
+          <label style="color:var(--tx2,#9aa5b1)">Symbol</label>
+          <div style="position:relative">
+            <input value="{{ symField }}" placeholder="type to filter declared symbols" onChange="{{ symFilter }}" onFocus="{{ openAc }}" style="width:100%;height:21px;padding:0 6px;background:var(--input,#0e1216);border:1px solid var(--acc,#4b90d6);border-radius:2px;color:var(--tx,#dde3ea);font:400 11px/1 'IBM Plex Mono',monospace;outline:none">
+          </div>
+          <label style="color:var(--tx2,#9aa5b1)">Address</label>
+          <div style="height:21px;display:flex;align-items:center;gap:5px;padding:0 6px;background:var(--panel2,#1d222a);border:1px solid var(--bord,#2a313a);border-radius:2px;color:var(--tx2,#9aa5b1);font:400 11px/1 'IBM Plex Mono',monospace">
+            <span style="flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ propAddr }}</span>
+            <svg width="10" height="10" viewBox="0 0 16 16" stroke="var(--tx3,#6e7882)" stroke-width="1.4" fill="none"><path d="M4 7V5a4 4 0 018 0v2M3 7h10v6H3z"></path></svg>
+          </div>
+          <label style="color:var(--tx2,#9aa5b1)">Data Type</label>
+          <div style="height:21px;display:flex;align-items:center;gap:5px;padding:0 6px;background:var(--panel2,#1d222a);border:1px solid var(--bord,#2a313a);border-radius:2px;color:var(--tx2,#9aa5b1);font:400 11px/1 'IBM Plex Mono',monospace">
+            <span style="flex:1">{{ propType }}</span>
+            <svg width="10" height="10" viewBox="0 0 16 16" stroke="var(--tx3,#6e7882)" stroke-width="1.4" fill="none"><path d="M4 7V5a4 4 0 018 0v2M3 7h10v6H3z"></path></svg>
+          </div>
+          <sc-if value="{{ isContact }}" hint-placeholder-val="{{ true }}">
+            <label style="color:var(--tx2,#9aa5b1)">Contact</label>
+          </sc-if>
+          <sc-if value="{{ isContact }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;gap:0">
+              <sc-for list="{{ contactTypes }}" as="ct" hint-placeholder-count="4">
+                <button onClick="{{ ct.on }}" style="{{ ct.style }}">
+                  <svg width="26" height="14" viewBox="0 0 26 14" stroke="currentColor" stroke-width="1.4" fill="none"><path d="{{ ct.d }}"></path><text x="13" y="10" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" font-weight="600" stroke="none" fill="currentColor">{{ ct.t }}</text></svg>
+                </button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isCoil }}" hint-placeholder-val="{{ false }}">
+            <label style="color:var(--tx2,#9aa5b1)">Coil</label>
+          </sc-if>
+          <sc-if value="{{ isCoil }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:0">
+              <sc-for list="{{ coilTypes }}" as="ct" hint-placeholder-count="3">
+                <button onClick="{{ ct.on }}" style="{{ ct.style }}">{{ ct.label }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isFB }}" hint-placeholder-val="{{ false }}">
+            <label style="color:var(--tx2,#9aa5b1)">Pins</label>
+          </sc-if>
+          <sc-if value="{{ isFB }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid var(--bord,#2a313a);border-radius:2px;overflow:hidden">
+              <sc-for list="{{ fbPins }}" as="p" hint-placeholder-count="4">
+                <div style="{{ p.style }}">
+                  <span style="width:30px;flex:none;color:var(--tx2,#9aa5b1)">{{ p.pin }}</span>
+                  <span style="width:40px;flex:none;color:var(--tx3,#6e7882)">{{ p.type }}</span>
+                  <span style="flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:var(--tx,#dde3ea)">{{ p.val }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <label style="color:var(--tx2,#9aa5b1)">Comment</label>
+          <textarea onChange="{{ editCmt }}" rows="2" value="{{ propComment }}" style="width:100%;padding:3px 6px;background:var(--input,#0e1216);border:1px solid var(--bord,#2a313a);border-radius:2px;color:var(--tx,#dde3ea);font:400 11px/1.35 'IBM Plex Sans',sans-serif;outline:none;resize:none"></textarea>
+        </div>
+        <div style="margin-top:8px;padding-top:6px;border-top:1px solid var(--bord,#2a313a);display:flex;align-items:center;gap:6px">
+          <span style="min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:400 10px/1.5 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ propLoc }} &#183; address and type come from Local Symbols</span>
+          <div style="flex:1"></div>
+          <button onClick="{{ closeAc }}" style="height:20px;padding:0 9px;font:500 10.5px/1 'IBM Plex Sans',sans-serif;background:var(--acc,#4b90d6);border:none;border-radius:2px;color:#fff;cursor:pointer">Apply</button>
+        </div>
+        <!-- properties autocomplete -->
+        <sc-if value="{{ acProp }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;left:88px;top:27px;right:8px;max-height:132px;overflow-y:auto;overflow-x:hidden;background:var(--panel2,#1d222a);border:1px solid var(--bord2,#3d4650);box-shadow:0 8px 20px rgba(0,0,0,.5);z-index:25">
+            <sc-for list="{{ acItems }}" as="a" hint-placeholder-count="6">
+              <div onClick="{{ a.on }}" style="{{ a.style }}">
+                <span style="width:62px;flex:none;font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882);overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ a.cls }}</span>
+                <span style="flex:1;min-width:0;font:400 11px/1.6 'IBM Plex Mono',monospace;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ a.name }}</span>
+                <span style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ a.addr }}</span>
+                <span style="font:500 10px/1.6 'IBM Plex Mono',monospace;color:var(--acc,#4b90d6);width:38px;text-align:right">{{ a.type }}</span>
+              </div>
+            </sc-for>
+            <sc-if value="{{ acEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:7px 8px;font:400 10.5px/1.5 'IBM Plex Sans',sans-serif;color:var(--tx3,#6e7882)">No declared symbol matches &#8212; add it in Local Symbols first.</div>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 8 COMPILE / MESSAGE PANEL -->
+<sc-if value="{{ bottomShown }}" hint-placeholder-val="{{ true }}">
+<div onMouseDown="{{ dragBottom }}" style="height:4px;flex:none;cursor:row-resize;background:var(--panel,#171b21);border-top:1px solid var(--bord,#2a313a);display:flex;align-items:center;justify-content:center" style-hover="background:var(--accs,rgba(75,144,214,.18))">
+  <div style="height:2px;width:22px;border-top:1px dotted var(--bord2,#3d4650);border-bottom:1px dotted var(--bord2,#3d4650)"></div>
+</div>
+<div style="{{ bottomPanelStyle }}">
+  <div style="height:24px;flex:none;display:flex;align-items:stretch;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+    <sc-for list="{{ bottomTabs }}" as="t" hint-placeholder-count="3">
+      <button onClick="{{ t.on }}" style="{{ t.style }}">
+        <span>{{ t.label }}</span>
+        <span style="{{ t.badgeStyle }}">{{ t.badge }}</span>
+      </button>
+    </sc-for>
+    <div style="flex:1"></div>
+    <div style="display:flex;align-items:center;gap:6px;padding:0 7px;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">
+      <span>{{ buildSummary }}</span>
+      <button onClick="{{ hideBottom }}" onMouseEnter="{{ tipHide }}" onMouseLeave="{{ hideTip }}" title="Hide panel" style="width:18px;height:18px;padding:0;line-height:0;display:grid;place-items:center;background:transparent;border:1px solid transparent;border-radius:2px;cursor:pointer;color:var(--tx3,#6e7882)" style-hover="color:var(--tx,#dde3ea);border-color:var(--bord,#2a313a);background:var(--panel2,#1d222a)">
+        <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.4" fill="none"><path d="M4 4l8 8M12 4l-8 8"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- COMPILE TAB -->
+  <sc-if value="{{ isCompileTab }}" hint-placeholder-val="{{ true }}">
+    <div style="flex:1;min-height:0;display:flex">
+      <div style="width:290px;flex:0 1 290px;min-width:196px;min-height:0;overflow-y:auto;overflow-x:hidden;border-right:1px solid var(--bord,#2a313a);padding:8px 10px 6px;display:flex;flex-direction:column;gap:7px">
+        <div style="display:flex;align-items:baseline;gap:7px">
+          <span style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx,#dde3ea)">{{ stageTitle }}</span>
+          <span style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ stageStep }}</span>
+          <div style="flex:1"></div>
+          <span style="font:600 12px/1 'IBM Plex Mono',monospace;color:var(--tx,#dde3ea)">{{ elapsedStr }}</span>
+        </div>
+        <div style="height:6px;background:var(--input,#0e1216);border:1px solid var(--bord,#2a313a);border-radius:1px;overflow:hidden">
+          <div style="{{ progressStyle }}"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:2px;margin-top:1px">
+          <sc-for list="{{ stages }}" as="s" hint-placeholder-count="5">
+            <div style="{{ s.style }}">
+              <span style="width:13px;flex:none;display:grid;place-items:center">
+                <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.6" fill="none"><path d="{{ s.d }}"></path></svg>
+              </span>
+              <span style="flex:1">{{ s.label }}</span>
+              <span style="font:400 10px/1 'IBM Plex Mono',monospace;opacity:.75">{{ s.t }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="flex:1"></div>
+        <div style="flex:none;display:flex;gap:5px">
+          <button onClick="{{ startBuild }}" style="flex:1;height:22px;font:500 11px/1 'IBM Plex Sans',sans-serif;background:var(--acc,#4b90d6);border:none;border-radius:2px;color:#fff;cursor:pointer">{{ buildBtn }}</button>
+          <button onClick="{{ stopBuild }}" style="height:22px;padding:0 9px;font:500 11px/1 'IBM Plex Sans',sans-serif;background:var(--panel2,#1d222a);border:1px solid var(--bord2,#3d4650);border-radius:2px;color:var(--tx2,#9aa5b1);cursor:pointer">Cancel</button>
+        </div>
+
+      </div>
+      <div style="flex:1;min-width:0;overflow:auto;padding:5px 8px;background:var(--log,#0b0e12)">
+        <sc-for list="{{ logLines }}" as="l" hint-placeholder-count="12">
+          <div style="{{ l.style }}"><span style="color:var(--tx3,#6e7882);width:52px;flex:none">{{ l.t }}</span><span>{{ l.text }}</span></div>
+        </sc-for>
+        <sc-if value="{{ building }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:7px;align-items:center;font:400 11px/1.55 'IBM Plex Mono',monospace;color:var(--tx2,#9aa5b1)">
+            <span style="width:52px;flex:none;color:var(--tx3,#6e7882)">{{ elapsedStr }}</span>
+            <span style="display:inline-block;width:9px;height:9px;border:1.5px solid var(--acc,#4b90d6);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite"></span>
+            <span>{{ tailLine }}</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- PROBLEMS TAB -->
+  <sc-if value="{{ isProblemsTab }}" hint-placeholder-val="{{ false }}">
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+      <div style="height:24px;flex:none;display:flex;align-items:center;gap:5px;padding:0 7px;border-bottom:1px solid var(--bord,#2a313a);background:var(--panel,#171b21)">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">Severity</span>
+        <sc-for list="{{ sevFilters }}" as="f" hint-placeholder-count="3">
+          <button onClick="{{ f.on }}" style="{{ f.style }}">{{ f.label }}</button>
+        </sc-for>
+        <span style="width:1px;height:13px;background:var(--bord,#2a313a);margin:0 3px"></span>
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">Source</span>
+        <sc-for list="{{ srcFilters }}" as="f" hint-placeholder-count="2">
+          <button onClick="{{ f.on }}" style="{{ f.style }}">{{ f.label }}</button>
+        </sc-for>
+        <div style="flex:1"></div>
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ probCount }}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:96px 92px 1fr 190px;height:21px;flex:none;background:var(--panel2,#1d222a);border-bottom:1px solid var(--bord,#2a313a);font:600 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1)">
+        <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid var(--bord,#2a313a)">Severity</div>
+        <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid var(--bord,#2a313a)">Code</div>
+        <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid var(--bord,#2a313a)">Message</div>
+        <div style="display:flex;align-items:center;padding:0 7px">Location</div>
+      </div>
+      <div style="flex:1;overflow:auto">
+        <sc-for list="{{ problems }}" as="p" hint-placeholder-count="3">
+          <div onClick="{{ p.on }}" onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" style="{{ p.style }}">
+            <div style="display:flex;align-items:center;gap:5px;padding:0 7px;color:{{ p.color }}">
+              <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5" fill="none"><path d="{{ p.d }}"></path></svg>
+              <span style="font-weight:500">{{ p.sev }}</span>
+            </div>
+            <div style="display:flex;align-items:center;padding:0 7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--tx2,#9aa5b1)">{{ p.code }}</div>
+            <div style="display:flex;align-items:center;padding:0 7px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ p.msg }}</div>
+            <div style="display:flex;align-items:center;gap:5px;padding:0 7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--tx2,#9aa5b1)">
+              <span>{{ p.loc }}</span>
+              <svg width="10" height="10" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5" fill="none" opacity="{{ p.jump }}"><path d="M6 4l5 4-5 4"></path></svg>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- SEARCH RESULTS TAB -->
+  <sc-if value="{{ isSearchTab }}" hint-placeholder-val="{{ false }}">
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+      <div style="height:24px;flex:none;display:flex;align-items:center;gap:6px;padding:0 7px;border-bottom:1px solid var(--bord,#2a313a);background:var(--panel,#171b21);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1)">
+        <span>Cross reference</span>
+        <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx,#dde3ea)">ConveyorMotor</span>
+        <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">%QX0.1 · BOOL · 5 references</span>
+      </div>
+      <div style="display:grid;grid-template-columns:120px 74px 1fr 150px;height:21px;flex:none;background:var(--panel2,#1d222a);border-bottom:1px solid var(--bord,#2a313a);font:600 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1)">
+        <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid var(--bord,#2a313a)">Symbol</div>
+        <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid var(--bord,#2a313a)">Access</div>
+        <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid var(--bord,#2a313a)">Element</div>
+        <div style="display:flex;align-items:center;padding:0 7px">Location</div>
+      </div>
+      <div style="flex:1;overflow:auto">
+        <sc-for list="{{ xrefs }}" as="x" hint-placeholder-count="5">
+          <div style="{{ x.style }}">
+            <div style="display:flex;align-items:center;padding:0 7px;font-family:'IBM Plex Mono',monospace;font-size:11px">{{ x.sym }}</div>
+            <div style="display:flex;align-items:center;padding:0 7px"><span style="{{ x.accStyle }}">{{ x.acc }}</span></div>
+            <div style="display:flex;align-items:center;padding:0 7px">{{ x.el }}</div>
+            <div style="display:flex;align-items:center;padding:0 7px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--tx2,#9aa5b1)">{{ x.loc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ bottomHidden }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ showBottom }}" style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 9px;background:var(--head,#131720);border-top:1px solid var(--bord,#2a313a);cursor:pointer;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">
+    <svg width="10" height="10" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.6" fill="none"><path d="M4 10l4-4 4 4"></path></svg>
+    <span>Compile · Problems · Search Results</span>
+    <span style="color:var(--red,#f0655c)">2 errors</span>
+    <span style="color:var(--amber,#e0a83c)">1 warning</span>
+    <div style="flex:1"></div>
+    <span>show panel</span>
+  </div>
+</sc-if>
+
+<!-- 9 STATUS BAR -->
+<div style="height:24px;flex:none;min-width:0;overflow:hidden;display:flex;align-items:center;gap:0;background:var(--head,#131720);border-top:1px solid var(--bord,#2a313a);font:400 11px/1.6 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1)">
+  <button onClick="{{ toggleInsert }}" style="height:100%;padding:0 9px;background:transparent;border:none;border-right:1px solid var(--bord,#2a313a);color:var(--tx2,#9aa5b1);font:400 11px/1 'IBM Plex Sans',sans-serif;cursor:pointer" style-hover="color:var(--tx,#dde3ea);background:var(--panel2,#1d222a)">{{ insertMode }}</button>
+  <div style="padding:0 9px;border-right:1px solid var(--bord,#2a313a);font-family:'IBM Plex Mono',monospace;font-size:10.5px">{{ cursorPos }}</div>
+  <div style="display:flex;align-items:center;gap:5px;padding:0 9px;border-right:1px solid var(--bord,#2a313a)">
+    <span style="width:7px;height:7px;border-radius:50%;background:var(--green,#3fd67f)"></span>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px">Connected — ESP32-S3 on COM4</span>
+  </div>
+  <div style="padding:0 9px;border-right:1px solid var(--bord,#2a313a)"><span style="{{ runChipStyle }}">{{ plcState }}</span></div>
+  <div style="padding:0 9px;border-right:1px solid var(--bord,#2a313a);font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ scanColor }}">{{ scanText }}</div>
+  <div style="padding:0 9px;border-right:1px solid var(--bord,#2a313a);font-family:'IBM Plex Mono',monospace;font-size:10.5px">{{ compileState }}</div>
+  <div style="flex:1;min-width:0;padding:0 9px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--acc,#4b90d6)">{{ statusMsg }}</div>
+  <div style="padding:0 9px;border-left:1px solid var(--bord,#2a313a);font-family:'IBM Plex Mono',monospace;font-size:10.5px">{{ modeText }}</div>
+  <div style="padding:0 9px;border-left:1px solid var(--bord,#2a313a);font-family:'IBM Plex Mono',monospace;font-size:10.5px">{{ zoomText }}</div>
+</div>
+
+<!-- OVERLAYS -->
+<sc-if value="{{ tip }}" hint-placeholder-val="{{ false }}">
+  <div style="{{ tipStyle }}">
+    <span style="color:var(--tx,#dde3ea)">{{ tip.name }}</span>
+    <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3,#6e7882);margin-left:7px">{{ tip.k }}</span>
+  </div>
+</sc-if>
+
+<sc-if value="{{ ctx }}" hint-placeholder-val="{{ false }}">
+  <div style="{{ ctxStyle }}">
+    <div style="padding:4px 9px 5px;border-bottom:1px solid var(--bord,#2a313a);font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ ctx.title }}</div>
+    <sc-for list="{{ ctxItems }}" as="it" hint-placeholder-count="7">
+      <sc-if value="{{ it.sep }}" hint-placeholder-val="{{ false }}">
+        <div style="height:1px;margin:4px 0;background:var(--bord,#2a313a)"></div>
+      </sc-if>
+      <sc-if value="{{ it.l }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ it.on }}" style="{{ it.style }}">
+          <span style="flex:1;text-align:left">{{ it.l }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--tx3,#6e7882)">{{ it.k }}</span>
+        </button>
+      </sc-if>
+    </sc-for>
+  </div>
+</sc-if>
+
+<sc-if value="{{ dragGhost }}" hint-placeholder-val="{{ false }}">
+  <div style="{{ ghostStyle }}">
+    <svg width="12" height="12" viewBox="0 0 16 16" stroke="var(--acc,#4b90d6)" stroke-width="1.3" fill="none"><path d="M4 4h8v8H4zM2 6h2M2 10h2M12 6h2M12 10h2"></path></svg>
+    <span>{{ dragGhost.name }}</span>
+    <span style="color:var(--tx3,#6e7882)">{{ dragGhost.lib }}</span>
+  </div>
+</sc-if>
+
+<sc-if value="{{ palette }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeAll }}" style="position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding-top:90px">
+    <div onClick="{{ stop }}" style="width:600px;background:var(--panel2,#1d222a);border:1px solid var(--bord2,#3d4650);box-shadow:0 18px 48px rgba(0,0,0,.6)">
+      <div style="display:flex;align-items:center;gap:8px;height:34px;padding:0 10px;border-bottom:1px solid var(--bord,#2a313a)">
+        <svg width="13" height="13" viewBox="0 0 16 16" stroke="var(--acc,#4b90d6)" stroke-width="1.5" fill="none"><path d="M4 4l4 4-4 4M9 12h4"></path></svg>
+        <span style="font:400 12.5px/1 'IBM Plex Mono',monospace;color:var(--tx,#dde3ea)">down</span>
+        <span style="width:1px;height:13px;background:var(--acc,#4b90d6);animation:blink 1s steps(1) infinite"></span>
+        <div style="flex:1"></div>
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">6 of 148 commands</span>
+      </div>
+      <sc-for list="{{ paletteItems }}" as="c" hint-placeholder-count="6">
+        <div onClick="{{ c.on }}" style="{{ c.style }}">
+          <span style="width:15px;display:grid;place-items:center;color:var(--tx3,#6e7882)"><svg width="12" height="12" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.4" fill="none"><path d="{{ c.d }}"></path></svg></span>
+          <span style="font:400 12px/1 'IBM Plex Sans',sans-serif;color:var(--tx,#dde3ea)">{{ c.label }}</span>
+          <span style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">{{ c.group }}</span>
+          <div style="flex:1"></div>
+          <span style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx2,#9aa5b1)">{{ c.k }}</span>
+        </div>
+      </sc-for>
+      <div style="height:24px;display:flex;align-items:center;gap:12px;padding:0 10px;border-top:1px solid var(--bord,#2a313a);background:var(--head,#131720);font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">
+        <span>↑↓ navigate</span><span>↵ run</span><span>⌃⌃ recent</span><span>Esc dismiss</span>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ hw }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeAll }}" style="position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:210;display:grid;place-items:center">
+    <div onClick="{{ stop }}" style="width:1020px;max-width:96vw;background:var(--panel,#171b21);border:1px solid var(--bord2,#3d4650);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head,#131720);border-bottom:1px solid var(--bord,#2a313a)">
+        <span style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx,#dde3ea)">Hardware Configuration</span>
+        <span style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">BottlingLine_v3 · GPIO → IEC address map</span>
+        <div style="flex:1"></div>
+        <button onClick="{{ closeAll }}" style="width:18px;height:18px;padding:0;line-height:0;display:grid;place-items:center;background:transparent;border:none;color:var(--tx2,#9aa5b1);cursor:pointer"><svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+      </div>
+      <div style="display:flex;align-items:stretch;min-height:0">
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+          <div style="height:30px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;border-bottom:1px solid var(--bord,#2a313a)">
+            <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1)">Target board</span>
+            <div style="position:relative">
+              <button onClick="{{ toggleBoard }}" style="height:21px;display:flex;align-items:center;gap:22px;padding:0 7px;background:var(--input,#0e1216);border:1px solid var(--acc,#4b90d6);border-radius:2px;color:var(--tx,#dde3ea);font:400 11px/1 'IBM Plex Mono',monospace;cursor:pointer">
+                <span>{{ board }}</span>
+                <svg width="9" height="9" viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 6l4 4 4-4"></path></svg>
+              </button>
+              <sc-if value="{{ boardOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;left:0;top:22px;width:100%;background:var(--panel2,#1d222a);border:1px solid var(--bord2,#3d4650);box-shadow:0 8px 20px rgba(0,0,0,.5);z-index:5">
+                  <sc-for list="{{ boards }}" as="b" hint-placeholder-count="5">
+                    <div onClick="{{ b.on }}" style="{{ b.style }}">{{ b.label }}</div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <span style="width:1px;height:14px;background:var(--bord,#2a313a)"></span>
+            <span style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">44 pins · 8 mapped · 1 conflict</span>
+            <div style="flex:1"></div>
+            <span style="display:flex;align-items:center;gap:5px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--red,#f0655c)">
+              <svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5" fill="none"><path d="M8 2l6 11H2zM8 6v3M8 11v.5"></path></svg>
+              GPIO 21 assigned twice
+            </span>
+          </div>
+          <div style="display:grid;grid-template-columns:74px 96px 108px 1fr 1.3fr;height:22px;flex:none;background:var(--panel2,#1d222a);border-bottom:1px solid var(--bord,#2a313a);font:600 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2,#9aa5b1)">
+            <sc-for list="{{ hwHead }}" as="h" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid var(--bord,#2a313a)">{{ h }}</div>
+            </sc-for>
+          </div>
+          <div style="max-height:326px;overflow:auto">
+            <sc-for list="{{ hwRows }}" as="r" hint-placeholder-count="9">
+              <div style="{{ r.style }}">
+                <div style="display:flex;align-items:center;gap:5px;padding:0 7px;font-family:'IBM Plex Mono',monospace;color:{{ r.gpioColor }}">
+                  <svg width="10" height="10" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.5" fill="none" opacity="{{ r.warn }}"><path d="M8 2l6 11H2zM8 6v3M8 11v.5"></path></svg>
+                  <span>{{ r.gpio }}</span>
+                </div>
+                <div style="display:flex;align-items:center;padding:0 7px">{{ r.dir }}</div>
+                <div style="display:flex;align-items:center;padding:0 7px;font-family:'IBM Plex Mono',monospace">{{ r.iec }}</div>
+                <div style="display:flex;align-items:center;padding:0 7px;font-family:'IBM Plex Mono',monospace">{{ r.sym }}</div>
+                <div style="display:flex;align-items:center;padding:0 7px;color:var(--tx2,#9aa5b1)">{{ r.cmt }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="width:290px;flex:none;border-left:1px solid var(--bord,#2a313a);padding:10px;display:flex;flex-direction:column;gap:8px">
+          <span style="font:600 10px/1 'IBM Plex Sans',sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--tx2,#9aa5b1)">Board pinout</span>
+          <svg viewBox="0 0 250 300" width="100%" style="display:block">
+            <rect x="70" y="16" width="110" height="268" rx="4" fill="var(--fbfill,#151b22)" stroke="var(--bord2,#3d4650)" stroke-width="1.4"></rect>
+            <rect x="98" y="26" width="54" height="26" rx="2" fill="none" stroke="var(--bord2,#3d4650)" stroke-width="1.2"></rect>
+            <path d="M104 34h42M104 40h42M104 46h30" stroke="var(--tx3,#6e7882)" stroke-width="1"></path>
+            <rect x="96" y="96" width="58" height="58" rx="3" fill="var(--panel2,#1d222a)" stroke="var(--tx3,#6e7882)" stroke-width="1.2"></rect>
+            <text x="125" y="122" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--tx2,#9aa5b1)">ESP32</text>
+            <text x="125" y="136" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--tx2,#9aa5b1)">S3</text>
+            <rect x="104" y="252" width="42" height="20" rx="2" fill="none" stroke="var(--bord2,#3d4650)" stroke-width="1.2"></rect>
+            <text x="125" y="266" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--tx3,#6e7882)">USB</text>
+            <sc-for list="{{ pins }}" as="p" hint-placeholder-count="16">
+              <g>
+                <rect x="{{ p.px }}" y="{{ p.py }}" width="9" height="9" rx="1.5" fill="{{ p.fill }}" stroke="{{ p.stroke }}" stroke-width="1.1"></rect>
+                <text x="{{ p.tx }}" y="{{ p.ty }}" text-anchor="{{ p.anchor }}" font-family="IBM Plex Mono, monospace" font-size="8" fill="{{ p.color }}">{{ p.label }}</text>
+              </g>
+            </sc-for>
+          </svg>
+          <div style="display:flex;flex-direction:column;gap:3px;font:400 10px/1.3 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--acc,#4b90d6)"></span>mapped input</span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--green,#3fd67f)"></span>mapped output</span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--red,#f0655c)"></span>conflict</span>
+          </div>
+        </div>
+      </div>
+      <div style="height:34px;flex:none;display:flex;align-items:center;gap:6px;padding:0 10px;background:var(--head,#131720);border-top:1px solid var(--bord,#2a313a)">
+        <span style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--red,#f0655c)">Resolve 1 conflict before download</span>
+        <div style="flex:1"></div>
+        <button onClick="{{ closeAll }}" style="height:22px;padding:0 11px;font:500 11px/1 'IBM Plex Sans',sans-serif;background:var(--panel2,#1d222a);border:1px solid var(--bord2,#3d4650);border-radius:2px;color:var(--tx2,#9aa5b1);cursor:pointer">Cancel</button>
+        <button onClick="{{ closeAll }}" style="height:22px;padding:0 11px;font:500 11px/1 'IBM Plex Sans',sans-serif;background:var(--acc,#4b90d6);border:none;border-radius:2px;color:#fff;cursor:pointer">Apply mapping</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ launcher }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeAll }}" style="position:fixed;inset:0;z-index:190">
+    <div onClick="{{ stop }}" style="position:absolute;left:6px;top:31px;width:214px;background:var(--panel2,#1d222a);border:1px solid var(--bord2,#3d4650);box-shadow:0 12px 30px rgba(0,0,0,.5)">
+      <div style="padding:5px 9px;border-bottom:1px solid var(--bord,#2a313a);font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3,#6e7882)">Platform apps</div>
+      <sc-for list="{{ apps }}" as="a" hint-placeholder-count="5">
+        <div style="{{ a.style }}">
+          <span style="width:14px;display:grid;place-items:center;color:var(--tx3,#6e7882)"><svg width="11" height="11" viewBox="0 0 16 16" stroke="currentColor" stroke-width="1.4" fill="none"><path d="{{ a.d }}"></path></svg></span>
+          <span style="flex:1">{{ a.label }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--tx3,#6e7882)">{{ a.tag }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeAll }}" style="position:fixed;inset:0;z-index:40"></div>
+</sc-if>
+<sc-if value="{{ ctx }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeAll }}" style="position:fixed;inset:0;z-index:150"></div>
+</sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1920,&quot;height&quot;:1080},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;,&quot;section&quot;:&quot;Appearance&quot;},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;edit&quot;,&quot;online&quot;],&quot;default&quot;:&quot;edit&quot;,&quot;tsType&quot;:&quot;'edit'|'online'&quot;,&quot;section&quot;:&quot;Appearance&quot;},&quot;showGrid&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Canvas&quot;}}">
+const DARK = {
+  bg:'#0e1114', panel:'#171b21', panel2:'#1d222a', head:'#131720', bord:'#2a313a', bord2:'#3d4650',
+  tx:'#dde3ea', tx2:'#9aa5b1', tx3:'#6e7882', acc:'#4b90d6', accs:'rgba(75,144,214,.18)', selbg:'#1b3350',
+  canv:'#0b0e12', grid:'#191f27', gutter:'#0e1216', input:'#0b0e12', log:'#090c0f', fbfill:'#151b22',
+  green:'#3fd67f', red:'#f0655c', amber:'#e0a83c', cmt:'#6f9a80', ink:'#8e99a4', dead:'#454e58',
+  lab:'#dde3ea', addr:'#9aa5b1', shadow:'rgba(0,0,0,.55)'
+};
+const LIGHT = {
+  bg:'#e5e8ec', panel:'#f3f4f7', panel2:'#fbfbfd', head:'#e9ebef', bord:'#ccd2d9', bord2:'#a9b1ba',
+  tx:'#1b2126', tx2:'#525c66', tx3:'#7c858f', acc:'#1a68b8', accs:'rgba(26,104,184,.14)', selbg:'#cadff6',
+  canv:'#fcfcfb', grid:'#e7eaed', gutter:'#eef0f3', input:'#ffffff', log:'#f8f9fa', fbfill:'#ffffff',
+  green:'#0f7a41', red:'#c0342a', amber:'#8f5c05', cmt:'#3f7a58', ink:'#414b55', dead:'#aab2ba',
+  lab:'#1b2126', addr:'#525c66', shadow:'rgba(0,0,0,.22)'
+};
+
+const ICON = {
+  nw:'M4 2h5l3 3v9H4z', open:'M2 4h5l1.5 2H14v8H2z', save:'M3 2h10v12H3zM6 2v4h4V2M5 10h6',
+  print:'M5 2h6v3H5zM3 5h10v6H3zM5 9h6v5H5z', undo:'M3 7h7a3 3 0 110 6H7M3 7l3-3M3 7l3 3',
+  redo:'M13 7H6a3 3 0 100 6h3M13 7l-3-3M13 7l-3 3', cut:'M5 2l6 9M11 2l-6 9M4 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3M12 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3',
+  copy:'M6 1h7v9H6zM3 5h7v10H3z', paste:'M4 3h8v11H4zM6 1h4v3H6z', find:'M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3',
+  no:'M1 8h3M4 3v10M12 3v10M12 8h3', nc:'M1 8h3M4 3v10M12 3v10M12 8h3M3 12l10-8',
+  coil:'M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10',
+  wire:'M1 8h14', vbr:'M4 2v12M12 2v12M4 8h8', insnw:'M2 3h12M2 13h12M8 6v4M6 8h4', delnw:'M2 3h12M2 13h12M6 6l4 4M10 6l-4 4',
+  fb:'M4 4h8v8H4zM2 6h2M2 10h2M12 6h2M12 10h2',
+  conn:'M2 8h4M10 8h4M6 5h4v6H6z', down:'M8 2v7M5 6l3 3 3-3M3 13h10', up:'M8 11V4M5 7l3-3 3 3M3 13h10',
+  run:'M5 3l8 5-8 5z', stop:'M4 4h8v8H4z', mon:'M2 3h12v8H2zM6 13h4M8 11v2M4 7l2-2 2 3 2-3 2 2',
+  force:'M9 2l-4 6h3l-1 6 4-7H8z', comp:'M4 3l4 5-4 5M9 13h5', rebuild:'M13 6A5 5 0 103 9M13 2v4h-4',
+  check:'M3 8l3 3 7-7', prev:'M10 4L5 8l5 4M4 3v10', next:'M6 4l5 4-5 4M12 3v10', xref:'M2 3h5v5H2zM9 8h5v5H9zM7 5h4v4',
+  zin:'M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3M5 7h4M7 5v4', zout:'M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3M5 7h4',
+  zfit:'M2 5V2h3M14 5V2h-3M2 11v3h3M14 11v3h-3', grid:'M2 2h12v12H2zM6 2v12M10 2v12M2 6h12M2 10h12',
+  cmt:'M2 3h12v8H6l-3 3z', panels:'M2 3h12v10H2zM6 3v10M2 10h12',
+  folder:'M2 4h4l1.5 2H14v8H2z', chip:'M5 5h6v6H5zM2 7h3M2 10h3M11 7h3M11 10h3M7 2v3M10 2v3M7 11v3M10 11v3',
+  net:'M4 2h8v3H4zM2 11h4v3H2zM10 11h4v3h-4zM8 5v3M4 8h8v3', sym:'M4 2h8v12H4zM6 6h4M6 9h4',
+  ld:'M3 3v10M13 3v10M3 8h3M10 8h3M6 5v6M10 5v6', st:'M3 4h10M3 8h7M3 12h9',
+  task:'M8 3a5 5 0 100 10A5 5 0 008 3M8 5.5V8l2 1.5', table:'M2 3h12v10H2zM2 6h12M6 6v7M10 6v7',
+  err:'M8 8m-6 0a6 6 0 1012 0 6 6 0 10-12 0M8 4v5M8 11v.5', warn:'M8 2l6 11H2zM8 6v3M8 11v.5',
+  info:'M8 8m-6 0a6 6 0 1012 0 6 6 0 10-12 0M8 7v5M8 5v.5',
+  dot:'M8 8m-2 0a2 2 0 104 0 2 2 0 10-4 0', tickc:'M4 8l3 3 5-6', spin:'M8 3a5 5 0 105 5', pend:'M8 3a5 5 0 100 10A5 5 0 008 3'
+};
+
+const STAGES = [
+  { label:'Validating', t:'1.4 s' },
+  { label:'Generating C++', t:'2.1 s' },
+  { label:'Compiling', t:'19.6 s' },
+  { label:'Linking', t:'5.2 s' },
+  { label:'Ready to flash', t:'' }
+];
+const LOG = [
+  [0,'esp-flow 2.4.1  target ESP32-S3  toolchain xtensa-esp32s3 12.2'],
+  [0,'validate: BottlingLine_v3 / Prog0 — 4 networks, 12 elements'],
+  [0,'validate: 4 local symbols, 18 global symbols resolved'],
+  [1,'codegen: Prog0 -> build/prog0.cpp'],
+  [1,'codegen: MotorStarter -> build/fb_motorstarter.cpp'],
+  [1,'codegen: scan task CyclicTask_10ms, cycle 10 ms'],
+  [1,'codegen: 386 lines emitted, 0 unsupported constructs'],
+  [2,'xtensa-esp32s3-elf-g++ -Os -c build/prog0.cpp'],
+  [2,'xtensa-esp32s3-elf-g++ -Os -c build/fb_motorstarter.cpp'],
+  [2,'xtensa-esp32s3-elf-g++ -Os -c runtime/iec_runtime.cpp'],
+  [2,'esp-idf: building component esp_flow_rt  (4/7)'],
+  [2,'esp-idf: building component driver  (5/7)'],
+  [3,'xtensa-esp32s3-elf-g++ -o build/firmware.elf'],
+  [3,'esptool: firmware.bin  248 KB  (4 MB flash, 6% used)'],
+  [4,'build finished in 28.3 s — 0 errors, 1 warning'],
+  [4,'ready to flash: ESP32-S3 on COM4']
+];
+const PROBLEMS = [
+  { sev:'Error', code:'SEM-0207', msg:"Symbol 'Motor2' is not declared in any accessible scope.", loc:'Prog0 : Network 4', src:'Compiler' },
+  { sev:'Error', code:'SEM-0311', msg:"Variable 'ConveyorMotor' is written by more than one coil.", loc:'Prog0 : Network 7', src:'Compiler' },
+  { sev:'Warning', code:'STR-0101', msg:'Contact has no operand assigned.', loc:'Prog0 : Network 2', src:'Editor' }
+];
+const E = (type, sym, addr, extra) => Object.assign({ t:'el', type, sym, addr }, extra || {});
+const S = (...kids) => ({ t:'ser', kids });
+const P = (...levels) => ({ t:'par', kids:levels });
+// tree helpers: par.kids are always ser nodes; ser.kids are el or par nodes
+const wSpan = (n) => n.t === 'el' ? (n.span || 1) : n.t === 'ser'
+  ? Math.max(1, n.kids.reduce((s, k) => s + wSpan(k), 0))
+  : Math.max(1, ...n.kids.map(wSpan));
+const nAt = (root, path) => { let n = root; for (let i = 0; i < path.length; i++) n = n.kids[path[i]]; return n; };
+const clone = (n) => n.t === 'el' ? Object.assign({}, n) : { t:n.t, kids:n.kids.map(clone) };
+const SEED = [
+  { comment:'// Network 1 — conveyor start / stop seal-in (latch)',
+    body:S(P(S(E('no','StartButton','%IX0.0')), S(E('no','ConveyorMotor','%QX0.1'))), E('nc','StopButton','%IX0.1')),
+    coils:[E('coil','ConveyorMotor','%QX0.1')] },
+  { comment:'// Network 2 — 5 s dwell before drum release',
+    body:S(E('no','ConveyorMotor','%QX0.1'), E('fb','DelayTimer','',{ fb:'TON', pt:'T#5s', span:2 })),
+    coils:[E('set','DrumRelease','%QX0.2')] },
+  { comment:'// Network 3 — operator reset clears the cycle latch',
+    body:S(E('p','ResetBtn','%IX0.3',{ forced:true })), coils:[E('reset','CycleRun','%MX0.0')] },
+  { comment:'// Network 4 — TODO interlock with upstream filler',
+    body:S(E('no','Motor2','',{ err:true })), coils:[] }
+];
+const VALS = { StartButton:1, StopButton:0, ConveyorMotor:1, DrumRelease:0, ResetBtn:0, CycleRun:0, Motor2:0 };
+const SYM_CHROME = 26 + 22 + 6 + 28, CANVAS_FLOOR = 150, SYM_FLOOR = 21 + 22;
+const CONTACT_TOOLS = { 'Normally-open contact':'no', 'Normally-closed contact':'nc', 'Rising-edge contact':'p', 'Falling-edge contact':'n', 'Function block':'fb' };
+const COIL_TOOLS = { 'Output coil':'coil', 'Set coil':'set', 'Reset coil':'reset' };
+const DECL = [
+  ['VAR_INPUT','StartButton','%IX0.0','BOOL','FALSE','Line start pushbutton (NO)'],
+  ['VAR_INPUT','StopButton','%IX0.1','BOOL','TRUE','E-stop line, fail-safe NC'],
+  ['VAR_INPUT','ResetBtn','%IX0.3','BOOL','FALSE','Operator reset pushbutton'],
+  ['VAR_INPUT','LevelSwitch','%IX0.5','BOOL','FALSE','Tank level float switch'],
+  ['VAR_OUTPUT','ConveyorMotor','%QX0.1','BOOL','FALSE','Main conveyor contactor'],
+  ['VAR_OUTPUT','DrumRelease','%QX0.2','BOOL','FALSE','Drum release solenoid'],
+  ['VAR_OUTPUT','FillValve','%QX0.3','BOOL','FALSE','Fill valve'],
+  ['VAR','CycleRun','%MX0.0','BOOL','FALSE','Cycle latch'],
+  ['VAR','DelayTimer','','TON','','Dwell before drum release'],
+  ['VAR','CycleCount','','DINT','0','Completed bottles this shift'],
+  ['VAR','MotorCurrent','%IW3','INT','0','CT clamp, 0–10 V']
+].map(r => ({ cls:r[0], name:r[1], addr:r[2], type:r[3], init:r[4], cmt:r[5] }));
+const DECL_BY = {}; DECL.forEach(d => { DECL_BY[d.name] = d; });
+const AC = [
+  { name:'Motor2Run', addr:'%QX0.4', type:'BOOL' },
+  { name:'MotorFault', addr:'%IX1.2', type:'BOOL' },
+  { name:'MotorCurrent', addr:'%IW3', type:'INT' },
+  { name:'MotorStarter', addr:'', type:'FB' }
+];
+
+class Component extends DCLogic {
+  state = {
+    theme:null, mode:null, openMenu:null, tab:0, bottomTab:'compile',
+    leftW:238, rightW:296, bottomH:150, symOpen:true, symH:65,
+    tip:null, ctx:null, palette:false, hw:false, launcher:false, boardOpen:false,
+    board:'ESP32-S3', drag:null, dropOn:false, acOpen:false, acProp:false, symQuery:null,
+    building:false, stage:0, elapsed:0, logN:3, hoverProb:-1, sev:'All', src:'All',
+    tree:{ root:true, programs:true, fbs:true, tasks:true }, lib:{ std:true, esp:true, user:true }, libOpen:true,
+    activeTool:null, statusMsg:'', dirty:true, bottomHidden:false, hoverCell:null, hoverSide:'right',
+    nets:SEED, sel:{ n:0, k:'cell', path:[1] }, branchArm:null,
+    grid:null, insert:'Insert', zoom:100, et:3.24, scan:2.4, hoverLib:-1, selNode:'prog0'
+  };
+
+  componentDidUpdate(prev) {
+    const p = this.props || {}, q = prev || {};
+    if (p.theme !== q.theme && p.theme) this.setState({ theme:p.theme });
+    if (p.mode !== q.mode && p.mode) this.setState({ mode:p.mode });
+    if (p.showGrid !== q.showGrid && p.showGrid !== undefined) this.setState({ grid:p.showGrid });
+  }
+
+  componentDidMount() {
+    this._key = (e) => {
+      if (e.key === 'P' && e.shiftKey && (e.ctrlKey || e.metaKey)) { e.preventDefault(); this.setState({ palette:true }); }
+      else if (e.key === 'Escape') { this.setState({ activeTool:null, branchArm:null, statusMsg:'' }); this.closeAll(); }
+      else if (e.key === 'b' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); this.armBranch(); }
+      else if (e.key === 'i' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); this.addNetwork(); }
+      else if (e.key === 'Delete' || e.key === 'Backspace') {
+        const tg = e.target, tag = tg && tg.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (tg && tg.isContentEditable)) return;
+        e.preventDefault(); this.delElement();
+      }
+    };
+    window.addEventListener('keydown', this._key);
+    this._fit = () => {
+      const col = this._canvasCol;
+      if (!col) return;
+      const h = col.clientHeight;
+      if (h && h !== this._colH) { this._colH = h; this.forceUpdate(); }
+    };
+    if (window.ResizeObserver && this._canvasCol) {
+      if (this._ro) this._ro.disconnect();
+      this._ro = new ResizeObserver(() => { if (this._fit) requestAnimationFrame(this._fit); });
+      this._ro.observe(this._canvasCol);
+    }
+    window.addEventListener('resize', this._fit);
+    requestAnimationFrame(this._fit);
+    this._tick = setInterval(() => {
+      if ((this.state.mode || (this.props || {}).mode) === 'online') {
+        this.setState(s => ({ et: s.et > 4.98 ? 0 : +(s.et + 0.16).toFixed(2), scan: +(2.2 + Math.random() * 0.5).toFixed(1) }));
+      }
+      if (this.state.building) {
+        this.setState(s => {
+          const el = s.elapsed + 0.25;
+          if (el >= 30) { clearInterval; return { building:false, elapsed:28.3, stage:4, logN:LOG.length }; }
+          const stage = el < 2 ? 0 : el < 5 ? 1 : el < 24 ? 2 : 3;
+          const logN = Math.min(LOG.length - 2, Math.max(3, Math.round(el / 1.9) + 2));
+          return { elapsed:el, stage, logN };
+        });
+      }
+    }, 250);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._key); window.removeEventListener('resize', this._fit); if (this._ro) this._ro.disconnect(); clearInterval(this._tick); }
+
+  T() { return this.state.theme === 'light' ? LIGHT : DARK; }
+  closeAll = () => this.setState({ openMenu:null, ctx:null, palette:false, hw:false, launcher:false, boardOpen:false, tip:null, acProp:false });
+  stop = (e) => e.stopPropagation();
+  noop = () => {};
+
+  // drag-resize
+  drag(prop, sign, axis) {
+    return (e) => {
+      e.preventDefault();
+      const start = axis === 'x' ? e.clientX : e.clientY, v0 = this.state[prop];
+      const lo = axis === 'y' ? 84 : 150;
+      const hi = axis === 'y' ? Math.max(lo, window.innerHeight - 260) : 560;
+      const mv = (ev) => {
+        const d = ((axis === 'x' ? ev.clientX : ev.clientY) - start) * sign;
+        this.setState({ [prop]: Math.max(lo, Math.min(hi, v0 + d)) });
+      };
+      const up = () => { window.removeEventListener('mousemove', mv); window.removeEventListener('mouseup', up); };
+      window.addEventListener('mousemove', mv); window.addEventListener('mouseup', up);
+    };
+  }
+
+  flash = (m) => { this.setState({ statusMsg:m }); clearTimeout(this._fl); this._fl = setTimeout(() => this.setState({ statusMsg:'' }), 2600); };
+  pickTool = (n) => () => this.setState(s => ({ activeTool: s.activeTool === n ? null : n, statusMsg: s.activeTool === n ? '' : 'Insert mode — click a rung position to place ' + n }));
+  mutate(fn) {
+    this.setState(s => {
+      const nets = s.nets.map(n => ({ comment:n.comment, body:clone(n.body), coils:n.coils.map(c => Object.assign({}, c)) }));
+      const patch = fn(nets) || {};
+      return Object.assign({ nets, dirty:true }, patch.sel ? { symQuery:null, acProp:false } : {}, patch);
+    });
+  }
+  elemAt(sel) {
+    if (!sel) return null;
+    const net = this.state.nets[sel.n]; if (!net) return null;
+    if (sel.k === 'coil') return net.coils[sel.c] || null;
+    if (!sel.path) return null;
+    try { const n = nAt(net.body, sel.path); return n && n.t === 'el' ? n : null; } catch (e) { return null; }
+  }
+  newElem(n, type) {
+    return type === 'fb'
+      ? E('fb', 'Timer' + (n + 1), '', { fb:'TON', pt:'T#5s', span:2 })
+      : E(type, '', '');
+  }
+  // insert next to an element, inside the series that owns it
+  placeAt(n, path, side, type) {
+    this.mutate(nets => {
+      const net = nets[n], el = this.newElem(n, type);
+      if (!path || !path.length) { net.body.kids.push(el); return { sel:{ n, k:'cell', path:[net.body.kids.length - 1] }, statusMsg:'Appended to Network ' + (n + 1) }; }
+      const ppath = path.slice(0, -1), idx = path[path.length - 1];
+      const owner = nAt(net.body, ppath);
+      if (!owner || owner.t !== 'ser') return {};
+      const at = Math.max(0, Math.min(side === 'left' ? idx : idx + 1, owner.kids.length));
+      owner.kids.splice(at, 0, el);
+      return { sel:{ n, k:'cell', path:ppath.concat(at) },
+        statusMsg:'Inserted ' + (side === 'left' ? 'before' : 'after') + ' — the rest of that line shifted right' };
+    });
+  }
+  appendTo(n, ppath, type) {
+    this.mutate(nets => {
+      const net = nets[n], el = this.newElem(n, type);
+      const owner = ppath.length ? nAt(net.body, ppath) : net.body;
+      if (!owner || owner.t !== 'ser') return {};
+      owner.kids.push(el);
+      return { sel:{ n, k:'cell', path:ppath.concat(owner.kids.length - 1) }, statusMsg:'Appended to that line' };
+    });
+  }
+  placeCoil(n, type) {
+    this.mutate(nets => {
+      nets[n].coils.push(E(type, '', ''));
+      return { sel:{ n, k:'coil', c:nets[n].coils.length - 1 },
+        statusMsg:'Coils always sit against the right rail — added output ' + nets[n].coils.length };
+    });
+  }
+  cellClick(n, kind, arg) {
+    const s = this.state, tool = s.activeTool;
+    if (kind === 'coil') {
+      if (s.branchArm) { this.branchCoil(n, arg); return; }
+      if (tool && COIL_TOOLS[tool]) { this.placeCoil(n, COIL_TOOLS[tool]); return; }
+      if (tool && CONTACT_TOOLS[tool]) { this.flash('A contact cannot go in the output column — coils only'); return; }
+      this.setState({ sel:{ n, k:'coil', c:arg }, hoverCell:null, symQuery:null, acProp:false });
+      return;
+    }
+    if (kind === 'slot') {
+      if (s.branchArm) { this.setState({ branchArm:null, statusMsg:'Nothing to branch from — click an existing element' }); return; }
+      if (tool && COIL_TOOLS[tool]) { this.placeCoil(n, COIL_TOOLS[tool]); return; }
+      if (tool && CONTACT_TOOLS[tool]) { this.appendTo(n, arg, CONTACT_TOOLS[tool]); return; }
+      this.setState({ sel:{ n, k:'slot', path:arg }, hoverCell:null });
+      return;
+    }
+    if (s.branchArm) { this.makeBranch(n, arg); return; }
+    if (tool && COIL_TOOLS[tool]) { this.placeCoil(n, COIL_TOOLS[tool]); return; }
+    if (tool && CONTACT_TOOLS[tool]) { this.placeAt(n, arg, s.hoverSide || 'right', CONTACT_TOOLS[tool]); return; }
+    this.setState({ sel:{ n, k:'cell', path:arg }, hoverCell:null, symQuery:null, acProp:false });
+  }
+  armBranch = () => {
+    const el = this.elemAt(this.state.sel);
+    if (!el) { this.flash('Select a contact or coil first, then branch from it'); return; }
+    if (el.type === 'fb') { this.flash('Function blocks cannot be branched'); return; }
+    this.setState({ branchArm:{ type:el.type }, activeTool:null,
+      statusMsg:'Branch armed — click an element; the child spans that element (and grows with anything inserted beside it inside the block)' });
+  };
+  branchCoil(n, c) {
+    const arm = this.state.branchArm;
+    const isCoil = arm && (arm.type === 'coil' || arm.type === 'set' || arm.type === 'reset');
+    if (!isCoil) { this.setState({ branchArm:null }); this.flash('A contact cannot go in the output column — coils only'); return; }
+    this.mutate(nets => {
+      nets[n].coils.splice(c + 1, 0, E(arm.type, '', ''));
+      return { branchArm:null, sel:{ n, k:'coil', c:c + 1 }, statusMsg:'Parallel coil added at the right rail' };
+    });
+  }
+  // U around exactly the clicked element, at any depth
+  makeBranch(n, path) {
+    const arm = this.state.branchArm; if (!arm) return;
+    if (arm.type === 'coil' || arm.type === 'set' || arm.type === 'reset') {
+      this.setState({ branchArm:null }); this.flash('Coil branches attach at the right rail — click a coil'); return;
+    }
+    this.mutate(nets => {
+      const net = nets[n], ppath = path.slice(0, -1), idx = path[path.length - 1];
+      const owner = nAt(net.body, ppath);
+      if (!owner || owner.t !== 'ser') return { branchArm:null, statusMsg:'Cannot branch from there' };
+      const target = owner.kids[idx];
+      if (!target) return { branchArm:null, statusMsg:'Nothing to branch from there' };
+      if (target.t === 'el' && target.type === 'fb') return { branchArm:null, statusMsg:'Function blocks cannot be branched' };
+      // Branch spans exactly its parent. If the clicked element IS its whole line
+      // inside a block, its displayed span is the block's width — so the child joins
+      // that block as a new level below it and inherits that width.
+      if (ppath.length >= 2 && owner.kids.length === 1) {
+        const parPath = ppath.slice(0, -1), lvl = ppath[ppath.length - 1];
+        const par = nAt(net.body, parPath);
+        if (par && par.t === 'par') {
+          const w = wSpan(par);
+          par.kids.splice(lvl + 1, 0, S(E(arm.type, '', '')));
+          return { branchArm:null, sel:{ n, k:'cell', path:parPath.concat(lvl + 1, 0) },
+            statusMsg:'Branch spans its parent — ' + w + ' element' + (w === 1 ? '' : 's') + '; insert inside the block to widen it' };
+        }
+      }
+      const span = wSpan(target);
+      owner.kids[idx] = P(S(target), S(E(arm.type, '', '')));
+      return { branchArm:null, sel:{ n, k:'cell', path:ppath.concat(idx, 1, 0) },
+        statusMsg:'Branch spans its parent — ' + span + ' element' + (span === 1 ? '' : 's') + '; insert inside the block to widen it' };
+    });
+  }
+  delElement = () => {
+    const sel = this.state.sel; if (!sel) { this.flash('Nothing selected'); return; }
+    this.mutate(nets => {
+      const net = nets[sel.n]; if (!net) return {};
+      if (sel.k === 'coil') { net.coils.splice(sel.c, 1); return { sel:{ n:sel.n, k:'cell', path:[0] }, statusMsg:'Coil removed' }; }
+      if (!sel.path || !sel.path.length) return {};
+      const ppath = sel.path.slice(0, -1), idx = sel.path[sel.path.length - 1];
+      const owner = nAt(net.body, ppath);
+      if (!owner || owner.t !== 'ser') return {};
+      owner.kids.splice(idx, 1);
+      // prune: empty level -> drop level; single-level parallel -> inline it
+      let p = ppath.slice();
+      while (p.length >= 2) {
+        const par = nAt(net.body, p.slice(0, -1));            // 'par'
+        const lvl = p[p.length - 1];
+        if (par.t !== 'par') break;
+        if (par.kids[lvl] && par.kids[lvl].kids.length === 0) par.kids.splice(lvl, 1);
+        if (par.kids.length === 1) {
+          const grandPath = p.slice(0, -2), gIdx = p[p.length - 2];
+          const gp = grandPath.length ? nAt(net.body, grandPath) : net.body;
+          if (gp.t === 'ser') gp.kids.splice(gIdx, 1, ...par.kids[0].kids);
+          p = grandPath;
+          continue;
+        }
+        break;
+      }
+      return { sel:{ n:sel.n, k:'cell', path:[Math.max(0, (net.body.kids.length || 1) - 1)] }, statusMsg:'Element removed — the line closed up' };
+    });
+  };
+
+  addNetwork = () => {
+    this.mutate(nets => {
+      nets.push({ comment:'// Network ' + (nets.length + 1) + ' — new network', body:S(), coils:[] });
+      return { sel:{ n:nets.length - 1, k:'slot', path:[] }, statusMsg:'Network ' + nets.length + ' inserted — pick a contact, then click the rung' };
+    });
+  };
+  delNetwork = () => {
+    this.mutate(nets => {
+      const n = this.state.sel ? this.state.sel.n : nets.length - 1;
+      if (nets.length < 2) return { statusMsg:'A program needs at least one network' };
+      nets.splice(n, 1);
+      return { sel:{ n:Math.max(0, n - 1), k:'cell', path:[0] }, statusMsg:'Network ' + (n + 1) + ' deleted — Ctrl+Z to undo' };
+    });
+  };
+  bindSymbol = (name) => {
+    const sel = this.state.sel; if (!sel) return;
+    const d = DECL_BY[name];
+    this.mutate(nets => {
+      const net = nets[sel.n]; if (!net) return {};
+      const el = sel.k === 'coil' ? net.coils[sel.c] : (sel.path ? nAt(net.body, sel.path) : null);
+      if (!el || el.t !== 'el') return {};
+      el.sym = name; el.addr = d ? d.addr : ''; el.err = false;
+      return { symQuery:null, acProp:false, statusMsg:'Bound to ' + name + (d && d.addr ? ' (' + d.addr + ')' : '') };
+    });
+  };
+  setElemType = (ty) => {
+    const sel = this.state.sel; if (!sel) return;
+    this.mutate(nets => {
+      const net = nets[sel.n]; if (!net) return {};
+      const el = sel.k === 'coil' ? net.coils[sel.c] : (sel.path ? nAt(net.body, sel.path) : null);
+      if (!el || el.t !== 'el' || el.type === 'fb') return {};
+      el.type = ty;
+      const NAME = { no:'NO contact', nc:'NC contact', p:'rising-edge contact', n:'falling-edge contact', coil:'output coil', set:'set coil', reset:'reset coil' };
+      return { statusMsg:'Changed to ' + NAME[ty] };
+    });
+  };
+  symFilter = (e) => this.setState({ symQuery:e.target.value, acProp:true });
+  editCell = (key) => (e) => {
+    const v = e.target.value, sel = this.state.sel;
+    if (!sel) return;
+    this.mutate(nets => {
+      const net = nets[sel.n]; if (!net) return {};
+      const el = sel.k === 'coil' ? net.coils[sel.c] : (sel.path ? nAt(net.body, sel.path) : null);
+      if (!el || el.t !== 'el') return {};
+      el[key] = v; el.err = false;
+      return {};
+    });
+  };
+  symRoom(colH) { return Math.max(SYM_FLOOR, colH - SYM_CHROME - CANVAS_FLOOR); }
+  dragSym = (e) => {
+    e.preventDefault();
+    const y0 = e.clientY, h0 = this.state.symH;
+    // the table can take everything the column has spare, minus the canvas floor
+    const col = e.currentTarget.parentElement;
+    const CHROME = SYM_CHROME, CANVAS_MIN = CANVAS_FLOOR;
+    const room = col ? Math.max(60, col.clientHeight - CHROME - CANVAS_MIN) : 420;
+    const mv = (ev) => this.setState({ symH: Math.max(SYM_FLOOR, Math.min(room, h0 + (ev.clientY - y0))) });
+    const up = () => { window.removeEventListener('mousemove', mv); window.removeEventListener('mouseup', up); };
+    window.addEventListener('mousemove', mv); window.addEventListener('mouseup', up);
+  };
+  startBuild = () => this.setState({ building:true, elapsed:0, stage:0, logN:1, bottomTab:'compile' });
+  stopBuild = () => this.setState({ building:false });
+
+  startLibDrag(item, lib) {
+    return (e) => {
+      e.preventDefault();
+      this.setState({ drag:{ name:item, lib, x:e.clientX, y:e.clientY } });
+      const mv = (ev) => this.setState(s => ({ drag: s.drag ? { ...s.drag, x:ev.clientX, y:ev.clientY } : null }));
+      const up = () => {
+        window.removeEventListener('mousemove', mv); window.removeEventListener('mouseup', up);
+        this.setState({ drag:null, dropOn:false });
+      };
+      window.addEventListener('mousemove', mv); window.addEventListener('mouseup', up);
+    };
+  }
+  canvasMove = () => { if (this.state.drag && !this.state.dropOn) this.setState({ dropOn:true }); };
+  canvasDrop = () => {
+    const d = this.state.drag; if (!d) return;
+    const n = this.state.sel ? this.state.sel.n : 0;
+    this.mutate(nets => {
+      nets[n].body.kids.push(E('fb', d.name + '_1', '', { fb:d.name, pt:'T#5s', span:2 }));
+      return { drag:null, dropOn:false, sel:{ n, k:'cell', path:[nets[n].body.kids.length - 1] }, statusMsg:d.name + ' inserted on Network ' + (n + 1) };
+    });
+  };
+
+  scenario(n) {
+    const base = { openMenu:null, ctx:null, palette:false, hw:false, launcher:false, tip:null, acOpen:false, acProp:false, drag:null, dropOn:false, building:false };
+    const S = {
+      1:{ ...base, theme:'dark', mode:'edit', bottomTab:'compile', stage:4, logN:LOG.length, elapsed:28.3 },
+      2:{ ...base, theme:'light', mode:'edit', bottomTab:'compile', stage:4, logN:LOG.length, elapsed:28.3 },
+      3:{ ...base, mode:'online', bottomTab:'search' },
+      4:{ ...base, mode:'edit', bottomTab:'compile', building:true, stage:2, elapsed:23, logN:11 },
+      5:{ ...base, mode:'edit', bottomTab:'problems', hoverProb:0 },
+      6:{ ...base, openMenu:'PLC', tip:{ name:'Download to PLC', k:'F8', x:352, y:126 } },
+      7:{ ...base, ctx:{ title:'Prog0 (Ladder)', x:150, y:330 }, selNode:'prog0' },
+      8:{ ...base, hw:true },
+      9:{ ...base, drag:{ name:'TON', lib:'Standard', x:760, y:520 }, dropOn:true },
+      10:{ ...base }
+    };
+    if (n === 10) return () => { window.location.href = 'ESP-Flow Design System.dc.html'; };
+    return () => this.setState(S[n] || base);
+  }
+
+  renderVals() {
+    const p = this.props || {};
+    const theme = this.state.theme || p.theme || 'dark';
+    const modeV = this.state.mode || p.mode || 'edit';
+    const gridV = (this.state.grid === null || this.state.grid === undefined) ? (p.showGrid === undefined ? true : p.showGrid) : this.state.grid;
+    const s = Object.assign({}, this.state, { theme, mode:modeV, grid:gridV });
+    const t = theme === 'light' ? LIGHT : DARK, online = modeV === 'online', light = theme === 'light';
+    const p1 = online ? t.green : t.ink, p0 = online ? t.dead : t.ink;
+    const symRoom = this._colH ? this._colH - SYM_CHROME - CANVAS_FLOOR : 420;
+    const symTight = this._colH ? symRoom < SYM_FLOOR : false;
+    const symApplied = Math.max(SYM_FLOOR, Math.min(s.symH, Math.max(SYM_FLOOR, symRoom)));
+    const rootStyle = {
+      '--bg':t.bg, '--panel':t.panel, '--panel2':t.panel2, '--head':t.head, '--bord':t.bord, '--bord2':t.bord2,
+      '--tx':t.tx, '--tx2':t.tx2, '--tx3':t.tx3, '--acc':t.acc, '--accs':t.accs, '--selbg':t.selbg,
+      '--canv':t.canv, '--grid': s.grid ? t.grid : t.canv, '--gutter':t.gutter, '--input':t.input, '--log':t.log,
+      '--fbfill':t.fbfill, '--green':t.green, '--red':t.red, '--amber':t.amber, '--cmt':t.cmt,
+      '--lab': online ? t.lab : t.lab, '--addr':t.addr, '--p1':p1, '--p0':p0,
+      position:'relative', width:'100%', height:'100vh', maxWidth:'100vw', minHeight:0, display:'flex', flexDirection:'column', overflow:'hidden',
+      background:t.bg, color:t.tx, fontFamily:"'IBM Plex Sans',system-ui,sans-serif", fontSize:'12px'
+    };
+
+    // ---- toolbars
+    const mk = (name, k, d, extra) => ({ name, k, d, ...extra });
+    const G = [
+      { label:'STD', items:[mk('New','Ctrl+N',ICON.nw,{act:()=>this.flash('New project — unsaved changes in BottlingLine_v3 must be saved first')}),mk('Open','Ctrl+O',ICON.open,{act:()=>this.flash('Open project…')}),mk('Save','Ctrl+S',ICON.save,{act:()=>{this.setState({dirty:false});this.flash('Prog0 saved');}}),mk('Print','Ctrl+P',ICON.print,{act:()=>this.flash('Printing Prog0 [Ladder] — 4 networks')}),mk('Undo','Ctrl+Z',ICON.undo,{act:()=>this.flash('Undo: delete contact on Network 4')}),mk('Redo','Ctrl+Y',ICON.redo,{act:()=>this.flash('Nothing to redo')}),mk('Cut','Ctrl+X',ICON.cut,{act:()=>this.flash('Cut '+sel.sym+' to clipboard')}),mk('Copy','Ctrl+C',ICON.copy,{act:()=>this.flash('Copied '+sel.sym)}),mk('Paste','Ctrl+V',ICON.paste,{act:()=>this.flash('Pasted at cursor — Network 4, Col 2')}),mk('Find','Ctrl+F',ICON.find,{act:()=>{this.setState({bottomTab:'search'});this.flash('Cross reference: ConveyorMotor');}})] },
+      { label:'LADDER', items:[mk('Normally-open contact','F2',ICON.no,{tool:1}),mk('Normally-closed contact','F3',ICON.nc,{tool:1}),mk('Rising-edge contact','F4',ICON.no,{t:'P',tool:1}),mk('Falling-edge contact','Shift+F4',ICON.no,{t:'N',tool:1}),mk('Output coil','F5',ICON.coil,{tool:1}),mk('Set coil','F6',ICON.coil,{t:'S',tool:1}),mk('Reset coil','F7',ICON.coil,{t:'R',tool:1}),mk('Function block','F9',ICON.fb,{tool:1}),mk('Branch from selection','Ctrl+B',ICON.vbr,{act:this.armBranch}),mk('Delete element','Del','M3 3h10v10H3zM6 6l4 4M10 6l-4 4',{act:this.delElement}),mk('Insert network','Ctrl+I',ICON.insnw,{act:this.addNetwork}),mk('Delete network','Ctrl+D',ICON.delnw,{act:this.delNetwork})] },
+      { label:'PLC', items:[mk('Connect device','Ctrl+K',ICON.conn,{act:()=>this.flash('Connected — ESP32-S3 on COM4')}),mk('Download to PLC','F8',ICON.down,{act:()=>{this.setState({bottomTab:'compile'});this.startBuild();this.flash('Building firmware before download…');}}),mk('Upload from PLC','Shift+F8',ICON.up,{act:()=>this.flash('Upload from PLC will overwrite the open project')}),mk('Run','Ctrl+R',ICON.run,{act:()=>{this.setState({mode:'online'});this.flash('PLC running — scan task CyclicTask_10ms');}}),mk('Stop','Ctrl+.',ICON.stop,{act:()=>{this.setState({mode:'edit'});this.flash('PLC stopped — outputs held at last state');}}),mk('Online monitor','Ctrl+M',ICON.mon,{act:()=>this.setState({mode: online?'edit':'online'})}),mk('Force values','Ctrl+Shift+F',ICON.force,{act:()=>this.flash('1 variable forced: ResetBtn = 0')})] },
+      { label:'COMPILE', items:[mk('Compile','F11',ICON.comp,{act:this.startBuild}),mk('Rebuild all','Ctrl+F11',ICON.rebuild,{act:this.startBuild}),mk('Check program','F12',ICON.check,{act:()=>{this.setState({bottomTab:'problems'});this.flash('Check complete — 2 errors, 1 warning');}}),mk('Previous error','Shift+F4',ICON.prev,{act:()=>{this.setState({bottomTab:'problems',sel:{n:1,k:'cell',c:0,r:0},symQuery:null,acProp:false});this.flash('STR-0101 — Prog0 : Network 2');}}),mk('Next error','F4',ICON.next,{act:()=>this.setState({bottomTab:'problems'})}),mk('Cross reference','Ctrl+Shift+X',ICON.xref,{act:()=>this.setState({bottomTab:'search'})})] },
+      { label:'VIEW', items:[mk('Zoom in','Ctrl++',ICON.zin,{act:()=>this.setState(x=>({zoom:Math.min(300,x.zoom+10)}))}),mk('Zoom out','Ctrl+-',ICON.zout,{act:()=>this.setState(x=>({zoom:Math.max(50,x.zoom-10)}))}),mk('Zoom to fit','Ctrl+0',ICON.zfit,{act:()=>this.setState({zoom:100})}),mk('Toggle grid','Ctrl+G',ICON.grid,{act:()=>this.setState({grid:!gridV})}),mk('Toggle comments','Ctrl+;',ICON.cmt,{act:()=>this.flash('Network comments hidden')}),mk('Toggle panels','Ctrl+0',ICON.panels,{act:()=>this.setState(x=>({leftW: x.leftW > 40 ? 0 : 238, rightW: x.rightW > 40 ? 0 : 296}))})] }
+    ];
+    const btnStyle = (on) => `width:24px;height:24px;padding:0;line-height:0;display:grid;place-items:center;border-radius:2px;cursor:pointer;background:${on?t.accs:'transparent'};border:1px solid ${on?t.acc:'transparent'};color:${on?t.acc:t.tx2}`;
+    const wire = (g) => ({
+      label:g.label,
+      items:g.items.map(b => ({
+        d:b.d, t:b.t || '',
+        style: btnStyle(b.name === 'Online monitor' ? online : b.name === 'Toggle grid' ? s.grid : b.name === 'Branch from selection' ? !!s.branchArm : b.tool ? s.activeTool === b.name : (s.tip && s.tip.name === b.name)),
+        on: b.act || (b.tool ? this.pickTool(b.name) : () => this.flash(b.name)),
+        enter: (e) => { const r = e.currentTarget.getBoundingClientRect(); this.setState({ tip:{ name:b.name, k:b.k, x:r.left, y:r.bottom + 4 } }); }
+      }))
+    });
+    const toolRows = [{ groups:[wire(G[0]), wire(G[1])] }, { groups:[wire(G[2]), wire(G[3]), wire(G[4])] }];
+
+    // ---- menus
+    const MENUS = ['File','Edit','View','Compile','PLC','Tools','Window','Help'];
+    const MITEMS = {
+      PLC:[['Connect Device','Ctrl+K',ICON.conn],['Download to PLC','F8',ICON.down],['Upload from PLC','Shift+F8',ICON.up],[null],['Run','Ctrl+R',ICON.run],['Stop','Ctrl+.',ICON.stop],['Online Mode','Ctrl+M',ICON.mon],['Force Values','Ctrl+Shift+F',ICON.force],[null],['Clear PLC Memory','',ICON.delnw],['Device Info','',ICON.chip]],
+      File:[['New Project','Ctrl+N',ICON.nw],['Open Project…','Ctrl+O',ICON.open],['Save','Ctrl+S',ICON.save],[null],['Print…','Ctrl+P',ICON.print],[null],['Export Project (.espf)','',ICON.up],['Close Project','',ICON.stop]],
+      Edit:[['Undo','Ctrl+Z',ICON.undo],['Redo','Ctrl+Y',ICON.redo],[null],['Cut','Ctrl+X',ICON.cut],['Copy','Ctrl+C',ICON.copy],['Paste','Ctrl+V',ICON.paste],['Find / Replace','Ctrl+F',ICON.find]],
+      View:[['Zoom In','Ctrl++',ICON.zin],['Zoom Out','Ctrl+-',ICON.zout],['Zoom to Fit','Ctrl+0',ICON.zfit],[null],['Grid','Ctrl+G',ICON.grid],['Comments','Ctrl+;',ICON.cmt],['Panels','',ICON.panels]],
+      Compile:[['Compile','F11',ICON.comp],['Rebuild All','Ctrl+F11',ICON.rebuild],['Check Program','F12',ICON.check],[null],['Next Error','F4',ICON.next],['Cross Reference','Ctrl+Shift+X',ICON.xref]],
+      Tools:[['Hardware Configuration…','',ICON.chip],['Symbol Manager','',ICON.sym],['Command Palette','Ctrl+Shift+P',ICON.comp],['Options…','',ICON.panels]],
+      Window:[['Split Editor','',ICON.panels],['Reset Layout','',ICON.grid],['Monitor Chart','',ICON.mon]],
+      Help:[['Documentation','F1',ICON.st],['IEC 61131-3 Reference','',ICON.sym],['About ESP-Flow','',ICON.info]]
+    };
+    const mX = {}; MENUS.reduce((x, m) => { mX[m] = x; return x + m.length * 7.1 + 16; }, 6);
+    const menus = MENUS.map(m => ({
+      label:m,
+      style:`height:100%;padding:0 8px;background:${s.openMenu===m?t.panel2:'transparent'};border:none;border-bottom:2px solid ${s.openMenu===m?t.acc:'transparent'};color:${s.openMenu===m?t.tx:t.tx2};font:400 11.5px/1 'IBM Plex Sans',sans-serif;cursor:pointer`,
+      on:(e)=>{ e.stopPropagation(); this.setState({ openMenu: s.openMenu === m ? null : m, tip:null }); },
+      hover:()=>{ if (s.openMenu && s.openMenu !== m) this.setState({ openMenu:m }); }
+    }));
+    const mi = MITEMS[s.openMenu] || [];
+    const menuItems = mi.map(([l, k, d]) => l === null || l === undefined
+      ? { sep:true, l:'', k:'', d:'', style:'' }
+      : { sep:false, l, k:k||'', d:d||'',
+          style:`width:100%;height:22px;display:flex;align-items:center;gap:8px;padding:0 9px;background:transparent;border:none;color:${t.tx};font:400 11.5px/1 'IBM Plex Sans',sans-serif;cursor:pointer;text-align:left`,
+          on:()=>{ if (l === 'Online Mode') this.setState({ mode: online?'edit':'online', openMenu:null }); else if (l === 'Hardware Configuration…') this.setState({ hw:true, openMenu:null }); else if (l === 'Command Palette') this.setState({ palette:true, openMenu:null }); else if (l === 'Compile' || l === 'Rebuild All') { this.setState({ openMenu:null }); this.startBuild(); } else this.setState({ openMenu:null }); } });
+    const menuPanelStyle = `position:absolute;left:${(mX[s.openMenu]||0)}px;top:24px;min-width:214px;padding:3px 0;background:${t.panel2};border:1px solid ${t.bord2};box-shadow:0 10px 26px ${t.shadow};z-index:70`;
+
+    // ---- tree
+    const TR = [
+      ['BottlingLine_v3', 0, ICON.folder, t.acc, 'root', 'project', ''],
+      ['Hardware Configuration', 1, ICON.chip, t.tx2, 'hw', 'leaf', 'ESP32-S3'],
+      ['Network Configuration', 1, ICON.net, t.tx2, 'net', 'leaf', ''],
+      ['Global Symbols', 1, ICON.sym, t.tx2, 'gsym', 'leaf', '18'],
+      ['Programs', 1, ICON.folder, t.amber, 'programs', 'group', ''],
+      ['Prog0', 2, ICON.ld, t.acc, 'prog0', 'prog', 'LD'],
+      ['Prog1', 2, ICON.st, t.tx2, 'prog1', 'prog', 'ST'],
+      ['Function Blocks', 1, ICON.folder, t.amber, 'fbs', 'group', ''],
+      ['MotorStarter', 2, ICON.fb, t.tx2, 'fb1', 'leaf', 'FB'],
+      ['TankFill', 2, ICON.fb, t.tx2, 'fb2', 'leaf', 'FB'],
+      ['Tasks', 1, ICON.folder, t.amber, 'tasks', 'group', ''],
+      ['CyclicTask_10ms', 2, ICON.task, t.tx2, 'tk1', 'leaf', '10 ms'],
+      ['CyclicTask_500ms', 2, ICON.task, t.tx2, 'tk2', 'leaf', '500 ms'],
+      ['Device Monitor Tables', 1, ICON.table, t.tx2, 'tbl', 'leaf', '2']
+    ];
+    let curGroup = null;
+    const visibleTR = TR.filter(([label, depth, d, ic, id, kind]) => {
+      if (depth === 1 && kind === 'group') { curGroup = id; return !!s.tree.root; }
+      if (depth === 1) { curGroup = null; return !!s.tree.root; }
+      if (depth >= 2) return !!s.tree.root && !!s.tree[curGroup];
+      return true;
+    });
+    const treeRows = visibleTR.map(([label, depth, d, iconColor, id, kind, tag]) => {
+      const selected = s.selNode === id;
+      const chev = kind === 'group' || kind === 'project' ? 'M5 3l5 5-5 5' : '';
+      const openChev = kind === 'group' || kind === 'project' ? 'M3 6l5 5 5-5' : '';
+      const isOpen = kind === 'project' ? s.tree.root : kind === 'group' ? !!s.tree[id] : false;
+      return {
+        label, d, iconColor, tag,
+        chev: isOpen ? openChev : chev,
+        style:`height:23px;display:flex;align-items:center;gap:3px;padding-left:${4 + depth * 13}px;padding-right:6px;cursor:pointer;background:${selected?t.selbg:'transparent'};color:${selected?t.tx:t.tx2};font:400 11.5px/1.5 'IBM Plex Sans',sans-serif;border-left:2px solid ${selected?t.acc:'transparent'}`,
+        on:()=>{ if (kind === 'group' || kind === 'project') this.setState(x => ({ tree:{ ...x.tree, [id]:!x.tree[id] }, selNode:id })); else if (id === 'hw') this.setState({ hw:true, selNode:id }); else this.setState({ selNode:id }); },
+        ctx:(e)=>{ e.preventDefault(); this.setState({ selNode:id, ctx:{ title: kind === 'prog' ? label + (id==='prog0'?' (Ladder)':' (Structured Text)') : label, x:e.clientX, y:e.clientY } }); }
+      };
+    });
+    const CTXI = [['Open','Enter'],['Open in New Tab',''],[null],['Compile Program','F11'],['Set as Startup Program',''],[null],['Rename…','F2'],['Delete','Del'],[null],['Cross Reference','Ctrl+Shift+X'],['Properties…','Alt+Enter']];
+    const ctxItems = CTXI.map(([l, k]) => l === null
+      ? { sep:true, l:'', k:'', style:'' }
+      : { sep:false, l, k,
+          style:`width:100%;height:22px;display:flex;align-items:center;gap:10px;padding:0 10px;background:transparent;border:none;color:${l==='Delete'?t.red:t.tx};font:400 11.5px/1 'IBM Plex Sans',sans-serif;cursor:pointer`,
+          on:this.closeAll });
+    const ctxStyle = s.ctx ? `position:fixed;left:${s.ctx.x}px;top:${s.ctx.y}px;min-width:216px;padding:3px 0;background:${t.panel2};border:1px solid ${t.bord2};box-shadow:0 12px 30px ${t.shadow};z-index:160` : '';
+
+    // ---- symbols table
+    const symHead = ['Class','Identifier','Address','Data Type','Initial','Comment'];
+    const SY = DECL.map(d => [d.cls, d.name, d.addr, d.type, d.init, d.cmt]);
+    const symCells = [];
+    SY.forEach((row, ri) => row.forEach((v, ci) => {
+      const mono = ci === 0 || ci === 2 || ci === 3 || ci === 4;
+      symCells.push({ v: v || '—',
+        style:`height:22px;display:flex;align-items:center;padding:0 7px;border-bottom:1px solid ${t.bord};border-right:1px solid ${t.bord};background:${ri%2?(light?'rgba(0,0,0,.02)':'rgba(255,255,255,.015)'):'transparent'};color:${v?(ci===0?t.acc:ci===5?t.tx2:t.tx):t.tx3};font:400 ${mono?'11px':'11.5px'}/1 ${mono?"'IBM Plex Mono',monospace":"'IBM Plex Sans',sans-serif"};overflow:hidden;white-space:nowrap;text-overflow:ellipsis` });
+    }));
+
+    // ---- tabs
+    const TABS = [['Prog0 [Ladder]', ICON.ld, true], ['MotorStarter [FB]', ICON.fb, false], ['Device Table 1', ICON.table, false], ['Monitor Chart', ICON.mon, false]];
+    const tabs = TABS.map(([label, d, dirty], i) => ({
+      label, d, dirty: dirty ? '●' : '',
+      style:`display:flex;align-items:center;gap:5px;flex:none;max-width:168px;height:100%;padding:0 9px;white-space:nowrap;background:${s.tab===i?t.bg:'transparent'};border:none;border-right:1px solid ${t.bord};border-bottom:1px solid ${s.tab===i?t.bg:t.bord};border-top:2px solid ${s.tab===i?t.acc:'transparent'};color:${s.tab===i?t.tx:t.tx2};font:400 11.5px/1 'IBM Plex Sans',sans-serif;cursor:pointer`,
+      on:()=>this.setState({ tab:i })
+    }));
+
+    // ---- library
+    const LIBS = [
+      ['std','Standard Library',[['Timers','TON, TOF, TP'],['Counters','CTU, CTD, CTUD'],['Edge Detection','R_TRIG, F_TRIG'],['Bistables','SR, RS'],['Math','ADD, SUB, MUL, DIV'],['Comparison','GT, GE, EQ, LE, LT'],['Bit Operations','AND, OR, XOR, SHL'],['Conversion','INT_TO_REAL, …']]],
+      ['esp','ESP-Flow Library',[['WiFi','FB'],['MQTT Publish','FB'],['MQTT Subscribe','FB'],['Analog Read','FB'],['PWM Output','FB'],['I2C Read','FB'],['NTP Time','FB']]],
+      ['user','User Library',[['MotorStarter','FB'],['TankFill','FB']]]
+    ];
+    const libRows = [];
+    LIBS.forEach(([id, label, items]) => {
+      const open = !!s.lib[id];
+      libRows.push({ label, tag:String(items.length), d:ICON.folder, iconColor:t.amber, chev: open ? 'M3 6l5 5 5-5' : 'M5 3l5 5-5 5',
+        style:`height:23px;display:flex;align-items:center;gap:3px;padding:0 6px 0 4px;cursor:pointer;background:${t.panel2};border-bottom:1px solid ${t.bord};color:${t.tx};font:600 11px/1.5 'IBM Plex Sans',sans-serif`,
+        on:()=>this.setState(x => ({ lib:{ ...x.lib, [id]:!x.lib[id] } })), down:()=>{} });
+      if (open) items.forEach(([n, tag]) => {
+        const dragging = s.drag && s.drag.name === n;
+        libRows.push({ label:n, tag, d:ICON.fb, iconColor: id === 'esp' ? t.acc : t.tx2, chev:'',
+          style:`height:23px;display:flex;align-items:center;gap:3px;padding-left:20px;padding-right:6px;cursor:grab;background:${dragging?t.accs:'transparent'};color:${t.tx2};font:400 11.5px/1.5 'IBM Plex Sans',sans-serif`,
+          on:()=>{}, down:this.startLibDrag(n, label.split(' ')[0]) });
+      });
+    });
+
+    // ---- selection / properties
+    // ---- ladder model -> draw lists (canvas grows with the logic)
+    const CW = 116, CH = 78, X0 = 76, RAIL_L = 56, COIL_W = 132, MINCOLS = 6;
+    const COLS = Math.max(MINCOLS, 1 + s.nets.reduce((m, net) => { const w = (function wv(n){ return n.t === 'el' ? (n.span || 1) : n.t === 'ser' ? Math.max(1, n.kids.reduce((a2, k) => a2 + wv(k), 0)) : Math.max(1, ...n.kids.map(wv)); })(net.body); return Math.max(m, w); }, 1));
+    const nodeX = (c) => X0 + c * CW, cellCx = (c, span) => nodeX(c) + (CW * (span || 1)) / 2;
+    const COILX = nodeX(COLS), RAIL_R = COILX + COIL_W;
+    const svgW = RAIL_R + 44;
+    const wireC = (p) => online ? (p ? t.green : t.dead) : t.ink;
+    const wireW = (p) => (online && p ? 2.6 : 1.6);
+    const valOf = (sym) => (VALS[sym] === undefined ? 0 : VALS[sym]);
+    const passes = (el) => {
+      if (!el) return false;
+      const v = valOf(el.sym);
+      if (el.type === 'nc') return !v;
+      if (el.type === 'no') return !!v;
+      return false;
+    };
+
+    const plates = [], wires = [], dots = [], glyphs = [], labels = [], hits = [], netBtns = [];
+    const mono = { ff:'IBM Plex Mono, monospace' };
+    const txt = (x, y, text, o) => {
+      const at = Object.assign({ fill:t.lab, fs:11, ff:"'IBM Plex Sans',sans-serif", fw:'400', fst:'normal', ta:'start' }, o || {});
+      const tx = at.ta === 'middle' ? '-50%' : at.ta === 'end' ? '-100%' : '0';
+      labels.push({ text, css:'position:absolute;left:' + x + 'px;top:' + (y - at.fs) + 'px;transform:translateX(' + tx + ');white-space:nowrap;line-height:1.15;font-family:' + at.ff + ';font-size:' + at.fs + 'px;font-weight:' + at.fw + ';font-style:' + at.fst + ';color:' + at.fill });
+    };
+    let selRing = null, caret = null, y = 14;
+    const arm = s.branchArm;
+    const ring = (rect) => ({ x:rect.x, y:rect.y, w:rect.w, h:rect.h, hx1:rect.x - 2.5, hx2:rect.x + rect.w - 2.5, hy1:rect.y - 2.5, hy2:rect.y + rect.h - 2.5 });
+
+    const drawElem = (el, cx, cy, ec) => {
+      if (el.type === 'coil' || el.type === 'set' || el.type === 'reset') {
+        glyphs.push({ d:'M' + (cx - 16) + ' ' + (cy - 14) + ' A16 14 0 0 0 ' + (cx - 16) + ' ' + (cy + 14), stroke:ec, sw:2 });
+        glyphs.push({ d:'M' + (cx + 16) + ' ' + (cy - 14) + ' A16 14 0 0 1 ' + (cx + 16) + ' ' + (cy + 14), stroke:ec, sw:2 });
+        if (el.type !== 'coil') txt(cx, cy + 4, el.type === 'set' ? 'S' : 'R', Object.assign({ ta:'middle', fw:'600', fill:ec }, mono));
+      } else {
+        glyphs.push({ d:'M' + (cx - 11) + ' ' + (cy - 14) + 'v28', stroke:ec, sw:2 });
+        glyphs.push({ d:'M' + (cx + 11) + ' ' + (cy - 14) + 'v28', stroke:ec, sw:2 });
+        if (el.type === 'nc') glyphs.push({ d:'M' + (cx - 15) + ' ' + (cy + 16) + 'L' + (cx + 15) + ' ' + (cy - 16), stroke:ec, sw:2 });
+        if (el.type === 'p' || el.type === 'n') txt(cx, cy + 4, el.type === 'p' ? 'P' : 'N', Object.assign({ ta:'middle', fw:'600', fill:ec }, mono));
+      }
+      txt(cx, cy - 20, el.sym || '???', { ta:'middle', fill: el.sym ? t.lab : t.tx3 });
+      txt(cx, cy + 28, el.addr || '—', Object.assign({ ta:'middle', fill: el.err ? t.red : t.addr, fs:10 }, mono));
+      if (el.err) glyphs.push({ d:'M' + (cx - 21) + ' ' + (cy - 16) + 'l4 3 4-3 4 3 4-3 4 3 4-3', stroke:t.red, sw:1.2 });
+      if (online) {
+        txt(cx + 22, cy - 8, String(valOf(el.sym)), Object.assign({ fill: el.forced ? t.red : t.tx2, fs:10, fw:'600' }, mono));
+        if (el.forced) txt(cx + 22, cy + 44, 'F forced 0', Object.assign({ fill:t.red, fs:10, fw:'600' }, mono));
+      }
+    };
+
+    const addHit = (rect, key, branchable, on, insertable) => {
+      const hov = s.hoverCell === key, armed = !!arm && branchable;
+      if (hov && armed) glyphs.push({ d:'M' + (rect.x + rect.w / 2) + ' ' + (rect.y + rect.h - 6) + 'v10 M' + (rect.x + rect.w / 2 - 7) + ' ' + (rect.y + rect.h + 4) + 'l7 7 7-7', stroke:t.acc, sw:1.6 });
+      if (hov && s.activeTool && insertable) {
+        const left = s.hoverSide !== 'right', bx = left ? rect.x + 1 : rect.x + rect.w - 1;
+        const ay = rect.y + rect.h / 2, dir = left ? -1 : 1;
+        glyphs.push({ d:'M' + bx + ' ' + (rect.y + 3) + 'V' + (rect.y + rect.h - 3), stroke:t.acc, sw:2.6 });
+        glyphs.push({ d:'M' + (bx + dir * 3) + ' ' + ay + 'h' + (dir * 11) + 'M' + (bx + dir * 8) + ' ' + (ay - 4) + 'l' + (dir * 5) + ' 4l' + (-dir * 5) + ' 4', stroke:t.acc, sw:1.5 });
+      }
+      hits.push({ x:rect.x, y:rect.y, w:rect.w, h:rect.h,
+        fill: hov ? (s.activeTool || armed ? 'rgba(75,144,214,.16)' : t.accs) : 'transparent',
+        stroke: hov ? t.acc : 'transparent',
+        dash: hov && (s.activeTool || armed) ? '4 3' : '',
+        cursor: s.activeTool ? 'crosshair' : armed ? 'copy' : 'pointer',
+        on,
+        enter:()=>this.setState({ hoverCell:key }),
+        move:(ev)=>{
+          const b = ev.currentTarget.getBoundingClientRect();
+          const side = (ev.clientX - b.left) < b.width / 2 ? 'left' : 'right';
+          if (s.hoverCell !== key || s.hoverSide !== side) this.setState({ hoverCell:key, hoverSide:side });
+        },
+        leave:()=>this.setState(x => (x.hoverCell === key ? { hoverCell:null } : null)) });
+    };
+
+    // ---- recursive measure / draw of the series-parallel tree
+    const wOf = (n) => n.t === 'el' ? (n.span || 1) : n.t === 'ser'
+      ? Math.max(1, n.kids.reduce((s2, k) => s2 + wOf(k), 0))
+      : Math.max(1, ...n.kids.map(wOf));
+    const hOf = (n) => n.t === 'el' ? 1 : n.t === 'ser'
+      ? Math.max(1, ...n.kids.map(hOf))
+      : n.kids.reduce((s2, k) => s2 + hOf(k), 0);
+    const conducts = (n) => n.t === 'el' ? passes(n)
+      : n.t === 'ser' ? (n.kids.length ? n.kids.every(conducts) : true)
+      : n.kids.some(conducts);
+
+    let maxSeries = 0;
+    s.nets.forEach(net => { maxSeries = Math.max(maxSeries, wOf(net.body) + 1); });
+    const COLS2 = Math.max(MINCOLS, maxSeries);
+
+    s.nets.forEach((net, ni) => {
+      const netTop = y, mainY = netTop + 56;
+      wires.push({ x1:40, y1:netTop, x2:svgW, y2:netTop, stroke:t.bord, sw:1, dash:'' });
+      txt(56, netTop + 18, net.comment, { fill:t.cmt, fst:'italic' });
+      txt(24, mainY + 4, String(ni + 1), Object.assign({ fill:t.tx3, fs:11, ta:'end' }, mono));
+
+      const occupied = {}, slotCands = [];
+      const drawSer = (node, path, col, row, allotW, pIn) => {
+        const yy = mainY + row * CH;
+        let prevX = nodeX(col), live = pIn, c = col;
+        node.kids.forEach((kid, i) => {
+          const kp = path.concat(i);
+          if (kid.t === 'par') {
+            const bw = wOf(kid), xL = nodeX(c), xR = nodeX(c + bw);
+            wires.push({ x1:prevX, y1:yy, x2:xL, y2:yy, stroke:wireC(live), sw:wireW(live), dash:'' });
+            let r2 = row, outs = [];
+            kid.kids.forEach((lvl, li) => {
+              outs.push(drawSer(lvl, kp.concat(li), c, r2, bw, live));
+              if (li > 0) {
+                const ly = mainY + r2 * CH;
+                wires.push({ x1:xL, y1:yy, x2:xL, y2:ly, stroke:wireC(live), sw:wireW(live), dash:'' });
+                wires.push({ x1:xR, y1:yy, x2:xR, y2:ly, stroke:wireC(outs.some(Boolean)), sw:wireW(outs.some(Boolean)), dash:'' });
+              }
+              r2 += hOf(lvl);
+            });
+            dots.push({ cx:xL, cy:yy, fill:wireC(live) });
+            dots.push({ cx:xR, cy:yy, fill:wireC(outs.some(Boolean)) });
+            live = outs.some(Boolean); prevX = xR; c += bw;
+            return;
+          }
+          const el = kid, span = el.span || 1, cx = cellCx(c, span);
+          const key = ni + ':' + kp.join('.');
+          const isSel = s.sel && s.sel.n === ni && s.sel.k === 'cell' && s.sel.path && s.sel.path.join('.') === kp.join('.');
+          const ec = el.err ? t.red : wireC(live);
+          if (el.type === 'fb') {
+            const boxL = nodeX(c) + 20, boxR = nodeX(c + span) - 20;
+            plates.push({ x:boxL, y:yy - 22, w:boxR - boxL, h:92, fill:t.fbfill, stroke:ec, dash:'' });
+            wires.push({ x1:boxL, y1:yy, x2:boxR, y2:yy, stroke:ec, sw:1, dash:'' });
+            txt((boxL + boxR) / 2, yy - 6, el.fb || 'TON', Object.assign({ ta:'middle', fw:'600' }, mono));
+            txt(boxL, yy - 30, el.sym || '???', { fw:'600', fill: el.sym ? t.lab : t.tx3 });
+            txt(boxL + 8, yy + 24, 'IN', Object.assign({ fill:t.addr, fs:10.5 }, mono));
+            txt(boxL + 8, yy + 52, 'PT', Object.assign({ fill:t.addr, fs:10.5 }, mono));
+            txt(boxR - 8, yy + 24, 'Q', Object.assign({ fill:t.addr, fs:10.5, ta:'end' }, mono));
+            txt(boxR - 8, yy + 52, 'ET', Object.assign({ fill:t.addr, fs:10.5, ta:'end' }, mono));
+            wires.push({ x1:prevX, y1:yy, x2:boxL - 14, y2:yy, stroke:wireC(live), sw:wireW(live), dash:'' });
+            wires.push({ x1:boxL - 14, y1:yy, x2:boxL - 14, y2:yy + 20, stroke:wireC(live), sw:wireW(live), dash:'' });
+            wires.push({ x1:boxL - 14, y1:yy + 20, x2:boxL, y2:yy + 20, stroke:wireC(live), sw:wireW(live), dash:'' });
+            if (el.pt) {
+              wires.push({ x1:boxL - 74, y1:yy + 48, x2:boxL, y2:yy + 48, stroke:t.ink, sw:1.6, dash:'' });
+              txt(boxL - 80, yy + 52, el.pt, Object.assign({ fill:t.addr, fs:10.5, ta:'end' }, mono));
+            }
+            wires.push({ x1:boxR, y1:yy + 20, x2:boxR + 16, y2:yy + 20, stroke:wireC(false), sw:1.6, dash:'' });
+            wires.push({ x1:boxR + 16, y1:yy + 20, x2:boxR + 16, y2:yy, stroke:wireC(false), sw:1.6, dash:'' });
+            if (online) {
+              txt(boxR + 24, yy + 52, 'ET ' + s.et.toFixed(2) + ' s', Object.assign({ fill:t.green, fs:10.5, fw:'600' }, mono));
+              plates.push({ x:boxL, y:yy + 74, w:(boxR - boxL) * Math.min(1, s.et / 5), h:4, fill:t.green, stroke:'none', dash:'' });
+            }
+            const rect = { x:boxL - 6, y:yy - 30, w:(boxR - boxL) + 12, h:104 };
+            occupied[Math.round(nodeX(c) + 8)] = 1;
+            if (isSel) selRing = ring(rect);
+            addHit(rect, key, false, ()=>this.cellClick(ni, 'cell', kp), true);
+            live = false; prevX = boxR + 16;
+          } else {
+            wires.push({ x1:prevX, y1:yy, x2:cx - 11, y2:yy, stroke:wireC(live), sw:wireW(live), dash:'' });
+            drawElem(el, cx, yy, ec);
+            live = live && passes(el); prevX = cx + 11;
+            const rect = { x:nodeX(c) + 8, y:yy - 32, w:CW - 16, h:70 };
+            occupied[Math.round(rect.x)] = 1;
+            if (isSel) selRing = ring(rect);
+            addHit(rect, key, true, ()=>this.cellClick(ni, 'cell', kp), true);
+          }
+          c += span;
+        });
+        // fill to the allotted right edge so short lines rejoin cleanly
+        const xEnd = nodeX(col + allotW);
+        if (prevX < xEnd) wires.push({ x1:prevX, y1:yy, x2:xEnd, y2:yy, stroke:wireC(live), sw:wireW(live), dash:'' });
+        // trailing slot extends this line
+        const slotKey = ni + ':slot:' + path.join('.');
+        const slotRect = { x:nodeX(col + allotW) + 8, y:yy - 32, w:CW - 16, h:70 };
+        const slotSel = s.sel && s.sel.n === ni && s.sel.k === 'slot' && (s.sel.path || []).join('.') === path.join('.');
+        if (slotSel) { selRing = ring(slotRect); caret = { x:slotRect.x + 5, y1:slotRect.y + 6, y2:slotRect.y + slotRect.h - 6 }; }
+        slotCands.push({ rect:slotRect, key:slotKey, path:path.slice() });
+        return live;
+      };
+
+      wires.push({ x1:RAIL_L, y1:mainY, x2:nodeX(0), y2:mainY, stroke:wireC(true), sw:wireW(true), dash:'' });
+      const bodyW = wOf(net.body);
+      const rungHot = drawSer(net.body, [], 0, 0, bodyW, true);
+      slotCands.forEach(sc => { const kx = Math.round(sc.rect.x), ky = Math.round(sc.rect.y); if (!occupied[kx] && !occupied[kx + ':' + ky]) { occupied[kx + ':' + ky] = 1; addHit(sc.rect, sc.key, false, ()=>this.cellClick(ni, 'slot', sc.path), false); } });
+      wires.push({ x1:nodeX(bodyW), y1:mainY, x2:COILX, y2:mainY, stroke:wireC(rungHot), sw:wireW(rungHot), dash:'' });
+
+      const coilCx = COILX + COIL_W / 2;
+      if (!net.coils.length) {
+        txt(coilCx, mainY + 4, 'output', Object.assign({ ta:'middle', fill:t.tx3, fs:10 }, mono));
+        addHit({ x:COILX + 10, y:mainY - 32, w:COIL_W - 20, h:70 }, ni + ':coilslot', false, ()=>this.cellClick(ni, 'coil', 0), false);
+      }
+      net.coils.forEach((el, i) => {
+        const cy = mainY + i * CH;
+        if (i > 0) {
+          wires.push({ x1:COILX, y1:mainY, x2:COILX, y2:cy, stroke:wireC(rungHot), sw:wireW(rungHot), dash:'' });
+          dots.push({ cx:COILX, cy:mainY, fill:wireC(rungHot) });
+        }
+        wires.push({ x1:COILX, y1:cy, x2:coilCx - 16, y2:cy, stroke:wireC(rungHot), sw:wireW(rungHot), dash:'' });
+        wires.push({ x1:coilCx + 16, y1:cy, x2:RAIL_R, y2:cy, stroke:wireC(rungHot), sw:wireW(rungHot), dash:'' });
+        drawElem(el, coilCx, cy, el.err ? t.red : wireC(rungHot));
+        const rect = { x:COILX + 10, y:cy - 32, w:COIL_W - 20, h:70 };
+        if (s.sel && s.sel.n === ni && s.sel.k === 'coil' && s.sel.c === i) selRing = ring(rect);
+        addHit(rect, ni + ':coil:' + i, true, ()=>this.cellClick(ni, 'coil', i), false);
+      });
+
+      const rows = Math.max(hOf(net.body), net.coils.length || 1);
+      y = netTop + 56 + rows * CH - 20;
+    });
+
+
+    const svgH = y + 62;
+    plates.unshift({ x:0, y:0, w:34, h:svgH, fill:t.gutter, stroke:'none', dash:'' });
+    wires.unshift({ x1:34, y1:0, x2:34, y2:svgH, stroke:t.bord, sw:1, dash:'' });
+    wires.push({ x1:RAIL_L, y1:14, x2:RAIL_L, y2:svgH - 48, stroke:online ? t.green : t.ink, sw:2.4, dash:'' });
+    wires.push({ x1:RAIL_R, y1:14, x2:RAIL_R, y2:svgH - 48, stroke:online ? t.green : t.ink, sw:2.4, dash:'' });
+    netBtns.push({ x:X0, y:svgH - 42, w:212, h:24, fill:t.accs, stroke:t.acc, on:this.addNetwork });
+    txt(X0 + 106, svgH - 25, '+ Insert network  (Ctrl+I)', Object.assign({ ta:'middle', fill:t.acc, fs:11, fw:'600' }, mono));
+
+    if (s.dropOn && s.drag) {
+      const dy = svgH - 116;
+      plates.push({ x:nodeX(1), y:dy - 30, w:CW * 2, h:76, fill:t.accs, stroke:t.acc, dash:'5 3' });
+      txt(nodeX(2), dy + 6, s.drag.name, Object.assign({ ta:'middle', fill:t.acc, fw:'600' }, mono));
+      txt(nodeX(2), dy + 32, 'drop to insert', Object.assign({ ta:'middle', fill:t.acc, fs:10 }, mono));
+    }
+
+
+    // ---- selection -> properties
+    const selCell = this.elemAt(s.sel);
+    const CTMAP = { no:'NO', nc:'NC', p:'P', n:'N', coil:'COIL', set:'COIL', reset:'COIL', fb:'FB' };
+    const locOf = (sl) => !sl ? 'No selection'
+      : 'Prog0 : Network ' + (sl.n + 1) + (sl.k === 'coil' ? ', Output ' + (sl.c + 1) : sl.k === 'slot' ? ', new position' : ', path ' + (sl.path || []).map(v => v + 1).join('.'));
+    const sel = selCell
+      ? { sym:selCell.sym || '', addr:selCell.addr || '', ct:CTMAP[selCell.type] || 'NO', cmt:selCell.cmt || '', loc:locOf(s.sel) }
+      : { sym:'', addr:'', ct:'EMPTY', cmt:'', loc: locOf(s.sel) + ' — empty' };
+    const selType = selCell ? selCell.type : '';
+    const selNet = s.sel ? s.nets[s.sel.n] : null;
+    let fbFeed = '—';
+    if (selNet && s.sel && s.sel.k === 'cell' && s.sel.path && s.sel.path.length) {
+      try {
+        const pp = s.sel.path.slice(0, -1), ii = s.sel.path[s.sel.path.length - 1];
+        const own = pp.length ? nAt(selNet.body, pp) : selNet.body;
+        const prev = own && own.kids[ii - 1];
+        if (prev && prev.t === 'el') fbFeed = prev.sym || '—';
+      } catch (e) {}
+    }
+    const fbOut = (selNet && selNet.coils[0] && selNet.coils[0].sym) || '—';
+
+    const CT = [['NO', ICON.no.replace(/8/g,'7'), ''], ['NC', 'M1 7h3M4 2v10M22 2v10M22 7h25', ''], ['P', ICON.no, 'P'], ['N', ICON.no, 'N']];
+    const contactTypes = [
+      { d:'M2 7h5M7 2v10M19 2v10M19 7h5', t:'', k:'no' },
+      { d:'M2 7h5M7 2v10M19 2v10M19 7h5M6 11l14-8', t:'', k:'nc' },
+      { d:'M2 7h5M7 2v10M19 2v10M19 7h5', t:'P', k:'p' },
+      { d:'M2 7h5M7 2v10M19 2v10M19 7h5', t:'N', k:'n' }
+    ].map(c => ({ d:c.d, t:c.t,
+      style:`width:34px;height:21px;padding:0;line-height:0;display:grid;place-items:center;background:${selType===c.k?t.accs:t.input};border:1px solid ${selType===c.k?t.acc:t.bord};color:${selType===c.k?t.acc:t.tx2};cursor:pointer`,
+      on:()=>this.setElemType(c.k) }));
+
+    const symQ = s.symQuery === null || s.symQuery === undefined ? '' : s.symQuery;
+    const wantKind = sel.ct === 'FB' ? 'fb' : sel.ct === 'COIL' ? 'out' : 'in';
+    const acMatches = DECL.filter(d => {
+      if (symQ && d.name.toLowerCase().indexOf(symQ.toLowerCase()) < 0) return false;
+      if (wantKind === 'fb') return d.type === 'TON' || d.type === 'TOF' || d.type === 'CTU';
+      return d.type === 'BOOL';
+    });
+    const acItems = acMatches.map((d, i) => ({ name:d.name, addr:d.addr || '—', type:d.type, cls:d.cls,
+      style:`height:22px;display:flex;align-items:center;gap:8px;padding:0 8px;background:${d.name===sel.sym?t.selbg:i===0?(light?'rgba(0,0,0,.03)':'rgba(255,255,255,.02)'):'transparent'};color:${t.tx};cursor:pointer`,
+      on:()=>this.bindSymbol(d.name) }));
+
+    // ---- build / log
+    const stageIdx = s.building ? s.stage : s.stage;
+    const pct = s.building ? Math.min(96, (s.elapsed / 30) * 100) : (s.stage >= 4 ? 100 : 0);
+    const mm = Math.floor(s.elapsed / 60), ss = Math.floor(s.elapsed % 60);
+    const elapsedStr = String(mm).padStart(2,'0') + ':' + String(ss).padStart(2,'0');
+    const stages = STAGES.map((st, i) => {
+      const done = i < stageIdx || (!s.building && s.stage >= 4);
+      const active = s.building && i === stageIdx;
+      return { label:st.label, t: done ? st.t : active ? 'running' : '',
+        d: done ? ICON.tickc : active ? ICON.spin : ICON.dot,
+        style:`height:19px;display:flex;align-items:center;gap:6px;padding:0 3px;color:${active?t.acc:done?t.tx2:t.tx3};font:${active?'500':'400'} 11.5px/1 'IBM Plex Sans',sans-serif` };
+    });
+    const logLines = LOG.slice(0, s.logN).map(([stg, text], i) => ({ text,
+      t: (stg === 0 ? '00:0' : stg === 1 ? '00:0' : stg === 2 ? '00:1' : stg === 3 ? '00:2' : '00:2') + String(i % 10),
+      style:`display:flex;gap:7px;font:400 11px/1.55 'IBM Plex Mono',monospace;color:${/warning/i.test(text)?t.amber:/finished|ready/.test(text)?t.green:t.tx2};white-space:pre-wrap` }));
+
+    const bottomTabs = [['compile','Compile',''],['problems','Problems','2 · 1'],['search','Search Results','5']].map(([id, label, badge]) => ({
+      label, badge,
+      style:`display:flex;align-items:center;gap:6px;height:100%;padding:0 10px;background:${s.bottomTab===id?t.panel:'transparent'};border:none;border-right:1px solid ${t.bord};border-bottom:2px solid ${s.bottomTab===id?t.acc:'transparent'};color:${s.bottomTab===id?t.tx:t.tx2};font:${s.bottomTab===id?'500':'400'} 11.5px/1 'IBM Plex Sans',sans-serif;cursor:pointer`,
+      badgeStyle:`font:400 9.5px/1 'IBM Plex Mono',monospace;padding:2px 4px;border-radius:2px;background:${badge?(id==='problems'?'rgba(240,101,92,.16)':t.panel2):'transparent'};color:${id==='problems'?t.red:t.tx3}`,
+      on:()=>this.setState({ bottomTab:id })
+    }));
+
+    const problems = PROBLEMS.filter(p => (s.sev === 'All' || p.sev + 's' === s.sev) && (s.src === 'All' || p.src === s.src)).map((p, i) => ({
+      sev:p.sev, code:p.code, msg:p.msg, loc:p.loc,
+      color: p.sev === 'Error' ? t.red : p.sev === 'Warning' ? t.amber : t.acc,
+      d: p.sev === 'Error' ? ICON.err : p.sev === 'Warning' ? ICON.warn : ICON.info,
+      jump: s.hoverProb === i ? 1 : 0,
+      style:`display:grid;grid-template-columns:96px 92px 1fr 190px;height:23px;cursor:pointer;background:${s.hoverProb===i?t.selbg:'transparent'};border-bottom:1px solid ${t.bord};color:${t.tx};font:400 11.5px/1 'IBM Plex Sans',sans-serif`,
+      enter:()=>this.setState({ hoverProb:i }), leave:()=>this.setState({ hoverProb:-1 }),
+      on:()=>this.setState({ sel: p.code === 'SEM-0207' ? { n:3, k:'cell', c:0, r:0 } : { n:1, k:'cell', c:0, r:0 }, symQuery:null, acProp:false })
+    }));
+    const fbtn = (active) => `height:17px;padding:0 7px;background:${active?t.accs:'transparent'};border:1px solid ${active?t.acc:t.bord};border-radius:2px;color:${active?t.acc:t.tx2};font:400 10.5px/1 'IBM Plex Sans',sans-serif;cursor:pointer`;
+    const sevFilters = ['All','Errors','Warnings','Info'].map(l => ({ label:l, style:fbtn(s.sev===l), on:()=>this.setState({ sev:l }) }));
+    const srcFilters = ['All','Editor','Compiler'].map(l => ({ label:l, style:fbtn(s.src===l), on:()=>this.setState({ src:l }) }));
+
+    const XR = [
+      ['ConveyorMotor','W','Output coil  --( )--','Prog0 : Network 1'],
+      ['ConveyorMotor','R','NO contact  --| |--','Prog0 : Network 1'],
+      ['ConveyorMotor','R','NO contact  --| |--','Prog0 : Network 2'],
+      ['ConveyorMotor','R','MotorStarter.Run','MotorStarter : Network 3'],
+      ['ConveyorMotor','W','Set coil  --(S)--','Prog0 : Network 7']
+    ];
+    const xrefs = XR.map(([sym, acc, el, loc], i) => ({ sym, acc, el, loc,
+      style:`display:grid;grid-template-columns:120px 74px 1fr 150px;height:23px;border-bottom:1px solid ${t.bord};background:${i%2?(light?'rgba(0,0,0,.02)':'rgba(255,255,255,.015)'):'transparent'};color:${t.tx};font:400 11.5px/1 'IBM Plex Sans',sans-serif`,
+      accStyle:`font:600 10px/1 'IBM Plex Mono',monospace;padding:2px 5px;border-radius:2px;background:${acc==='W'?'rgba(224,168,60,.16)':t.panel2};color:${acc==='W'?t.amber:t.tx2}` }));
+
+    const PAL = [['Download to PLC','PLC','F8',ICON.down],['Download and Run','PLC','Ctrl+F8',ICON.run],['Download Changes Only','PLC','Alt+F8',ICON.up],['Toggle Online Monitor','View','Ctrl+M',ICON.mon],['Show Download History','PLC','',ICON.table],['Download Firmware to SD','Tools','',ICON.chip]];
+    const paletteItems = PAL.map(([label, group, k, d], i) => ({ label, group, k, d,
+      style:`display:flex;align-items:center;gap:9px;height:28px;padding:0 11px;cursor:pointer;background:${i===0?t.selbg:'transparent'};border-left:2px solid ${i===0?t.acc:'transparent'}`,
+      on:()=>this.setState({ palette:false }) }));
+
+    // ---- hardware modal
+    const HW = [
+      ['GPIO 4','Input','%IX0.0','StartButton','Line start pushbutton',false],
+      ['GPIO 5','Input','%IX0.1','StopButton','E-stop, fail-safe NC',false],
+      ['GPIO 6','Input','%IX0.3','ResetBtn','Operator reset',false],
+      ['GPIO 7','Output','%QX0.1','ConveyorMotor','Main conveyor contactor',false],
+      ['GPIO 15','Output','%QX0.2','DrumRelease','Drum release solenoid',false],
+      ['GPIO 21','Output','%QX0.3','FillValve','Fill valve — duplicate pin',true],
+      ['GPIO 21','Input','%IX0.5','LevelSwitch','Tank level — duplicate pin',true],
+      ['GPIO 34','Analog In','%IW3','MotorCurrent','CT clamp, 0–10 V',false],
+      ['GPIO 38','PWM','%QW1','VfdSpeed','VFD speed reference',false]
+    ];
+    const hwHead = ['GPIO','Direction','IEC Address','Symbol','Comment'];
+    const hwRows = HW.map(([gpio, dir, iec, sym, cmt, warn], i) => ({
+      gpio, dir, iec, sym, cmt, warn: warn ? 1 : 0,
+      gpioColor: warn ? t.red : t.tx,
+      style:`display:grid;grid-template-columns:74px 96px 108px 1fr 1.3fr;height:23px;border-bottom:1px solid ${t.bord};background:${warn?(light?'rgba(192,52,42,.09)':'rgba(240,101,92,.10)'):(i%2?(light?'rgba(0,0,0,.02)':'rgba(255,255,255,.015)'):'transparent')};color:${t.tx};font:400 11.5px/1 'IBM Plex Sans',sans-serif`
+    }));
+    const PINS = [
+      ['3V3','n'],['GND','n'],['GPIO4','i'],['GPIO5','i'],['GPIO6','i'],['GPIO7','o'],['GPIO15','o'],['GPIO16','n'],
+      ['GPIO21','x'],['GPIO34','i'],['GPIO38','o'],['GPIO39','n'],['GPIO40','n'],['TXD0','n'],['RXD0','n'],['EN','n']
+    ];
+    const pinFill = { i:t.acc, o:t.green, x:t.red, n:'none' };
+    const pins = PINS.map((p, i) => {
+      const leftSide = i < 8, row = leftSide ? i : i - 8;
+      const py = 40 + row * 29;
+      return { px: leftSide ? 61 : 180, py, tx: leftSide ? 55 : 194, ty: py + 8,
+        anchor: leftSide ? 'end' : 'start', label:p[0],
+        fill: pinFill[p[1]], stroke: p[1] === 'n' ? t.bord2 : pinFill[p[1]],
+        color: p[1] === 'x' ? t.red : t.tx2 };
+    });
+    const boards = ['ESP32','ESP32-S2','ESP32-S3','ESP32-C3','ESP32-C6'].map(b => ({ label:b,
+      style:`height:22px;display:flex;align-items:center;padding:0 8px;cursor:pointer;background:${s.board===b?t.selbg:'transparent'};color:${t.tx};font:400 11px/1 'IBM Plex Mono',monospace`,
+      on:()=>this.setState({ board:b, boardOpen:false }) }));
+
+    const APPS = [['SCADA Runtime','scada',ICON.mon],['ESP-Flow','ide',ICON.ld],['Integration Hub','flow',ICON.net],['BI Reports','bi',ICON.table],['Device Registry','reg',ICON.chip]];
+    const apps = APPS.map(([label, tag, d]) => ({ label, tag, d,
+      style:`height:26px;display:flex;align-items:center;gap:8px;padding:0 9px;cursor:pointer;background:${label==='ESP-Flow'?t.selbg:'transparent'};color:${t.tx};font:400 11.5px/1 'IBM Plex Sans',sans-serif` }));
+
+    const scenarios = [1,2,3,4,5,6,7,8,9,10].map(n => ({
+      n:String(n),
+      style:`width:17px;height:17px;padding:0;line-height:0;display:grid;place-items:center;background:${t.panel2};border:1px solid ${t.bord};border-radius:2px;color:${t.tx2};font:500 9.5px/1 'IBM Plex Mono',monospace;cursor:pointer`,
+      on:this.scenario(n),
+      enter:(e)=>{ const r = e.currentTarget.getBoundingClientRect(); const names = { 1:'Master · dark', 2:'Light theme', 3:'Online monitoring', 4:'Compile mid-build', 5:'Problems panel', 6:'PLC menu + tooltip', 7:'Tree context menu', 8:'Hardware config', 9:'Library drag', 10:'Design system sheet' }; this.setState({ tip:{ name:names[n], k:'', x:r.left - 60, y:r.bottom + 4 } }); }
+    }));
+
+    return {
+      rootStyle, themeLabel: light ? 'Light' : 'Dark', toggleTheme:()=>this.setState({ theme: light ? 'dark' : 'light' }),
+      toggleLauncher:(e)=>{ e.stopPropagation(); this.setState({ launcher:!s.launcher }); }, launcher:s.launcher, apps,
+      scenarios, hideTip:()=>this.setState({ tip:null }),
+      menus, menuOpen:!!s.openMenu, menuItems, menuPanelStyle, openPalette:()=>this.setState({ palette:true }),
+      toolRows,
+      leftPanelStyle:`width:${s.leftW}px;flex:0 1 ${s.leftW}px;min-width:${s.leftW ? 96 : 0}px;display:flex;flex-direction:column;background:${t.panel};overflow:hidden`,
+      rightPanelStyle:`width:${s.rightW}px;flex:0 1 ${s.rightW}px;min-width:${s.rightW ? 140 : 0}px;display:flex;flex-direction:column;background:${t.panel};overflow:hidden`,
+      bottomPanelStyle:`height:${s.bottomH}px;flex:none;min-height:0;min-width:0;overflow:hidden;display:flex;flex-direction:column;background:${t.panel};border-top:1px solid ${t.bord}`,
+      dragLeft:this.drag('leftW', 1, 'x'), dragRight:this.drag('rightW', -1, 'x'), dragBottom:this.drag('bottomH', -1, 'y'),
+      treeRows, ctx:s.ctx, ctxItems, ctxStyle, libRows,
+      libOpen: s.libOpen !== false,
+      libChev: s.libOpen === false ? 'M5 3l5 5-5 5' : 'M3 6l5 5 5-5',
+      libHint: s.libOpen === false ? '3 groups' : 'drag onto canvas',
+      toggleLib: () => this.setState({ libOpen: s.libOpen === false }),
+      libPanelStyle: s.libOpen === false
+        ? 'flex:none;display:flex;flex-direction:column;border-bottom:1px solid ' + t.bord
+        : 'flex:1 1 auto;min-height:132px;display:flex;flex-direction:column;border-bottom:1px solid ' + t.bord,
+      tabs, crumbNet:'Network ' + ((s.sel ? s.sel.n : 0) + 1), crumbMode: online ? 'ONLINE MONITOR · read-only' : 'OFFLINE EDIT',
+      symOpen: s.symOpen, symChev: s.symOpen ? 'M3 6l5 5 5-5' : 'M5 3l5 5-5 5', toggleSym:()=>this.setState({ symOpen:!s.symOpen }),
+      symHead, symCells, symApplied,
+      symTightNote: symTight ? ' · table clamped, window short' : '',
+      symTableStyle:`flex:none;height:${symApplied}px;min-height:0;overflow-y:auto;overflow-x:auto;min-width:0;display:grid;grid-template-columns:minmax(88px,104px) minmax(96px,1.1fr) minmax(84px,96px) minmax(72px,84px) minmax(76px,92px) minmax(140px,2fr);align-content:start;font:400 11.5px/1 'IBM Plex Sans',sans-serif`,
+      dragSym:this.dragSym,
+      colRef:(el)=>{
+        if (el === this._canvasCol) return;
+        this._canvasCol = el;
+        if (el && window.ResizeObserver) {
+          if (this._ro) this._ro.disconnect();
+          this._ro = new ResizeObserver(() => { if (this._fit) requestAnimationFrame(this._fit); });
+          this._ro.observe(el);
+        }
+        if (el && this._fit) requestAnimationFrame(this._fit);
+      },
+      w1: online ? 2.6 : 1.6, live: online ? 1 : 0,
+      etText:'ET  ' + s.et.toFixed(2) + ' s  /  5.00 s', etW: Math.round((s.et / 5) * 176),
+      canvasInner:'position:relative;width:' + svgW + 'px;height:' + svgH + 'px',
+      hits, plates, wires, dots, glyphs, labels, netBtns, caret, svgH, svgW, svgBox:'0 0 ' + svgW + ' ' + svgH,
+      selRing,
+      dropOn:!!s.dropOn, dropLabel: s.drag ? s.drag.name : 'TON',
+      canvasMove:this.canvasMove, canvasDrop:this.canvasDrop,
+      acOpen:s.acOpen, acProp:s.acProp && !!s.sel, acItems, acEmpty:!acItems.length,
+      symField: (s.acProp && s.symQuery !== null && s.symQuery !== undefined) ? s.symQuery : sel.sym,
+      symFilter:this.symFilter, declCount:DECL.length,
+      openAc:()=>this.setState({ acProp:true, symQuery:'' }), noop:this.noop,
+      propGridStyle:`display:grid;grid-template-columns:${s.rightW < 244 ? '1fr' : '74px 1fr'};gap:4px 6px;align-items:center;font:400 11.5px/1.4 'IBM Plex Sans',sans-serif`,
+      isContact: ['NO','NC','P','N'].indexOf(sel.ct) >= 0,
+      isCoil: sel.ct === 'COIL', isFB: sel.ct === 'FB',
+      propType: !sel.sym ? '—' : DECL_BY[sel.sym] ? DECL_BY[sel.sym].type : 'undeclared',
+      coilTypes: [['Coil','coil'],['Set','set'],['Reset','reset']].map(([label, ty]) => {
+        const on = selType === ty;
+        return { label,
+          style:`height:21px;padding:0 8px;background:${on?t.accs:t.input};border:1px solid ${on?t.acc:t.bord};color:${on?t.acc:t.tx2};font:500 10.5px/1 'IBM Plex Mono',monospace;cursor:pointer`,
+          on:()=>this.setElemType(ty) };
+      }),
+      fbPins: [['IN','BOOL',fbFeed],['PT','TIME',(selCell && selCell.pt) || '—'],['Q','BOOL',fbOut],['ET','TIME', online ? s.et.toFixed(2) + ' s' : '—']].map(([pin, type, val], i) => ({ pin, type, val,
+        style:`display:flex;align-items:center;gap:6px;height:20px;padding:0 6px;background:${i%2?(light?'rgba(0,0,0,.02)':'rgba(255,255,255,.015)'):'transparent'};font:400 10.5px/1 'IBM Plex Mono',monospace` })),
+      propKind: sel.ct === 'FB' ? 'Function block' : sel.ct === 'COIL' ? 'Coil' : 'Contact', propSymbol:sel.sym, propAddr: !sel.sym ? '—' : DECL_BY[sel.sym] ? (DECL_BY[sel.sym].addr || '—') : 'not declared', propComment:sel.cmt, propLoc:sel.loc, contactTypes,
+      bottomTabs, isCompileTab: s.bottomTab === 'compile', isProblemsTab: s.bottomTab === 'problems', isSearchTab: s.bottomTab === 'search',
+      stages, elapsedStr, progressStyle:`width:${pct}%;height:100%;background:${s.building?t.acc:t.green};transition:width .2s linear`,
+      stageTitle: s.building ? STAGES[stageIdx].label : s.stage >= 4 ? 'Ready to flash' : 'Idle',
+      stageStep: s.building ? 'step ' + (stageIdx + 1) + ' of 5' : s.stage >= 4 ? '5 of 5' : '',
+      building:s.building, buildBtn: s.building ? 'Building…' : 'Compile (F11)', startBuild:this.startBuild, stopBuild:this.stopBuild,
+      logLines, tailLine: s.building ? LOG[Math.min(LOG.length - 1, s.logN)][1] : '',
+      buildSummary: s.building ? 'building firmware…' : '0 errors · 1 warning · 248 KB',
+      problems, sevFilters, srcFilters, probCount: problems.length + ' of 3 shown',
+      xrefs, palette:s.palette, paletteItems, closeAll:this.closeAll, stop:this.stop,
+      hw:s.hw, hwHead, hwRows, pins, boards, board:s.board, boardOpen:s.boardOpen,
+      toggleBoard:(e)=>{ e.stopPropagation(); this.setState({ boardOpen:!s.boardOpen }); },
+      statusMsg:s.statusMsg, closeAc:()=>this.setState({ acProp:false, symQuery:null }),
+      editCmt:this.editCell('cmt'),
+      addNetwork:this.addNetwork,
+      bottomHidden:!!s.bottomHidden, bottomShown:!s.bottomHidden,
+      hideBottom:(e)=>{ e.stopPropagation(); this.setState({ bottomHidden:true, tip:null }); },
+      showBottom:()=>this.setState({ bottomHidden:false }),
+      tipHide:(e)=>{ const r = e.currentTarget.getBoundingClientRect(); this.setState({ tip:{ name:'Hide panel', k:'Ctrl+\\', x:r.left - 60, y:r.top - 24 } }); },
+      toolHint: s.branchArm ? 'Branch armed — click an element; the child spans that element (and grows with anything inserted beside it inside the block)' : s.activeTool ? (COIL_TOOLS[s.activeTool] ? s.activeTool + ' — click the rung; coils land at the right rail' : s.activeTool + ' — click a position; elements to the right shift over') : 'Pick a tool, then click the rung · select an element and Ctrl+B to branch',
+      insertMode:s.insert, toggleInsert:()=>this.setState({ insert: s.insert === 'Insert' ? 'Overwrite' : 'Insert' }),
+      cursorPos: s.sel ? 'Network ' + (s.sel.n + 1) + (s.sel.k === 'coil' ? ', Output ' + (s.sel.c + 1) : s.sel.k === 'slot' ? ', new position' : ', path ' + (s.sel.path || []).map(v => v + 1).join('.')) : 'No selection',
+      plcState: online ? 'RUN' : 'STOP',
+      runChipStyle:`font:600 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;padding:2px 6px;border-radius:2px;background:${online?(light?'rgba(15,122,65,.14)':'rgba(63,214,127,.16)'):t.panel2};color:${online?t.green:t.tx2};border:1px solid ${online?t.green:t.bord}`,
+      scanText: online ? 'Scan: ' + s.scan.toFixed(1) + ' ms' : 'Scan: —',
+      scanColor: online ? t.green : t.tx3,
+      compileState: s.building ? 'Compiling ' + elapsedStr : s.stage >= 4 ? 'Compiled · ready to flash' : 'Not compiled',
+      modeText: online ? 'MONITOR' : 'EDIT',
+      zoomText: s.zoom + '%',
+      tip:s.tip, tipStyle: s.tip ? `position:fixed;left:${s.tip.x}px;top:${s.tip.y}px;padding:3px 7px;background:${t.panel2};border:1px solid ${t.bord2};box-shadow:0 6px 16px ${t.shadow};font:400 11px/1.3 'IBM Plex Sans',sans-serif;white-space:nowrap;z-index:300` : '',
+      dragGhost:s.drag, ghostStyle: s.drag ? `position:fixed;left:${s.drag.x + 10}px;top:${s.drag.y + 8}px;display:flex;align-items:center;gap:6px;padding:3px 8px;background:${t.panel2};border:1px solid ${t.acc};box-shadow:0 8px 20px ${t.shadow};font:400 11px/1 'IBM Plex Mono',monospace;color:${t.tx};pointer-events:none;z-index:320` : ''
+    };
+  }
+}
+
+</script>
+</body>
+</html>

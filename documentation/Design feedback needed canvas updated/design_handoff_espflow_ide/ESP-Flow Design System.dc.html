@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"><style>
+html,body{margin:0;padding:0;background:#0e1114;overflow:auto}
+*{box-sizing:border-box}
+a{color:#4b90d6;text-decoration:none}a:hover{color:#79b0e8}
+</style></helmet>
+<div style="width:1600px;min-height:100vh;padding:26px 30px 60px;background:#0e1114;color:#dde3ea;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:12px">
+
+  <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:12px;border-bottom:1px solid #2a313a">
+    <span style="font:600 13px/1 'IBM Plex Sans',sans-serif;letter-spacing:.1em;color:#4b90d6">ESP&#8209;FLOW</span>
+    <span style="font:500 15px/1 'IBM Plex Sans',sans-serif">Design system sheet</span>
+    <span style="font:400 11px/1 'IBM Plex Mono',monospace;color:#6e7882">v0.1 &#183; dark-first &#183; IEC 61131-3 ladder</span>
+    <div style="flex:1"></div>
+    <a href="ESP-Flow IDE.dc.html" style="font:400 11px/1 'IBM Plex Mono',monospace">&#8592; back to the IDE</a>
+  </div>
+
+  <!-- COLOR TOKENS -->
+  <div style="margin-top:22px;display:flex;align-items:baseline;gap:9px">
+    <span style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">01 &#183; Colour tokens</span>
+    <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#6e7882">Chrome is desaturated. Colour is reserved for signal: green conducts, red errors and forces, amber warns.</span>
+  </div>
+  <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:22px">
+    <sc-for list="{{ palettes }}" as="p" hint-placeholder-count="2">
+      <div style="border:1px solid #2a313a">
+        <div style="height:26px;display:flex;align-items:center;gap:8px;padding:0 9px;background:#171b21;border-bottom:1px solid #2a313a">
+          <span style="font:600 11px/1 'IBM Plex Sans',sans-serif">{{ p.name }}</span>
+          <span style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:#6e7882">{{ p.note }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr)">
+          <sc-for list="{{ p.tokens }}" as="c" hint-placeholder-count="24">
+            <div style="border-right:1px solid #2a313a;border-bottom:1px solid #2a313a;padding:0">
+              <div style="{{ c.swatch }}"></div>
+              <div style="padding:4px 6px 6px">
+                <div style="font:500 10.5px/1.2 'IBM Plex Mono',monospace;color:#dde3ea">{{ c.name }}</div>
+                <div style="font:400 10px/1.3 'IBM Plex Mono',monospace;color:#6e7882">{{ c.hex }}</div>
+                <div style="font:400 10px/1.3 'IBM Plex Sans',sans-serif;color:#6e7882">{{ c.role }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:8px;display:flex;gap:16px;font:400 10.5px/1.4 'IBM Plex Mono',monospace;color:#6e7882">
+    <span>contrast &#8212; dark: text/canvas 11.4:1 &#183; green/canvas 8.1:1 &#183; red/canvas 5.6:1 &#183; amber/canvas 8.4:1</span>
+    <span>light: text/canvas 14.2:1 &#183; green/canvas 4.9:1 &#183; red/canvas 5.4:1</span>
+  </div>
+
+  <!-- TYPE + SPACING -->
+  <div style="margin-top:26px;display:grid;grid-template-columns:1.35fr 1fr;gap:22px">
+    <div>
+      <div style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">02 &#183; Type scale</div>
+      <div style="margin-top:10px;border:1px solid #2a313a">
+        <sc-for list="{{ typeRows }}" as="r" hint-placeholder-count="8">
+          <div style="display:grid;grid-template-columns:130px 92px 1fr;align-items:center;height:34px;border-bottom:1px solid #2a313a">
+            <div style="padding:0 9px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:#9aa5b1">{{ r.token }}</div>
+            <div style="padding:0 9px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:#6e7882">{{ r.spec }}</div>
+            <div style="{{ r.style }}">{{ r.sample }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div>
+      <div style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">03 &#183; Spacing &amp; metrics</div>
+      <div style="margin-top:10px;border:1px solid #2a313a">
+        <sc-for list="{{ spaceRows }}" as="r" hint-placeholder-count="8">
+          <div style="display:grid;grid-template-columns:74px 60px 1fr;align-items:center;height:26px;border-bottom:1px solid #2a313a">
+            <div style="padding:0 9px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:#9aa5b1">{{ r.token }}</div>
+            <div style="padding:0 9px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:#6e7882">{{ r.px }}</div>
+            <div style="display:flex;align-items:center;gap:8px;padding-right:9px">
+              <div style="{{ r.bar }}"></div>
+              <span style="font:400 10px/1 'IBM Plex Sans',sans-serif;color:#6e7882">{{ r.use }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- LADDER SYMBOLS -->
+  <div style="margin-top:26px;display:flex;align-items:baseline;gap:9px">
+    <span style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">04 &#183; Ladder symbols &#215; states</span>
+    <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#6e7882">Line art on a 60&#215;34 cell grid, 2 px element strokes, 1.6 px wires (2.6 px when conducting).</span>
+  </div>
+  <div style="margin-top:10px;border:1px solid #2a313a;background:#0b0e12">
+    <div style="display:grid;grid-template-columns:150px repeat(5,1fr);height:26px;background:#171b21;border-bottom:1px solid #2a313a">
+      <sc-for list="{{ stateHead }}" as="h" hint-placeholder-count="6">
+        <div style="display:flex;align-items:center;gap:6px;padding:0 10px;border-right:1px solid #2a313a;font:600 10.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">{{ h }}</div>
+      </sc-for>
+    </div>
+    <sc-for list="{{ symbolRows }}" as="row" hint-placeholder-count="10">
+      <div style="display:grid;grid-template-columns:150px repeat(5,1fr);border-bottom:1px solid #2a313a">
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:2px;padding:0 10px;border-right:1px solid #2a313a">
+          <span style="font:500 11px/1.2 'IBM Plex Sans',sans-serif">{{ row.name }}</span>
+          <span style="font:400 10px/1.2 'IBM Plex Mono',monospace;color:#6e7882">{{ row.glyph }}</span>
+        </div>
+        <sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="5">
+          <div style="display:grid;place-items:center;height:56px;border-right:1px solid #2a313a">
+            <svg width="76" height="44" viewBox="-8 -5 76 44" fill="none">
+              <rect x="{{ c.rx }}" y="{{ c.ry }}" width="{{ c.rw }}" height="{{ c.rh }}" stroke="{{ c.ring }}" stroke-width="1.2" stroke-dasharray="4 2" fill="none"></rect>
+              <path d="{{ c.d }}" stroke="{{ c.stroke }}" stroke-width="{{ c.sw }}"></path>
+              <text x="30" y="21" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600" fill="{{ c.stroke }}">{{ c.t }}</text>
+              <path d="{{ c.squiggle }}" stroke="#f0655c" stroke-width="1.2"></path>
+              <text x="0" y="{{ c.badgeY }}" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="600" fill="#f0655c">{{ c.badge }}</text>
+            </svg>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- ICONS -->
+  <div style="margin-top:26px;display:flex;align-items:baseline;gap:9px">
+    <span style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">05 &#183; Icon set</span>
+    <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#6e7882">16&#215;16 grid, 1.35 px stroke, square caps, no fills &#8212; legible in both themes.</span>
+  </div>
+  <div style="margin-top:10px;border:1px solid #2a313a;display:grid;grid-template-columns:repeat(12,1fr)">
+    <sc-for list="{{ icons }}" as="i" hint-placeholder-count="40">
+      <div style="height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border-right:1px solid #2a313a;border-bottom:1px solid #2a313a">
+        <svg width="16" height="16" viewBox="0 0 16 16" stroke="#dde3ea" stroke-width="1.35" fill="none" stroke-linecap="square"><path d="{{ i.d }}"></path><text x="8" y="10.5" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="6.5" font-weight="600" stroke="none" fill="#dde3ea">{{ i.t }}</text></svg>
+        <span style="font:400 9.5px/1 'IBM Plex Mono',monospace;color:#6e7882">{{ i.name }}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- CHROME / TABLE / FORMS -->
+  <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px">
+    <div>
+      <div style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">06 &#183; Panel chrome</div>
+      <div style="margin-top:10px;border:1px solid #2a313a;background:#171b21">
+        <div style="height:24px;display:flex;align-items:center;gap:6px;padding:0 8px;background:#131720;border-bottom:1px solid #2a313a">
+          <span style="font:600 10px/1 'IBM Plex Sans',sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#9aa5b1">Panel title</span>
+          <div style="flex:1"></div>
+          <svg width="11" height="11" viewBox="0 0 16 16" stroke="#6e7882" stroke-width="1.4" fill="none"><path d="M3 8h10"></path></svg>
+        </div>
+        <div style="display:flex">
+          <div style="flex:1;padding:8px;font:400 11px/1.5 'IBM Plex Sans',sans-serif;color:#9aa5b1">Panel body &#183; 24 px header, 1 px borders, 0&#8211;2 px radii, no shadows except floating layers.</div>
+          <div style="width:4px;background:#171b21;border-left:1px solid #2a313a;display:flex;align-items:center;justify-content:center"><div style="width:2px;height:22px;border-left:1px dotted #3d4650;border-right:1px dotted #3d4650"></div></div>
+        </div>
+        <div style="height:23px;display:flex;align-items:center;gap:6px;padding:0 8px;border-top:1px solid #2a313a;font:400 10.5px/1 'IBM Plex Mono',monospace;color:#6e7882">splitter 4 px &#183; drag to resize</div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+          <span style="{{ c.style }}">{{ c.label }}</span>
+        </sc-for>
+      </div>
+    </div>
+    <div>
+      <div style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">07 &#183; Table styling</div>
+      <div style="margin-top:10px;border:1px solid #2a313a">
+        <div style="display:grid;grid-template-columns:1fr 1fr 78px;height:21px;background:#1d222a;border-bottom:1px solid #2a313a;font:600 10.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">
+          <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid #2a313a">Identifier</div>
+          <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid #2a313a">Address</div>
+          <div style="display:flex;align-items:center;padding:0 7px">Type</div>
+        </div>
+        <sc-for list="{{ tableRows }}" as="r" hint-placeholder-count="4">
+          <div style="{{ r.style }}">
+            <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid #2a313a">{{ r.a }}</div>
+            <div style="display:flex;align-items:center;padding:0 7px;border-right:1px solid #2a313a;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9aa5b1">{{ r.b }}</div>
+            <div style="display:flex;align-items:center;padding:0 7px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4b90d6">{{ r.c }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:8px;font:400 10.5px/1.45 'IBM Plex Mono',monospace;color:#6e7882">22&#8211;24 px rows &#183; 7 px cell padding &#183; zebra at 1.5% &#183; selection uses --selbg with a 2 px accent edge</div>
+    </div>
+    <div>
+      <div style="font:600 12.5px/1 'IBM Plex Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">08 &#183; Form controls</div>
+      <div style="margin-top:10px;border:1px solid #2a313a;padding:10px;display:grid;grid-template-columns:78px 1fr;gap:7px 8px;align-items:center">
+        <label style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">Default</label>
+        <input value="ConveyorMotor" onChange="{{ noop }}" style="height:21px;padding:0 6px;background:#0b0e12;border:1px solid #2a313a;border-radius:2px;color:#dde3ea;font:400 11px/1 'IBM Plex Mono',monospace;outline:none" />
+        <label style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">Focused</label>
+        <input value="%QX0.1" onChange="{{ noop }}" style="height:21px;padding:0 6px;background:#0b0e12;border:1px solid #4b90d6;border-radius:2px;color:#dde3ea;font:400 11px/1 'IBM Plex Mono',monospace;outline:none" />
+        <label style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">Invalid</label>
+        <input value="Motor2" onChange="{{ noop }}" style="height:21px;padding:0 6px;background:#0b0e12;border:1px solid #f0655c;border-radius:2px;color:#dde3ea;font:400 11px/1 'IBM Plex Mono',monospace;outline:none" />
+        <label style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">Select</label>
+        <div style="height:21px;display:flex;align-items:center;justify-content:space-between;padding:0 6px;background:#0b0e12;border:1px solid #2a313a;border-radius:2px;color:#dde3ea;font:400 11px/1 'IBM Plex Mono',monospace">ESP32-S3<svg width="9" height="9" viewBox="0 0 16 16" stroke="#9aa5b1" stroke-width="2" fill="none"><path d="M4 6l4 4 4-4"></path></svg></div>
+        <label style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">Segmented</label>
+        <div style="display:flex">
+          <sc-for list="{{ segs }}" as="g" hint-placeholder-count="4">
+            <div style="{{ g.style }}">{{ g.label }}</div>
+          </sc-for>
+        </div>
+        <label style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">Buttons</label>
+        <div style="display:flex;gap:6px">
+          <button style="height:22px;padding:0 10px;background:#4b90d6;border:none;border-radius:2px;color:#fff;font:500 11px/1 'IBM Plex Sans',sans-serif;cursor:pointer">Primary</button>
+          <button style="height:22px;padding:0 10px;background:#1d222a;border:1px solid #3d4650;border-radius:2px;color:#9aa5b1;font:500 11px/1 'IBM Plex Sans',sans-serif;cursor:pointer">Secondary</button>
+          <button style="height:22px;padding:0 10px;background:transparent;border:1px solid #2a313a;border-radius:2px;color:#6e7882;font:500 11px/1 'IBM Plex Sans',sans-serif">Disabled</button>
+        </div>
+        <label style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#9aa5b1">Progress</label>
+        <div style="height:6px;background:#0b0e12;border:1px solid #2a313a;overflow:hidden"><div style="width:62%;height:100%;background:#4b90d6"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1600,&quot;height&quot;:2400}}">
+const DARK_T = [
+  ['--bg','#0e1114','app frame'],['--panel','#171b21','panel body'],['--panel2','#1d222a','raised / header'],['--head','#131720','title strips'],
+  ['--bord','#2a313a','hairline'],['--bord2','#3d4650','strong edge'],['--tx','#dde3ea','primary text'],['--tx2','#9aa5b1','secondary'],
+  ['--tx3','#6e7882','tertiary'],['--acc','#4b90d6','selection / focus'],['--selbg','#1b3350','row selection'],['--canv','#0b0e12','ladder canvas'],
+  ['--grid','#191f27','canvas grid'],['--ink','#8e99a4','de-energised wire'],['--green','#3fd67f','conducting'],['--red','#f0655c','error / forced'],
+  ['--amber','#e0a83c','warning'],['--cmt','#6f9a80','network comment'],['--input','#0b0e12','field ground'],['--log','#090c0f','build log']
+];
+const LIGHT_T = [
+  ['--bg','#e5e8ec','app frame'],['--panel','#f3f4f7','panel body'],['--panel2','#fbfbfd','raised / header'],['--head','#e9ebef','title strips'],
+  ['--bord','#ccd2d9','hairline'],['--bord2','#a9b1ba','strong edge'],['--tx','#1b2126','primary text'],['--tx2','#525c66','secondary'],
+  ['--tx3','#7c858f','tertiary'],['--acc','#1a68b8','selection / focus'],['--selbg','#cadff6','row selection'],['--canv','#fcfcfb','ladder canvas'],
+  ['--grid','#e7eaed','canvas grid'],['--ink','#414b55','de-energised wire'],['--green','#0f7a41','conducting'],['--red','#c0342a','error / forced'],
+  ['--amber','#8f5c05','warning'],['--cmt','#3f7a58','network comment'],['--input','#ffffff','field ground'],['--log','#f8f9fa','build log']
+];
+const SYMS = [
+  ['NO contact','--| |--','M2 17h16M18 6v22M42 6v22M42 17h16',''],
+  ['NC contact','--|/|--','M2 17h16M18 6v22M42 6v22M42 17h16M17 27L43 7',''],
+  ['Rising edge','--|P|--','M2 17h16M18 6v22M42 6v22M42 17h16','P'],
+  ['Falling edge','--|N|--','M2 17h16M18 6v22M42 6v22M42 17h16','N'],
+  ['Output coil','--( )--','M2 17h16M58 17h-16M22 5a13 12 0 000 24M38 5a13 12 0 010 24',''],
+  ['Set coil','--(S)--','M2 17h16M58 17h-16M22 5a13 12 0 000 24M38 5a13 12 0 010 24','S'],
+  ['Reset coil','--(R)--','M2 17h16M58 17h-16M22 5a13 12 0 000 24M38 5a13 12 0 010 24','R'],
+  ['Function block','TON / CTU','M14 4h32v26H14zM2 10h12M2 24h12M46 10h12M46 24h12',''],
+  ['Horizontal wire','———','M2 17h56',''],
+  ['Vertical branch','│ ┬ │','M14 3v28M46 3v28M14 17h32','']
+];
+const ICONS = [
+  ['new','M4 2h5l3 3v9H4z'],['open','M2 4h5l1.5 2H14v8H2z'],['save','M3 2h10v12H3zM6 2v4h4V2M5 10h6'],['print','M5 2h6v3H5zM3 5h10v6H3zM5 9h6v5H5z'],
+  ['undo','M3 7h7a3 3 0 110 6H7M3 7l3-3M3 7l3 3'],['redo','M13 7H6a3 3 0 100 6h3M13 7l-3-3M13 7l-3 3'],['cut','M5 2l6 9M11 2l-6 9M4 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3M12 13a1.5 1.5 0 100-3 1.5 1.5 0 000 3'],
+  ['copy','M6 1h7v9H6zM3 5h7v10H3z'],['paste','M4 3h8v11H4zM6 1h4v3H6z'],['find','M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3'],
+  ['contact-no','M1 8h3M4 3v10M12 3v10M12 8h3'],['contact-nc','M1 8h3M4 3v10M12 3v10M12 8h3M3 12l10-8'],['contact-p','M1 8h3M4 3v10M12 3v10M12 8h3','P'],['contact-n','M1 8h3M4 3v10M12 3v10M12 8h3','N'],
+  ['coil','M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10'],['coil-set','M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10','S'],['coil-reset','M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10','R'],
+  ['fb','M4 4h8v8H4zM2 6h2M2 10h2M12 6h2M12 10h2'],['wire','M1 8h14'],['branch','M4 2v12M12 2v12M4 8h8'],['net-add','M2 3h12M2 13h12M8 6v4M6 8h4'],['net-del','M2 3h12M2 13h12M6 6l4 4M10 6l-4 4'],
+  ['connect','M2 8h4M10 8h4M6 5h4v6H6z'],['download','M8 2v7M5 6l3 3 3-3M3 13h10'],['upload','M8 11V4M5 7l3-3 3 3M3 13h10'],['run','M5 3l8 5-8 5z'],['stop','M4 4h8v8H4z'],
+  ['monitor','M2 3h12v8H2zM6 13h4M8 11v2M4 7l2-2 2 3 2-3 2 2'],['force','M9 2l-4 6h3l-1 6 4-7H8z'],['compile','M4 3l4 5-4 5M9 13h5'],['rebuild','M13 6A5 5 0 103 9M13 2v4h-4'],
+  ['check','M3 8l3 3 7-7'],['err-prev','M10 4L5 8l5 4M4 3v10'],['err-next','M6 4l5 4-5 4M12 3v10'],['xref','M2 3h5v5H2zM9 8h5v5H9zM7 5h4v4'],
+  ['zoom-in','M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3M5 7h4M7 5v4'],['zoom-out','M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3M5 7h4'],['zoom-fit','M2 5V2h3M14 5V2h-3M2 11v3h3M14 11v3h-3'],
+  ['grid','M2 2h12v12H2zM6 2v12M10 2v12M2 6h12M2 10h12'],['comments','M2 3h12v8H6l-3 3z'],['panels','M2 3h12v10H2zM6 3v10M2 10h12'],
+  ['folder','M2 4h4l1.5 2H14v8H2z'],['chip','M5 5h6v6H5zM2 7h3M2 10h3M11 7h3M11 10h3M7 2v3M10 2v3M7 11v3M10 11v3'],['network','M4 2h8v3H4zM2 11h4v3H2zM10 11h4v3h-4zM8 5v3M4 8h8v3'],
+  ['symbols','M4 2h8v12H4zM6 6h4M6 9h4'],['ladder','M3 3v10M13 3v10M3 8h3M10 8h3M6 5v6M10 5v6'],['struct-text','M3 4h10M3 8h7M3 12h9'],['task','M8 3a5 5 0 100 10A5 5 0 008 3M8 5.5V8l2 1.5'],
+  ['table','M2 3h12v10H2zM2 6h12M6 6v7M10 6v7'],['error','M8 8m-6 0a6 6 0 1012 0 6 6 0 10-12 0M8 4v5M8 11v.5'],['warning','M8 2l6 11H2zM8 6v3M8 11v.5'],['info','M8 8m-6 0a6 6 0 1012 0 6 6 0 10-12 0M8 7v5M8 5v.5']
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    const swatch = (hex) => `height:34px;border-bottom:1px solid #2a313a;background:${hex}`;
+    const pal = (name, note, arr) => ({ name, note, tokens: arr.map(([n, hex, role]) => ({ name:n, hex, role, swatch:swatch(hex) })) });
+
+    const typeRows = [
+      ['type/ui','Plex Sans 12/1.2','Menu, tree, table and panel text'],
+      ['type/ui-sm','Plex Sans 11/1.2','Toolbar labels, filters, hints'],
+      ['type/label','Plex Sans 600 10 · .07em caps','PANEL TITLES'],
+      ['type/mono','Plex Mono 11/1.2','%IX0.0  %QX0.1  T#5s'],
+      ['type/mono-sm','Plex Mono 10/1.2','SEM-0207  Network 4, Col 1'],
+      ['type/log','Plex Mono 11/1.55','xtensa-esp32s3-elf-g++ -Os -c prog0.cpp'],
+      ['type/canvas','Plex Sans 11 / Mono 10','Symbol names above, addresses below'],
+      ['type/title','Plex Sans 500 15/1.2','Section and dialog titles']
+    ].map(([token, spec, sample]) => ({ token, spec, sample,
+      style:`padding:0 9px;color:#dde3ea;font:${token==='type/label'?"600 10px/1 'IBM Plex Sans',sans-serif":token==='type/title'?"500 15px/1 'IBM Plex Sans',sans-serif":token.indexOf('mono')>0||token==='type/log'?`400 ${token==='type/mono-sm'?'10':'11'}px/1 'IBM Plex Mono',monospace`:`400 ${token==='type/ui-sm'?'11':'12'}px/1 'IBM Plex Sans',sans-serif`};letter-spacing:${token==='type/label'?'.07em':'0'};text-transform:${token==='type/label'?'uppercase':'none'};overflow:hidden;white-space:nowrap;text-overflow:ellipsis` }));
+
+    const spaceRows = [
+      ['space/1','2 px','icon gaps'],['space/2','4 px','tree indent step, chip padding'],['space/3','6 px','control gaps'],
+      ['space/4','8 px','panel padding'],['space/5','10 px','dialog padding'],['row/tree','23 px','tree + library rows'],
+      ['row/table','22 px','symbol and problem rows'],['row/toolbar','28 px','toolbar bands'],['row/status','24 px','menu, tabs, status bar']
+    ].map(([token, px, use]) => ({ token, px, use,
+      bar:`height:8px;width:${Math.min(96, parseInt(px) * 3.4)}px;background:#4b90d6;opacity:${token.indexOf('row')===0?.45:.85}` }));
+
+    const stateHead = ['Symbol','Normal','Selected','Conducting','Error','Forced'];
+    const symbolRows = SYMS.map(([name, glyph, d, t]) => ({
+      name, glyph,
+      cells: ['normal','selected','conducting','error','forced'].map(st => {
+        const stroke = st === 'conducting' ? '#3fd67f' : st === 'error' || st === 'forced' ? '#f0655c' : '#8e99a4';
+        return {
+          d, t, stroke, sw: st === 'conducting' ? 2.6 : 2,
+          ring: st === 'selected' ? '#4b90d6' : 'none',
+          rx: st === 'selected' ? -3 : 0, ry: st === 'selected' ? -3 : 0,
+          rw: st === 'selected' ? 66 : 0, rh: st === 'selected' ? 40 : 0,
+          squiggle: st === 'error' ? 'M14 37l4 3 4-3 4 3 4-3 4 3 4-3' : '',
+          badge: st === 'forced' ? 'F' : '', badgeY: st === 'forced' ? 8 : -20
+        };
+      })
+    }));
+
+    const icons = ICONS.map(([name, d, t]) => ({ name, d, t: t || '' }));
+
+    const chips = [
+      ['RUN', '#3fd67f'], ['STOP', '#9aa5b1'], ['Connected — COM4', '#3fd67f'], ['2 errors', '#f0655c'], ['1 warning', '#e0a83c'], ['FORCED', '#f0655c']
+    ].map(([label, color]) => ({ label,
+      style:`font:600 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;padding:3px 7px;border-radius:2px;border:1px solid ${color};color:${color};background:${color==='#9aa5b1'?'#1d222a':'transparent'}` }));
+
+    const tableRows = [
+      ['StartButton','%IX0.0','BOOL','n'],['StopButton','%IX0.1','BOOL','sel'],['ConveyorMotor','%QX0.1','BOOL','zebra'],['Motor2','—','?','err']
+    ].map(([a, b, c, kind]) => ({ a, b, c,
+      style:`display:grid;grid-template-columns:1fr 1fr 78px;height:23px;border-bottom:1px solid #2a313a;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:#dde3ea;background:${kind==='sel'?'#1b3350':kind==='zebra'?'rgba(255,255,255,.015)':kind==='err'?'rgba(240,101,92,.10)':'transparent'};border-left:2px solid ${kind==='sel'?'#4b90d6':'transparent'}` }));
+
+    const segs = ['NO','NC','P','N'].map((label, i) => ({ label,
+      style:`width:32px;height:21px;display:grid;place-items:center;background:${i===0?'rgba(75,144,214,.18)':'#0b0e12'};border:1px solid ${i===0?'#4b90d6':'#2a313a'};color:${i===0?'#4b90d6':'#9aa5b1'};font:500 10.5px/1 'IBM Plex Mono',monospace;cursor:pointer` }));
+
+    return {
+      palettes: [pal('Dark theme', 'default · dim control rooms', DARK_T), pal('Light theme', 'daylight / print', LIGHT_T)],
+      typeRows, spaceRows, stateHead, symbolRows, icons, chips, tableRows, segs, noop: () => {}
+    };
+  }
+}
+
+</script>
+</body>
+</html>

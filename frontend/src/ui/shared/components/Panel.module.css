@@ -1,0 +1,69 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: var(--h-panel-head);
+  padding: 0 var(--sp-2) 0 var(--sp-1);
+  background: var(--head);
+  border-bottom: var(--border);
+  color: var(--tx);
+  font-size: var(--fs-head);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.01em;
+  user-select: none;
+}
+
+.headerMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  height: 100%;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.chev {
+  flex: none;
+  color: var(--tx3);
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag {
+  flex: none;
+  padding: 0 4px;
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-normal);
+}
+
+.actions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}

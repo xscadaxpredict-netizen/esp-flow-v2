@@ -1,0 +1,76 @@
+.toolbar {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  padding: 1px 4px;
+  background: var(--panel);
+  border-bottom: var(--border);
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Rows wrap rather than clip, so no tool becomes unreachable on a narrow
+   viewport — the toolbar grows a line instead of hiding buttons. */
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: var(--h-toolbar-row);
+  min-width: 0;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 0 5px;
+  border-right: 1px solid var(--bord);
+}
+
+.groupLabel {
+  margin-right: 4px;
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.06em;
+}
+
+.btn {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  /* The one deliberate exception to radius 0: toolbar buttons are 2px. */
+  border-radius: 2px;
+  border: 1px solid transparent;
+  color: var(--tx2);
+  line-height: 0;
+  transition: background var(--t-fast) linear;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--panel2);
+  border-color: var(--bord);
+  color: var(--tx);
+}
+
+.btn:disabled {
+  color: var(--dead);
+  cursor: default;
+}
+
+/* An armed tool or an engaged mode is state, so it reads as held down. */
+.btnArmed {
+  background: var(--accs);
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+@media (max-width: 1280px) {
+  .groupLabel {
+    display: none;
+  }
+}

@@ -1,0 +1,82 @@
+.bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  height: var(--h-statusbar);
+  padding: 0 var(--sp-2);
+  background: var(--head);
+  border-top: var(--border);
+  color: var(--tx2);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+  user-select: none;
+  overflow: hidden;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 var(--sp-3);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* The contextual message may shrink; the fixed readouts may not. */
+.msg {
+  min-width: 0;
+  color: var(--tx);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spacer {
+  flex: 1;
+  min-width: var(--sp-4);
+}
+
+.sep {
+  flex: none;
+  width: 1px;
+  height: 11px;
+  background: var(--bord);
+}
+
+.dotLive,
+.dotIdle {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.dotLive {
+  background: var(--green);
+}
+
+.dotIdle {
+  background: var(--dead);
+}
+
+.run,
+.stop {
+  padding: 0 var(--sp-3);
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+}
+
+.run {
+  color: var(--green);
+}
+
+.stop {
+  color: var(--tx3);
+}
+
+@media (max-width: 1200px) {
+  .bar > .cell:nth-child(5) {
+    display: none;
+  }
+}

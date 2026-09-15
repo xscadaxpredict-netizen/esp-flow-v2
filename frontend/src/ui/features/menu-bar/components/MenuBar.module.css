@@ -1,0 +1,124 @@
+.bar {
+  flex: none;
+  display: flex;
+  align-items: stretch;
+  height: var(--h-menubar);
+  padding-left: 2px;
+  background: var(--panel);
+  border-bottom: var(--border);
+  user-select: none;
+}
+
+.slot {
+  position: relative;
+  display: flex;
+}
+
+.label {
+  padding: 0 var(--sp-4);
+  color: var(--tx2);
+  font-size: var(--fs-body);
+  white-space: nowrap;
+  transition: background var(--t-fast) linear;
+}
+
+.label:hover {
+  background: var(--panel2);
+  color: var(--tx);
+}
+
+.labelOpen {
+  background: var(--accs);
+  color: var(--acc);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 80;
+  min-width: 214px;
+  padding: 3px 0;
+  background: var(--panel2);
+  border: var(--border-strong);
+  box-shadow: var(--shadow-menu);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  height: var(--h-menu-row);
+  padding: 0 var(--sp-4) 0 var(--sp-1);
+  color: var(--tx);
+  font-size: var(--fs-body);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.item:hover:not(:disabled) {
+  background: var(--selbg);
+}
+
+.item:disabled {
+  color: var(--tx3);
+  cursor: default;
+}
+
+.itemIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  color: var(--tx2);
+}
+
+.itemLabel {
+  flex: 1;
+}
+
+.shortcut {
+  flex: none;
+  padding-left: var(--sp-6);
+  color: var(--tx3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+}
+
+.sep {
+  height: 1px;
+  margin: 3px 6px;
+  background: var(--bord);
+}
+
+.palette {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 3px 6px 3px auto;
+  padding: 0 var(--sp-3);
+  background: var(--panel2);
+  border: var(--border);
+  color: var(--tx3);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+  transition: color var(--t-fast) linear;
+}
+
+.palette:hover {
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  color: var(--tx3);
+}
+
+@media (max-width: 1180px) {
+  .palette span {
+    display: none;
+  }
+}
