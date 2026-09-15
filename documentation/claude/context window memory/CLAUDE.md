@@ -86,10 +86,11 @@ and implemented in `frontend/src/core/ladder/`.
   filler wires stretch automatically.
 - **Deletion runs the rules backwards** — remove, drop an emptied level, then collapse a
   parallel left with one level into its parent series (`mutations.ts`, `deleteAt`).
-- **Outputs live in the tree.** A coil is an element that ends its line at the right rail
-  (rule 6); several outputs are a block whose every leg terminates (rule 7). A coil is drawn
-  where its own logic ends, not in a shared column — **ISPSoft wins over the prototype on
-  ladder canvas geometry**, decided 2026-09-12. `shape.ts` holds the predicate.
+- **Outputs live in the tree.** A coil is an element that ends its line — nothing is drawn to
+  its right and there is no right rail (rule 6). Several outputs are a block whose every leg
+  terminates (rule 7). A coil is drawn where its own logic ends, not in a shared column —
+  **ISPSoft wins over the prototype on ladder canvas geometry**, decided 2026-09-12. A coil may
+  only be placed where power can reach the end of the rung (`canTerminate` in `shape.ts`).
 - **Slot resolution: shallowest path wins.** Trailing slots collide when a block is the last
   child of its parent. Sort candidates by path length ascending before the hit dedupe, so the
   click means "after the block", not "inside its first level" (`layout.ts`).
@@ -145,6 +146,11 @@ Backend will be **Django + DRF + Channels**, with Celery for PlatformIO builds. 
   exactly this class of defect.
 - **Feature slices**: `ui/features/<region>/components/` plus a barrel. One slice per region.
 - **Overlay keys go on `window`**, not on element `onKeyDown` — see the command palette.
+- **One version for the whole product, in lockstep.** The root `VERSION` file is the source of
+  truth; `frontend/package.json` (and later `backend/pyproject.toml` and a firmware build flag)
+  mirror it. Browser, compiler and ESP32 runtime must agree, so they never version separately.
+  A release bumps `VERSION` and every manifest, adds a `CHANGELOG.md` section, and gets an
+  annotated `vX.Y.Z` tag. Stay on `0.x` until a ladder program compiles and flashes.
 
 ## Commands
 
@@ -153,7 +159,7 @@ cd frontend && npm run dev        # Vite dev server on :5173
 cd frontend && npm run typecheck  # tsc --noEmit
 cd frontend && npm run lint       # eslint, expected 0 problems
 cd frontend && npm run build      # tsc -b && vite build
-cd frontend && npm test           # vitest run, 89 tests
+cd frontend && npm test           # vitest run, 124 tests
 ```
 
 `.claude/launch.json` defines the `esp-flow-frontend` preview server for the Browser pane.

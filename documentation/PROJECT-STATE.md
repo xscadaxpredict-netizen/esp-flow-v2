@@ -1,6 +1,6 @@
 # ESP-Flow — Project State
 
-**As of 2026-09-12.** Written as a handoff so a new session can continue without re-deriving
+**As of 2026-09-15.** Written as a handoff so a new session can continue without re-deriving
 context. Read [CLAUDE.md](claude/context%20window%20memory/CLAUDE.md) first for the hard rules; this document covers what
 exists, what was decided and why, what is verified, and what is still open.
 
@@ -15,7 +15,9 @@ exists, what was decided and why, what is verified, and what is still open.
 | `firmware/` | **Empty directory.** No PlatformIO project, no C++ runtime. |
 | `documentation/` | Primer, ADR-001, design handoffs, ladder rules, frontend architecture. |
 
-Nothing is committed to git — the repo is not initialised.
+The whole repository — frontend, backend, firmware, documentation — is under git and pushed to
+`github.com/xscadaxpredict-netizen/esp-flow-v2` on `main`. Current release **0.1.0**, tagged
+`v0.1.0`. Empty `backend/` and `firmware/` folders do not appear on GitHub until they hold a file.
 
 ## 2. Decisions already made
 
@@ -35,6 +37,8 @@ Do not relitigate these without new information. Each was chosen deliberately.
 | Styling | CSS custom properties + CSS Modules | The design is exact-pixel and radius-0. |
 | Undesigned areas | Labelled empty states, nothing invented | |
 | Minimum viewport | **980×640** | The README's stricter figure, over the Layout Guide's 1440×900. |
+| Versioning | **One product version in lockstep**, root `VERSION` is the source of truth | Browser, Python compiler and ESP32 runtime must agree on diagnostic codes and generated C++; separate versions would need a compatibility table. `0.x` until compile-and-flash works. |
+| Ladder canvas geometry | **ISPSoft wins over the prototype** | Decided 2026-09-12. Outputs sit where their logic ends; no right rail. The prototype still governs every other region. |
 
 ## 3. What the frontend contains
 
@@ -49,7 +53,7 @@ The valuable part. Framework-free and portable.
   an output), `path.ts` (`nodeAt`, clone, `pathOfElement`),
   `mutations.ts` (place, append, branch, delete with pruning, network ops, symbol binding),
   `evaluate.ts` (power flow: series AND, parallel OR), **`layout.ts`** (pure geometry →
-  draw lists; canvas metrics `CW 116, CH 78, X0 76, RAIL_L 56, COIL_W 132, MINCOLS 6`).
+  draw lists; canvas metrics `CW 116, CH 78, X0 76, RAIL_L 56, RIGHT_PAD 40, MINCOLS 6`).
 - `rules/structural.ts` — the browser's only validation, `STR-` codes.
 - `data/seed.ts` — the bottling-line example: 4 networks, 11 symbols, live values, compiler
   diagnostics, build stages, build log, cross-reference rows. **Delete this when the backend
@@ -183,24 +187,30 @@ Each is a considered choice, not an oversight. Revisit if the user disagrees.
 
 ## 7. Gaps, in priority order
 
-1. **Test coverage stops at the domain layer.** Vitest landed 2026-09-12 with 89 cases over
-   `core/ladder/`, `core/rules/` and the undo stack, each citing the rule it protects. Their
+1. **Nothing persists.** Networks come from the seed data every time the app loads, so a page
+   reload throws away whatever was drawn. `io/storage/` is an empty stub. Decide between a local
+   browser save as a stopgap and waiting for the backend.
+2. **Test coverage stops at the domain layer.** Vitest landed 2026-09-12 and now holds 124 cases
+   over `core/ladder/`, `core/rules/`, the undo stack and the live structural diagnostics, each citing the rule it protects. Their
    bite was checked by breaking rule 1 and rule 5 on purpose and confirming the right tests
    failed. Nothing covers `services/useCases/`, the React layer, or anything about how the
    editor looks — those still rest entirely on driving the browser.
-2. **Backend does not exist.** No Django project, no diagnostic registry, no codegen.
-3. **Firmware does not exist.** No PlatformIO project, no C++ IEC runtime (`TON`, `CTU`,
+3. **Backend does not exist.** No Django project, no diagnostic registry, no codegen.
+4. **Firmware does not exist.** No PlatformIO project, no C++ IEC runtime (`TON`, `CTU`,
    scan cycle, process image, retentive memory).
-4. **Undesigned surfaces** — Structured Text editor, Monitor Chart, and a fully specified
+5. **Undesigned surfaces** — Structured Text editor, Monitor Chart, and a fully specified
    Hardware Configuration modal. Currently labelled empty states.
-5. **Diagnostic registry not generated.** ADR-001 specifies
+6. **Diagnostic registry not generated.** ADR-001 specifies
    `backend/compiler/diagnostics/registry.yaml` as the single authority with a generated
    `codes.generated.ts` and a CI check that no `SEM-` code is emitted from TypeScript.
    `core/diagnostics/codes.ts` is a hand-written stand-in.
-6. **Leftover scaffold barrels** exporting nothing: `ui/features/compiler/components/index.ts`
+7. **No MPS bifurcation tool.** Deferred 2026-09-12. The output block already produces what MPS
+   produces; missing is ISPSoft's separate tool and its habit of showing legal positions before
+   the click. See `reference/rules/ispsoft-behaviour.md`.
+8. **Leftover scaffold barrels** exporting nothing: `ui/features/compiler/components/index.ts`
    (superseded by `message-panel`), `ui/features/monitoring/components/index.ts`, and several
    `components/index.ts` stubs inside slices that now export from the slice barrel.
-7. **Two handoff folders** differing by one line. `Design feedback needed/` is superseded by
+9. **Two handoff folders** differing by one line. `Design feedback needed/` is superseded by
    `Design feedback needed canvas updated/`. Someone will read the wrong one.
 
 ## 8. Open questions the user has not answered
@@ -228,9 +238,10 @@ Smaller, also open:
 
 ## 9. Suggested next steps
 
-If continuing the frontend: the outputs-inside-the-rung proposal in
-[architecture/proposal-outputs-in-the-rung.md](architecture/proposal-outputs-in-the-rung.md)
-is written and waiting on two design answers. The ladder tests that should precede it are done.
+If continuing the frontend: outputs inside the rung are built (rules 6 and 7), so the canvas
+matches ISPSoft on placement. Three candidates, in order: decide persistence (§7.1); show legal
+positions before a click rather than refusing after it; let pointer position decide series or
+parallel so branching needs no arming step. MPS comes after those.
 
 If moving to the backend: answers to §8 questions 1–3 are needed first. With those, the order
 is Django project skeleton → diagnostic registry + generator → project/POU models → PLCopen
