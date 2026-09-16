@@ -10,8 +10,18 @@ import {
 import type { Network } from '../models/network';
 import type { InsertSide, Selection } from '../models/selection';
 import { el, newElement, newNetwork, par, ser } from './builders';
+import {
+  insertIndex,
+  NO_APPEND_POINT,
+  NO_BRANCH_POINT,
+  NO_INSERT_POINT,
+  NOTHING_SELECTED,
+  NOTHING_TO_BRANCH,
+  seriesAt,
+  verdict,
+  type Intent,
+} from './legality';
 import { cloneNetworks, nodeAt, pathOfElement } from './path';
-import { canTerminate, terminates } from './shape';
 import { width } from './span';
 
 /**
@@ -19,6 +29,10 @@ import { width } from './span';
  * and the sentence the status bar reports. A rejected mutation returns the
  * networks unchanged with `changed: false` and an explanatory message — the
  * editor tells you why nothing happened rather than silently doing nothing.
+ *
+ * Whether an edit is legal at all is asked of `legality.ts`, which the canvas
+ * asks too so it can show the answer before the click. Mutations resolve, ask,
+ * and edit; they carry no second copy of rules 6 and 7.
  */
 export interface MutationResult {
   networks: Network[];
@@ -35,13 +49,6 @@ const reject = (networks: Network[], selection: Selection | null, statusMsg: str
 });
 
 export const isCoilType = (t: ElementType) => isCoil(t);
-
-/** Rule 6, in the one sentence the status bar shows when it is broken. */
-const OUTPUT_ENDS_LINE = 'An output ends its line — nothing can follow it';
-
-/** Rule 7, for a coil dropped where power cannot reach the rail. */
-const OUTPUT_CANNOT_REACH_RAIL =
-  'An output must reach the right rail — this branch rejoins and the rung carries on';
 
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
@@ -65,10 +72,17 @@ export function placeAt(
   const net = networks[n];
   if (!net) return reject(nets, selection, 'No such network');
 
+  // An empty path means the rung itself, which is the same intent as its
+  // trailing slot: append to the body.
+  const intent: Intent =
+    path && path.length ? { kind: 'cell', path, zone: side } : { kind: 'slot', path: [] };
+
+  const allowed = verdict(net.body, intent, type);
+  if (!allowed.ok) return reject(nets, selection, allowed.reason);
+
   const element = newElement(type, n);
 
-  if (!path || path.length === 0) {
-    if (terminates(net.body)) return reject(nets, selection, OUTPUT_ENDS_LINE);
+  if (intent.kind === 'slot') {
     net.body.kids.push(element);
     return {
       networks,
@@ -80,24 +94,10 @@ export function placeAt(
 
   const ppath = path.slice(0, -1);
   const idx = path[path.length - 1];
-  const owner = nodeAt(net.body, ppath);
-  if (!owner || owner.t !== 'ser') return reject(nets, selection, 'Cannot insert there');
+  const owner = seriesAt(net.body, ppath);
+  if (!owner) return reject(nets, selection, NO_INSERT_POINT);
 
-  const at = Math.max(0, Math.min(side === 'left' ? idx : idx + 1, owner.kids.length));
-  const atEnd = at === owner.kids.length;
-
-  // Rule 6. An output only ever lands at the end of a line that has none, and
-  // nothing at all lands after one.
-  if (isCoilType(type) ? !atEnd || terminates(owner) : atEnd && terminates(owner)) {
-    return reject(nets, selection, OUTPUT_ENDS_LINE);
-  }
-
-  // Rule 7. Ending this line is only legal if power can get from here to the
-  // rail — a leg of a block that rejoins and carries on cannot hold an output.
-  if (isCoilType(type) && !canTerminate(net.body, ppath)) {
-    return reject(nets, selection, OUTPUT_CANNOT_REACH_RAIL);
-  }
-
+  const at = insertIndex(owner.kids.length, idx, side);
   owner.kids.splice(at, 0, element);
 
   return {
@@ -120,12 +120,11 @@ export function appendTo(
   const net = networks[n];
   if (!net) return reject(nets, selection, 'No such network');
 
-  const owner = ppath.length ? nodeAt(net.body, ppath) : net.body;
-  if (!owner || owner.t !== 'ser') return reject(nets, selection, 'Cannot append there');
-  if (terminates(owner)) return reject(nets, selection, OUTPUT_ENDS_LINE);
-  if (isCoilType(type) && !canTerminate(net.body, ppath)) {
-    return reject(nets, selection, OUTPUT_CANNOT_REACH_RAIL);
-  }
+  const allowed = verdict(net.body, { kind: 'slot', path: ppath }, type);
+  if (!allowed.ok) return reject(nets, selection, allowed.reason);
+
+  const owner = seriesAt(net.body, ppath);
+  if (!owner) return reject(nets, selection, NO_APPEND_POINT);
 
   owner.kids.push(newElement(type, n));
   return {
@@ -161,29 +160,16 @@ export function branchAt(
   const net = networks[n];
   if (!net) return reject(nets, selection, 'No such network');
 
+  const allowed = verdict(net.body, { kind: 'cell', path, zone: 'below' }, armType);
+  if (!allowed.ok) return reject(nets, selection, allowed.reason);
+
   const ppath = path.slice(0, -1);
   const idx = path[path.length - 1];
-  const owner = nodeAt(net.body, ppath);
-  if (!owner || owner.t !== 'ser') return reject(nets, selection, 'Cannot branch from there');
+  const owner = seriesAt(net.body, ppath);
+  if (!owner) return reject(nets, selection, NO_BRANCH_POINT);
 
   const target = owner.kids[idx];
-  if (!target) return reject(nets, selection, 'Nothing to branch from there');
-  if (target.t === 'el' && target.type === 'fb') {
-    return reject(nets, selection, 'Function blocks cannot be branched');
-  }
-
-  // Rule 7: a new leg must terminate exactly as its siblings do, so the armed
-  // tool has to match what it is branching from.
-  const targetIsOutput = target.t === 'el' && isCoil(target.type);
-  if (targetIsOutput !== isCoilType(armType)) {
-    return reject(
-      nets,
-      selection,
-      targetIsOutput
-        ? 'Branching an output needs another output — pick a coil'
-        : 'An output cannot branch a contact — every leg must end the same way',
-    );
-  }
+  if (!target) return reject(nets, selection, NOTHING_TO_BRANCH);
 
   // The clicked element is the entire line inside a block.
   if (ppath.length >= 2 && owner.kids.length === 1) {
@@ -363,20 +349,16 @@ export function setElementType(
   if (!sel) return reject(nets, sel, 'Nothing selected');
   const networks = cloneNetworks(nets);
   const net = networks[sel.n];
-  const element = net ? resolveElement(net, sel) : null;
-  if (!element) return reject(nets, sel, 'Nothing selected');
-  if (element.type === 'fb') return reject(nets, sel, 'A function block cannot be converted');
+  if (!net) return reject(nets, sel, NOTHING_SELECTED);
 
   // Rules 6 and 7: a contact may only become an output where an output may
-  // stand — last on its line, and on a line that reaches the rail.
-  if (isCoilType(type) && !isCoilType(element.type)) {
-    const ppath = (sel.path ?? []).slice(0, -1);
-    const idx = (sel.path ?? []).length - 1;
-    const owner = ppath.length ? nodeAt(net.body, ppath) : net.body;
-    const last = owner && owner.t === 'ser' && (sel.path ?? [])[idx] === owner.kids.length - 1;
-    if (!last) return reject(nets, sel, OUTPUT_ENDS_LINE);
-    if (!canTerminate(net.body, ppath)) return reject(nets, sel, OUTPUT_CANNOT_REACH_RAIL);
-  }
+  // stand — last on its line, and on a line that reaches the rail. A function
+  // block is refused outright, and so is a path that points at no element.
+  const allowed = verdict(net.body, { kind: 'convert', path: sel.path ?? [] }, type);
+  if (!allowed.ok) return reject(nets, sel, allowed.reason);
+
+  const element = resolveElement(net, sel);
+  if (!element) return reject(nets, sel, NOTHING_SELECTED);
 
   element.type = type;
   return {
