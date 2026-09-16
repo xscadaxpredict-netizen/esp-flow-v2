@@ -33,6 +33,12 @@
   transition: fill var(--t-fast) linear;
 }
 
+/* The lower band of a cell branches rather than inserts. The cursor says so
+   before the click, which is the whole point of letting position decide. */
+.below {
+  cursor: s-resize;
+}
+
 .insertBtn {
   cursor: pointer;
   opacity: 0.9;

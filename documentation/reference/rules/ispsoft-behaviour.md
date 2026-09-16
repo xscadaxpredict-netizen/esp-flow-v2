@@ -68,10 +68,17 @@ and confirmed by hand in ISPSoft.
 
 ## 3. Where we differ from ISPSoft
 
-**One tool versus two, and a mode versus a position.** ISPSoft has a contact tool where the
-pointer's position decides series or parallel, plus a separate MPS tool for bifurcation. We have
-a placement tool plus an armed branch command. Ours is a mode; theirs is a position. Neither is
-wrong, but theirs needs no arming step, and it is worth considering.
+**A mode versus a position — resolved 2026-09-16, we adopted theirs.** ISPSoft has a contact tool
+where the pointer's position decides series or parallel. We had a placement tool plus an armed
+branch command: a mode where theirs was a position, and one step longer. Position now decides
+here too. With a tool armed, the lower band of a cell — below the glyph, 24 of its 70 units —
+branches, and either side inserts in series. The new leg takes the armed tool's type, where the
+old armed route copied the type of whatever was selected.
+
+The toolbar's branch command is kept and still overrides the pointer, because it was asked for
+explicitly and because it is the route that works without a mouse.
+
+**Still one tool versus two.** MPS remains a separate tool in ISPSoft and is not built here.
 
 **Prevention versus refusal.** When a position will not take an MPS, ISPSoft *shows the positions
 that will*. We let the click happen and then explain why nothing did. Theirs is the better

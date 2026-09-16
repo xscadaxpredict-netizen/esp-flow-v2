@@ -2,6 +2,7 @@ import { isCoil, type LadderElement, type NodePath, type SeriesNode } from '../m
 import type { Network } from '../models/network';
 import type { Selection } from '../models/selection';
 import { conducts, passes, type ValueMap } from './evaluate';
+import type { Zone } from './legality';
 import { terminates } from './shape';
 import { height, width } from './span';
 
@@ -92,6 +93,32 @@ export interface Hit extends Rect {
   /** An element may be inserted here, with a left/right side. */
   insertable: boolean;
 }
+
+/**
+ * The lower band of a cell, below the glyph, where pointing means "branch".
+ *
+ * A cell is 70 tall with the element centred in it, so its glyph ends 46 down.
+ * The band is the 24 below that — the symbol label is above the glyph and the
+ * address below it, which puts the address inside the band. That is intended:
+ * the whole lower part of a cell reads as "underneath this element".
+ */
+export const BRANCH_BAND = 24;
+
+/**
+ * WHERE THE POINTER IS, AND THEREFORE WHAT A CLICK MEANS.
+ *
+ * ISPSoft has one contact tool and lets position decide: point at the right of
+ * a contact to insert after it, the left to insert before, the bottom to
+ * connect in parallel. This is that rule, kept pure so it can be tested without
+ * a DOM and so the component stays a renderer.
+ *
+ * Coordinates are local to the hit rect, in SVG units — the caller divides out
+ * the zoom before asking.
+ */
+export const zoneAt = (hit: Hit, localX: number, localY: number): Zone => {
+  if (hit.branchable && localY >= hit.h - BRANCH_BAND) return 'below';
+  return localX < hit.w / 2 ? 'left' : 'right';
+};
 
 export interface LadderLayout {
   width: number;
