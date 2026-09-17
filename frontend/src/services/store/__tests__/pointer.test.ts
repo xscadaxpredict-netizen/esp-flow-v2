@@ -57,6 +57,19 @@ describe('pointing below an element branches it', () => {
     expect(leg?.t === 'el' && leg.type).toBe('nc');
   });
 
+  it('builds a complete function block when branching with that tool', () => {
+    // The branch leg is made the same way a placed element is. Built bare, a
+    // block had no width, no type and no preset, and drew as a one-cell stub.
+    useLadderStore.setState({ activeTool: 'fb', hoverZone: 'below' });
+    store().cellClick(0, 'cell', [0]);
+
+    const leg = nodeAt(body(), [0, 1, 0]);
+    expect(leg?.t).toBe('el');
+    if (leg?.t !== 'el') return;
+    expect(leg).toMatchObject({ type: 'fb', span: 2, fb: 'TON', pt: 'T#5s' });
+    expect(leg.sym).not.toBe('');
+  });
+
   it('records one step of history, like any other change', () => {
     useLadderStore.setState({ activeTool: 'no', hoverZone: 'below' });
     store().cellClick(0, 'cell', [0]);
