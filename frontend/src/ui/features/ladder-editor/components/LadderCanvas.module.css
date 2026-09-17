@@ -39,6 +39,19 @@
   cursor: s-resize;
 }
 
+/* The armed element would be refused here. The status bar already says why;
+   the cursor says so without having to look down. */
+.refused {
+  cursor: not-allowed;
+}
+
+/* The element about to be placed, drawn where it will go. Faint enough to read
+   as a promise rather than a change, and never in the way of the click. */
+.ghost {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .insertBtn {
   cursor: pointer;
   opacity: 0.9;

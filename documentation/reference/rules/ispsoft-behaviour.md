@@ -80,10 +80,15 @@ explicitly and because it is the route that works without a mouse.
 
 **Still one tool versus two.** MPS remains a separate tool in ISPSoft and is not built here.
 
-**Prevention versus refusal.** When a position will not take an MPS, ISPSoft *shows the positions
-that will*. We let the click happen and then explain why nothing did. Theirs is the better
-interaction and would suit our hit-region model well: the canvas already knows every legal
-position before the click.
+**Prevention versus refusal — resolved 2026-09-17, we now do both.** When a position will not take
+an MPS, ISPSoft *shows the positions that will*. We used to let the click happen and then explain
+why nothing did. Now, as soon as a tool is armed, every position that would accept it is outlined,
+and hovering one draws a faint ghost of the element where it will go. The preview asks the same
+legality function the click asks, so it cannot promise a position the click then refuses.
+
+We go one step further than ISPSoft. Hovering a position that would refuse shows the reason in the
+status bar before any click, with a not-allowed cursor. ISPSoft only shows what is legal; we also
+say why the rest is not.
 
 **The right rail — resolved, not a difference any more.** Chapter 10 says nothing about power
 rails, and the recording shows none. We drew one, following the design prototype. Removed
@@ -120,5 +125,5 @@ recording and screenshots show. Removed the same day.
 
 The MPS bifurcation tool itself. Decided 2026-09-12: get the basic placement rules right first,
 then add it. Our output block already covers what MPS produces structurally; what is missing is
-ISPSoft's separate tool for creating one, and its habit of showing the legal positions before
-the click rather than explaining after it.
+ISPSoft's separate tool for creating one. Showing the legal positions before the click is no
+longer missing — it was built 2026-09-17 for the placement tools, and an MPS tool would reuse it.

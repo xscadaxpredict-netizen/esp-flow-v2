@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Zone } from '../../../../core/ladder/legality';
-import { layoutLadder, zoneAt, type Hit } from '../../../../core/ladder/layout';
+import { elementShape, layoutLadder, zoneAt, type Hit } from '../../../../core/ladder/layout';
+import { accepts, answerFor, ghostAt, previewLegality } from '../../../../core/ladder/preview';
 import { useLadderStore } from '../../../../services/store/useLadderStore';
 import { useUIStore } from '../../../../services/store/useUIStore';
 import styles from './LadderCanvas.module.css';
@@ -19,6 +20,7 @@ export function LadderCanvas() {
   const showGrid = useUIStore((s) => s.showGrid);
   const showComments = useUIStore((s) => s.showComments);
   const zoom = useUIStore((s) => s.zoom);
+  const setStatus = useUIStore((s) => s.setStatus);
 
   const [hoverKey, setHoverKey] = useState<string | null>(null);
   const [zone, setZone] = useState<Zone>('right');
@@ -30,6 +32,44 @@ export function LadderCanvas() {
   );
 
   const armed = !!branchArm;
+
+  /*
+   * PLACEMENT PREVIEW.
+   *
+   * What the armed element is, and whether position or the branch command
+   * decides its shape. Nothing is armed in online mode, because nothing can be
+   * edited there.
+   */
+  const previewType = online ? null : (activeTool ?? branchArm?.type ?? null);
+  const previewMode = activeTool ? 'tool' : 'branch';
+
+  // Rebuilt when the tool or the ladder changes — never on a pointer move, which
+  // only looks this table up. Keeping it apart from the layout memo is what
+  // stops hovering from re-laying out the whole ladder.
+  const preview = useMemo(
+    () => (previewType ? previewLegality(networks, layout.hits, previewType, previewMode) : null),
+    [networks, layout.hits, previewType, previewMode],
+  );
+
+  const hoveredHit = hoverKey ? layout.hits.find((h) => h.key === hoverKey) : undefined;
+  const hoverAnswer = preview && hoveredHit ? answerFor(preview, hoveredHit, zone) : null;
+  const refusal = hoverAnswer && !hoverAnswer.ok ? hoverAnswer.reason : null;
+
+  // Pointing at a position that would refuse says why, before the click. An
+  // allowed position leaves the status bar alone, so the last result survives
+  // ordinary movement.
+  useEffect(() => {
+    if (refusal && useUIStore.getState().statusMsg !== refusal) setStatus(refusal);
+  }, [refusal, setStatus]);
+
+  // The ghost: the armed element, drawn faintly where it will go.
+  const ghost =
+    previewType && hoveredHit && hoverAnswer?.ok
+      ? (() => {
+          const at = ghostAt(hoveredHit, previewMode === 'branch' ? 'below' : zone);
+          return { ...at, shape: elementShape(previewType, at.cx, at.cy) };
+        })()
+      : null;
 
   /**
    * The pointer's position inside a cell is what decides the shape, so it is
@@ -180,6 +220,15 @@ export function LadderCanvas() {
             const willBranch = hit.branchable && (armed || (!!activeTool && zone === 'below'));
             const willInsert = hovered && !!activeTool && !willBranch && hit.insertable;
 
+            // Preview: does this position take the armed element at all, and is
+            // the exact way it is being pointed at refused?
+            const open = accepts(preview?.[hit.key]);
+            const refusedHere = hovered && !!refusal;
+            const cue = refusedHere ? 'var(--tx3)' : 'var(--acc)';
+
+            const stroke = hovered && (activeTool || armed) ? cue : open ? 'var(--acc)' : 'none';
+            const cursor = refusedHere ? styles.refused : hovered && willBranch ? styles.below : '';
+
             return (
               <g key={hit.key}>
                 <rect
@@ -187,10 +236,12 @@ export function LadderCanvas() {
                   y={hit.y}
                   width={hit.w}
                   height={hit.h}
-                  fill={hovered ? 'var(--accs)' : 'transparent'}
-                  stroke={hovered && (activeTool || armed) ? 'var(--acc)' : 'none'}
+                  fill={hovered && !refusedHere ? 'var(--accs)' : 'transparent'}
+                  stroke={stroke}
+                  strokeOpacity={hovered ? 1 : 0.45}
                   strokeDasharray="3 2"
-                  className={`${styles.hit} ${hovered && willBranch ? styles.below : ''}`}
+                  className={`${styles.hit} ${cursor}`}
+                  data-accepts={preview ? String(open) : undefined}
                   onMouseEnter={() => setHoverKey(hit.key)}
                   onMouseLeave={() => setHoverKey((k) => (k === hit.key ? null : k))}
                   onMouseMove={onHitMove(hit)}
@@ -203,7 +254,7 @@ export function LadderCanvas() {
                   <path
                     d={`M${hit.x + hit.w / 2} ${hit.y + hit.h - 6}v10 M${hit.x + hit.w / 2 - 7} ${hit.y + hit.h + 4}l7 7 7-7`}
                     fill="none"
-                    stroke="var(--acc)"
+                    stroke={cue}
                     strokeWidth={1.6}
                   />
                 )}
@@ -214,13 +265,42 @@ export function LadderCanvas() {
                     y1={hit.y + 6}
                     x2={zone === 'left' ? hit.x + 2 : hit.x + hit.w - 2}
                     y2={hit.y + hit.h - 6}
-                    stroke="var(--acc)"
+                    stroke={cue}
                     strokeWidth={2}
                   />
                 )}
               </g>
             );
           })}
+
+          {/* The ghost sits above the hit layer but never takes the click. */}
+          {ghost && (
+            <g className={styles.ghost} data-ghost aria-hidden="true">
+              {ghost.shape.paths.map((d, i) => (
+                <path
+                  key={i}
+                  d={d}
+                  fill="none"
+                  stroke="var(--acc)"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                />
+              ))}
+              {ghost.shape.letter && (
+                <text
+                  x={ghost.cx}
+                  y={ghost.cy + 4}
+                  fill="var(--acc)"
+                  fontSize={11}
+                  fontWeight="600"
+                  textAnchor="middle"
+                  fontFamily="var(--font-mono)"
+                >
+                  {ghost.shape.letter}
+                </text>
+              )}
+            </g>
+          )}
         </svg>
       </div>
     </div>

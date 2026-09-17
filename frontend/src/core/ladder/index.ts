@@ -13,3 +13,4 @@ export * from './legality';
 export * from './evaluate';
 export * from './mutations';
 export * from './layout';
+export * from './preview';
