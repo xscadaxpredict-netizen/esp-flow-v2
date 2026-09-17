@@ -1,6 +1,7 @@
 import type { ElementType } from '../models/ladderNode';
 import type { Network } from '../models/network';
-import { CH, type Hit } from './layout';
+import { spanOf } from './builders';
+import { CH, CW, type Hit } from './layout';
 import { verdict, type Verdict, type Zone } from './legality';
 
 /**
@@ -82,12 +83,26 @@ export const accepts = (answers: HitAnswers | undefined): boolean =>
  * Where to draw the ghost of the element about to be placed.
  *
  * A slot and a branch show exactly where the element will land, since nothing
- * moves sideways to make room. An insert shows the boundary it goes in at —
- * drawing its true final column would mean laying out an imagined copy of the
- * whole ladder on every pointer move, which is the cost this preview avoids.
+ * moves sideways to make room: it starts at that column and is as wide as the
+ * element is.
+ *
+ * An insert of a one-cell element straddles the boundary it goes in at. Drawing
+ * its true final column would mean laying out an imagined copy of the whole
+ * ladder on every pointer move, which is the cost this preview avoids.
+ *
+ * A function block cannot straddle. Two cells wide and centred on a boundary,
+ * it covered half of each neighbour and showed neither where it would sit nor
+ * which way the line would move. So it is drawn where it will actually land:
+ * starting at that boundary. Either way that is exact — an insert before an
+ * element takes that element's column, and one after takes the next.
  */
-export const ghostAt = (hit: Hit, zone: Zone): { cx: number; cy: number } => {
-  if (hit.kind === 'slot') return { cx: (hit.xL + hit.xR) / 2, cy: hit.cy };
-  if (zone === 'below') return { cx: (hit.xL + hit.xR) / 2, cy: hit.cy + CH };
-  return { cx: zone === 'left' ? hit.xL : hit.xR, cy: hit.cy };
+export const ghostAt = (hit: Hit, zone: Zone, type: ElementType): { cx: number; cy: number } => {
+  const span = spanOf(type);
+  const landingFrom = (left: number) => left + (span * CW) / 2;
+
+  if (hit.kind === 'slot') return { cx: landingFrom(hit.xL), cy: hit.cy };
+  if (zone === 'below') return { cx: landingFrom(hit.xL), cy: hit.cy + CH };
+
+  const edge = zone === 'left' ? hit.xL : hit.xR;
+  return { cx: span === 1 ? edge : landingFrom(edge), cy: hit.cy };
 };

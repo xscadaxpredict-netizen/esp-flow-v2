@@ -150,20 +150,52 @@ describe('where the ghost is drawn', () => {
   });
 
   it('puts an insert on the boundary it goes in at', () => {
-    expect(ghostAt(first, 'left')).toEqual({ cx: X0, cy: first.cy });
-    expect(ghostAt(first, 'right')).toEqual({ cx: X0 + CW, cy: first.cy });
+    expect(ghostAt(first, 'left', 'no')).toEqual({ cx: X0, cy: first.cy });
+    expect(ghostAt(first, 'right', 'no')).toEqual({ cx: X0 + CW, cy: first.cy });
   });
 
   it('puts a branch exactly where the new level appears, one row down', () => {
-    expect(ghostAt(first, 'below')).toEqual({ cx: X0 + CW / 2, cy: first.cy + CH });
+    expect(ghostAt(first, 'below', 'no')).toEqual({ cx: X0 + CW / 2, cy: first.cy + CH });
   });
 
   it('puts a slot’s ghost in the middle of the slot, whatever the zone', () => {
     const { hits: open } = layoutOf(ser(el('no', 'A')));
     const slot = slotAt(open, []);
 
-    expect(ghostAt(slot, 'left')).toEqual({ cx: slot.xL + CW / 2, cy: slot.cy });
-    expect(ghostAt(slot, 'below')).toEqual(ghostAt(slot, 'left'));
+    expect(ghostAt(slot, 'left', 'no')).toEqual({ cx: slot.xL + CW / 2, cy: slot.cy });
+    expect(ghostAt(slot, 'below', 'no')).toEqual(ghostAt(slot, 'left', 'no'));
+  });
+});
+
+describe('a function block ghost sits where the block will land', () => {
+  // Two cells wide. Centred on a boundary it covered half of each neighbour, so
+  // it starts at the boundary instead — which is exactly the column it takes.
+  const { hits } = layoutOf(ser(el('no', 'A'), el('no', 'B'), el('coil', 'M')));
+  const b = cellAt(hits, [1]);
+
+  it('inserted after an element, starts at that element’s right edge', () => {
+    expect(ghostAt(b, 'right', 'fb')).toEqual({ cx: b.xR + CW, cy: b.cy });
+  });
+
+  it('inserted before an element, takes that element’s column', () => {
+    expect(ghostAt(b, 'left', 'fb')).toEqual({ cx: b.xL + CW, cy: b.cy });
+  });
+
+  it('branched below, starts at the element’s column one row down', () => {
+    expect(ghostAt(b, 'below', 'fb')).toEqual({ cx: b.xL + CW, cy: b.cy + CH });
+  });
+
+  it('never straddles the boundary the way a one-cell element does', () => {
+    const box = elementShape('fb', ghostAt(b, 'right', 'fb').cx, b.cy).paths[0];
+    const left = Number(box.match(/^M(-?[\d.]+)/)![1]);
+    expect(left).toBeGreaterThanOrEqual(b.xR);
+    expect(ghostAt(b, 'right', 'no').cx).toBe(b.xR);
+  });
+
+  it('in a slot, fills the two cells from the slot’s left edge', () => {
+    const { hits: open } = layoutOf(ser(el('no', 'A')));
+    const slot = slotAt(open, []);
+    expect(ghostAt(slot, 'right', 'fb')).toEqual({ cx: slot.xL + CW, cy: slot.cy });
   });
 });
 

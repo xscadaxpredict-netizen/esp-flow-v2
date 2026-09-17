@@ -66,7 +66,7 @@ export function LadderCanvas() {
   const ghost =
     previewType && hoveredHit && hoverAnswer?.ok
       ? (() => {
-          const at = ghostAt(hoveredHit, previewMode === 'branch' ? 'below' : zone);
+          const at = ghostAt(hoveredHit, previewMode === 'branch' ? 'below' : zone, previewType);
           return { ...at, shape: elementShape(previewType, at.cx, at.cy) };
         })()
       : null;
@@ -238,7 +238,9 @@ export function LadderCanvas() {
                   height={hit.h}
                   fill={hovered && !refusedHere ? 'var(--accs)' : 'transparent'}
                   stroke={stroke}
-                  strokeOpacity={hovered ? 1 : 0.45}
+                  // 0.75 keeps an accepting outline at 3:1 against the canvas in both
+                  // themes. At 0.45 it read about 2:1 and vanished into the grid lines.
+                  strokeOpacity={hovered ? 1 : 0.75}
                   strokeDasharray="3 2"
                   className={`${styles.hit} ${cursor}`}
                   data-accepts={preview ? String(open) : undefined}

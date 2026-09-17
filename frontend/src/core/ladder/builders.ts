@@ -26,9 +26,12 @@ export const par = (...levels: SeriesNode[]): ParallelNode => ({ t: 'par', kids:
  * A freshly placed element. Function blocks arrive as a TON instance because
  * that is the overwhelmingly common case; the type is changed in Properties.
  */
+/** Cells a new element of this type occupies. A function block is two wide. */
+export const spanOf = (type: ElementType): number => (type === 'fb' ? 2 : 1);
+
 export const newElement = (type: ElementType, netIndex: number): LadderElement =>
   type === 'fb'
-    ? el('fb', `Timer${netIndex + 1}`, '', { fb: 'TON', pt: 'T#5s', span: 2 })
+    ? el('fb', `Timer${netIndex + 1}`, '', { fb: 'TON', pt: 'T#5s', span: spanOf('fb') })
     : el(type);
 
 /** An empty network, ready for its first element. */

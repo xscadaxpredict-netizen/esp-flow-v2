@@ -45,11 +45,13 @@
   cursor: not-allowed;
 }
 
-/* The element about to be placed, drawn where it will go. Faint enough to read
-   as a promise rather than a change, and never in the way of the click. */
+/* The element about to be placed, drawn where it will go. Accent-coloured and
+   lighter than a placed element so it reads as a promise rather than a change,
+   but at 0.75 it still clears 3:1 against the canvas in both themes; at 0.5 it
+   did not. Never in the way of the click. */
 .ghost {
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 .insertBtn {
