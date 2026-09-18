@@ -22,6 +22,8 @@ Deletion runs the same rules backwards: remove the element, drop a level left em
 
 After a deletion the selection follows the neighbour on the left — the one on the right when the deleted element was first in its line, that line's trailing slot when no element is left beside it, and the rung's own slot when pruning carried that line away. An output is an element like any other, so deleting one lands on the contact beside it.
 
+Where you point decides what a click means, as it does in ISPSoft. With an element tool armed, the lower band of a cell — below the glyph — branches, and either side of it inserts in series, before or after. The new element takes the armed tool's type in both cases, so branching needs no separate armed mode. The toolbar's branch command remains and overrides the pointer when used. With no tool armed, a click anywhere in a cell simply selects it.
+
 Constraints — not rules of the shape, but what the editor holds fixed or refuses:
 
 - A function block occupies two cells and cannot be branched.

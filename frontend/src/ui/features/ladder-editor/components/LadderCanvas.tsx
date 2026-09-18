@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { layoutLadder, type Hit } from '../../../../core/ladder/layout';
+import type { Zone } from '../../../../core/ladder/legality';
+import { layoutLadder, zoneAt, type Hit } from '../../../../core/ladder/layout';
 import { useLadderStore } from '../../../../services/store/useLadderStore';
 import { useUIStore } from '../../../../services/store/useUIStore';
 import styles from './LadderCanvas.module.css';
@@ -12,7 +13,7 @@ import styles from './LadderCanvas.module.css';
  * Nothing here knows how a branch is shaped; that lives in the domain layer.
  */
 export function LadderCanvas() {
-  const { networks, selection, values, branchArm, activeTool, cellClick, setHoverSide, addNetwork } =
+  const { networks, selection, values, branchArm, activeTool, cellClick, setHoverZone, addNetwork } =
     useLadderStore();
   const mode = useUIStore((s) => s.mode);
   const showGrid = useUIStore((s) => s.showGrid);
@@ -20,7 +21,7 @@ export function LadderCanvas() {
   const zoom = useUIStore((s) => s.zoom);
 
   const [hoverKey, setHoverKey] = useState<string | null>(null);
-  const [hoverSideLocal, setHoverSideLocal] = useState<'left' | 'right'>('right');
+  const [zone, setZone] = useState<Zone>('right');
 
   const online = mode === 'online';
   const layout = useMemo(
@@ -30,13 +31,25 @@ export function LadderCanvas() {
 
   const armed = !!branchArm;
 
+  /**
+   * The pointer's position inside a cell is what decides the shape, so it is
+   * tracked as it moves rather than read at the click.
+   *
+   * The rect is drawn in SVG units and displayed at the zoom scale, so the
+   * offset is converted back to a fraction before `zoneAt` sees it. Pixels
+   * would give the wrong band at any zoom but 100%.
+   */
   const onHitMove = (hit: Hit) => (e: React.MouseEvent) => {
-    if (!hit.insertable) return;
+    if (!hit.insertable && !hit.branchable) return;
     const box = (e.currentTarget as SVGRectElement).getBoundingClientRect();
-    const side = e.clientX - box.left < box.width / 2 ? 'left' : 'right';
-    if (side !== hoverSideLocal) {
-      setHoverSideLocal(side);
-      setHoverSide(side);
+    const next = zoneAt(
+      hit,
+      ((e.clientX - box.left) / box.width) * hit.w,
+      ((e.clientY - box.top) / box.height) * hit.h,
+    );
+    if (next !== zone) {
+      setZone(next);
+      setHoverZone(next);
     }
   };
 
@@ -162,6 +175,11 @@ export function LadderCanvas() {
           {/* Hit layer last so it sits above everything and takes the clicks. */}
           {layout.hits.map((hit) => {
             const hovered = hoverKey === hit.key;
+            // What this click would do, which is the pointer's position unless a
+            // branch is armed from the toolbar — that overrides position.
+            const willBranch = hit.branchable && (armed || (!!activeTool && zone === 'below'));
+            const willInsert = hovered && !!activeTool && !willBranch && hit.insertable;
+
             return (
               <g key={hit.key}>
                 <rect
@@ -169,10 +187,10 @@ export function LadderCanvas() {
                   y={hit.y}
                   width={hit.w}
                   height={hit.h}
-                  fill={hovered ? (armed && hit.branchable ? 'var(--accs)' : 'var(--accs)') : 'transparent'}
+                  fill={hovered ? 'var(--accs)' : 'transparent'}
                   stroke={hovered && (activeTool || armed) ? 'var(--acc)' : 'none'}
                   strokeDasharray="3 2"
-                  className={styles.hit}
+                  className={`${styles.hit} ${hovered && willBranch ? styles.below : ''}`}
                   onMouseEnter={() => setHoverKey(hit.key)}
                   onMouseLeave={() => setHoverKey((k) => (k === hit.key ? null : k))}
                   onMouseMove={onHitMove(hit)}
@@ -180,8 +198,8 @@ export function LadderCanvas() {
                     cellClick(hit.n, hit.kind, hit.path ?? [])
                   }
                 />
-                {/* When a branch is armed, show where the new level will attach. */}
-                {hovered && armed && hit.branchable && (
+                {/* Pointing below an element attaches a new level under it. */}
+                {hovered && willBranch && (
                   <path
                     d={`M${hit.x + hit.w / 2} ${hit.y + hit.h - 6}v10 M${hit.x + hit.w / 2 - 7} ${hit.y + hit.h + 4}l7 7 7-7`}
                     fill="none"
@@ -189,12 +207,12 @@ export function LadderCanvas() {
                     strokeWidth={1.6}
                   />
                 )}
-                {/* When a tool is armed, show which side the element will land on. */}
-                {hovered && !!activeTool && hit.insertable && (
+                {/* Pointing at either side inserts there, in series. */}
+                {willInsert && (
                   <line
-                    x1={hoverSideLocal === 'left' ? hit.x + 2 : hit.x + hit.w - 2}
+                    x1={zone === 'left' ? hit.x + 2 : hit.x + hit.w - 2}
                     y1={hit.y + 6}
-                    x2={hoverSideLocal === 'left' ? hit.x + 2 : hit.x + hit.w - 2}
+                    x2={zone === 'left' ? hit.x + 2 : hit.x + hit.w - 2}
                     y2={hit.y + hit.h - 6}
                     stroke="var(--acc)"
                     strokeWidth={2}

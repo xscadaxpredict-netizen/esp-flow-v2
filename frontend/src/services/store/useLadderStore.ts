@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { ElementType } from '../../core/models/ladderNode';
 import type { Network } from '../../core/models/network';
-import type { InsertSide, Selection } from '../../core/models/selection';
+import type { Selection } from '../../core/models/selection';
 import type { ValueMap } from '../../core/ladder/evaluate';
 import {
   addNetwork as addNetworkOp,
@@ -16,6 +16,7 @@ import {
   setNetworkComment as setCommentOp,
   type MutationResult,
 } from '../../core/ladder/mutations';
+import type { Zone } from '../../core/ladder/legality';
 import { elementAt } from '../../core/ladder/path';
 import { checkProgram } from '../../core/rules/structural';
 import { SEED_NETWORKS, SEED_VALUES } from '../../core/data/seed';
@@ -31,8 +32,14 @@ interface LadderState {
   branchArm: { type: ElementType } | null;
   /** The element tool armed on the toolbar, if any. */
   activeTool: ElementType | null;
-  /** Which half of an element the pointer is over, deciding insertion side. */
-  hoverSide: InsertSide;
+  /**
+   * Where the pointer sits within an element, which is what decides the shape.
+   *
+   * ISPSoft has one tool and lets position choose: right inserts after, left
+   * inserts before, below connects in parallel. So branching needs no armed
+   * mode — it is a place you point at, not a state you enter.
+   */
+  hoverZone: Zone;
   /** Live values during monitoring. Seeded until the device bridge exists. */
   values: ValueMap;
 
@@ -41,7 +48,7 @@ interface LadderState {
 
   select: (sel: Selection | null) => void;
   setActiveTool: (t: ElementType | null) => void;
-  setHoverSide: (s: InsertSide) => void;
+  setHoverZone: (z: Zone) => void;
   armBranch: () => void;
   cancelArm: () => void;
 
@@ -87,13 +94,13 @@ export const useLadderStore = create<LadderState>((set, get) => {
     selection: { n: 0, kind: 'cell', path: [1] },
     branchArm: null,
     activeTool: null,
-    hoverSide: 'right',
+    hoverZone: 'right',
     values: SEED_VALUES,
     past: [],
     future: [],
 
     select: (selection) => set({ selection }),
-    setHoverSide: (hoverSide) => set({ hoverSide }),
+    setHoverZone: (hoverZone) => set({ hoverZone }),
 
     setActiveTool: (activeTool) => {
       set({ activeTool, branchArm: null });
@@ -129,7 +136,7 @@ export const useLadderStore = create<LadderState>((set, get) => {
     },
 
     cellClick: (n, kind, arg) => {
-      const { activeTool, branchArm, hoverSide, selection } = get();
+      const { activeTool, branchArm, hoverZone, selection } = get();
       const nets = get().networks;
 
       const path = arg;
@@ -154,7 +161,14 @@ export const useLadderStore = create<LadderState>((set, get) => {
         return;
       }
       if (activeTool) {
-        apply(placeAt(nets, n, path, hoverSide, activeTool, selection));
+        // Position decides the shape. Below an element branches; either side of
+        // it inserts in series. The armed tool supplies the new element's type
+        // in both cases, so branching needs no second step.
+        apply(
+          hoverZone === 'below'
+            ? branchAt(nets, n, path, activeTool, selection)
+            : placeAt(nets, n, path, hoverZone, activeTool, selection),
+        );
         return;
       }
       set({ selection: { n, kind: 'cell', path } });

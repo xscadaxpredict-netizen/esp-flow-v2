@@ -9,7 +9,7 @@ import {
 } from '../models/ladderNode';
 import type { Network } from '../models/network';
 import type { InsertSide, Selection } from '../models/selection';
-import { el, newElement, newNetwork, par, ser } from './builders';
+import { newElement, newNetwork, par, ser } from './builders';
 import {
   insertIndex,
   NO_APPEND_POINT,
@@ -178,7 +178,7 @@ export function branchAt(
     const block = nodeAt(net.body, parPath);
     if (block && block.t === 'par') {
       const w = width(block);
-      (block as ParallelNode).kids.splice(lvl + 1, 0, ser(el(armType)));
+      (block as ParallelNode).kids.splice(lvl + 1, 0, ser(newElement(armType, n)));
       return {
         networks,
         selection: { n, kind: 'cell', path: parPath.concat(lvl + 1, 0) },
@@ -189,7 +189,7 @@ export function branchAt(
   }
 
   const span = width(target);
-  owner.kids[idx] = par(ser(target), ser(el(armType)));
+  owner.kids[idx] = par(ser(target), ser(newElement(armType, n)));
   return {
     networks,
     selection: { n, kind: 'cell', path: ppath.concat(idx, 1, 0) },
