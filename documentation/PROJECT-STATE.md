@@ -1,6 +1,6 @@
 # ESP-Flow — Project State
 
-**As of 2026-09-15.** Written as a handoff so a new session can continue without re-deriving
+**As of 2026-09-16.** Written as a handoff so a new session can continue without re-deriving
 context. Read [CLAUDE.md](claude/context%20window%20memory/CLAUDE.md) first for the hard rules; this document covers what
 exists, what was decided and why, what is verified, and what is still open.
 
@@ -39,6 +39,8 @@ Do not relitigate these without new information. Each was chosen deliberately.
 | Minimum viewport | **980×640** | The README's stricter figure, over the Layout Guide's 1440×900. |
 | Versioning | **One product version in lockstep**, root `VERSION` is the source of truth | Browser, Python compiler and ESP32 runtime must agree on diagnostic codes and generated C++; separate versions would need a compatibility table. `0.x` until compile-and-flash works. |
 | Ladder canvas geometry | **ISPSoft wins over the prototype** | Decided 2026-09-12. Outputs sit where their logic ends; no right rail. The prototype still governs every other region. |
+| Backend scope | **Standalone — ESP-Flow owns its own backend** | Decided 2026-09-16. Project creation and configuration happen inside ESP-Flow. The launcher authenticates the user and opens the app; it is not a project owner and holds no ESP-Flow data. |
+| Persistence | **None in the browser — wait for the backend** | Decided 2026-09-16. A browser-local stopgap would model a project twice and be thrown away. The project model is designed once, with the database. |
 
 ## 3. What the frontend contains
 
@@ -187,9 +189,10 @@ Each is a considered choice, not an oversight. Revisit if the user disagrees.
 
 ## 7. Gaps, in priority order
 
-1. **Nothing persists.** Networks come from the seed data every time the app loads, so a page
-   reload throws away whatever was drawn. `io/storage/` is an empty stub. Decide between a local
-   browser save as a stopgap and waiting for the backend.
+1. **Nothing persists — deliberately.** Networks come from the seed data every time the app
+   loads, so a page reload throws away whatever was drawn. `io/storage/` stays an empty stub.
+   Decided 2026-09-16: persistence waits for the backend, where the project model is designed
+   once and saved to the database. **Do not add a browser-local save.**
 2. **Test coverage stops at the domain layer.** Vitest landed 2026-09-12 and now holds 124 cases
    over `core/ladder/`, `core/rules/`, the undo stack and the live structural diagnostics, each citing the rule it protects. Their
    bite was checked by breaking rule 1 and rule 5 on purpose and confirming the right tests
@@ -217,13 +220,14 @@ Each is a considered choice, not an oversight. Revisit if the user disagrees.
 
 These block backend work. They were asked and are still outstanding.
 
-1. **Is the backend a standalone Django project, or an app inside an existing platform
-   backend?** `fleet-core` and `esp-flow-studio` sit beside `esp-flow` on `D:\xpredict_softwares\`.
-   Neither has been examined — access was scoped to `esp-flow`.
-2. **How does auth arrive from the launcher?** A JWT or session that DRF validates, or does
-   ESP-Flow authenticate independently?
-3. **Does ESP-Flow's data hang off a platform-level project entity** shared with FUXA and BI,
-   and if so what is the contract? This decides the Django model roots.
+1. ~~Standalone Django project, or an app inside a platform backend?~~ **Answered 2026-09-16:
+   standalone.** ESP-Flow has its own backend, and projects are created and configured inside the
+   app, so the Django model roots are ESP-Flow's own.
+2. **How does auth arrive from the launcher?** Still open, and now the only launcher contract
+   that matters. The launcher logs the user in and opens the app — does it hand over a JWT or a
+   session cookie that ESP-Flow's DRF validates, or does ESP-Flow authenticate independently?
+3. ~~Does ESP-Flow's data hang off a platform-level project entity?~~ **Answered 2026-09-16: no.**
+   The project entity belongs to ESP-Flow.
 4. **Database** — SQLite to start, or Postgres/MySQL from day one? (`soft-plc web ide.md`
    mentions MySQL.)
 5. **Where do PlatformIO builds run** — same host as Django, or a separate worker? Decides
@@ -239,13 +243,14 @@ Smaller, also open:
 ## 9. Suggested next steps
 
 If continuing the frontend: outputs inside the rung are built (rules 6 and 7), so the canvas
-matches ISPSoft on placement. Three candidates, in order: decide persistence (§7.1); show legal
-positions before a click rather than refusing after it; let pointer position decide series or
-parallel so branching needs no arming step. MPS comes after those.
+matches ISPSoft on placement. Persistence is settled (§7.1), leaving two, taken as one piece of
+work: show legal positions before a click rather than refusing after it, and let pointer position
+decide series or parallel so branching needs no arming step. MPS comes after those.
 
-If moving to the backend: answers to §8 questions 1–3 are needed first. With those, the order
-is Django project skeleton → diagnostic registry + generator → project/POU models → PLCopen
-XML → codegen → PlatformIO orchestration.
+If moving to the backend: the scope question is settled — a standalone Django project owning its
+own projects. Auth (§8.2), the database choice (§8.4) and where PlatformIO builds run (§8.5) are
+still needed. The order is Django project skeleton → diagnostic registry + generator →
+project/POU models → PLCopen XML → codegen → PlatformIO orchestration.
 
 If moving to firmware: the C++ IEC runtime library is independent of the open questions and
 could start now — process image, four-phase scan cycle, and the standard function blocks from
