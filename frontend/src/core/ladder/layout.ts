@@ -1,4 +1,10 @@
-import { isCoil, type LadderElement, type NodePath, type SeriesNode } from '../models/ladderNode';
+import {
+  isCoil,
+  type ElementType,
+  type LadderElement,
+  type NodePath,
+  type SeriesNode,
+} from '../models/ladderNode';
 import type { Network } from '../models/network';
 import type { Selection } from '../models/selection';
 import { conducts, passes, type ValueMap } from './evaluate';
@@ -32,6 +38,39 @@ const ELEM_HALF = 11; // contact half-width, where wires meet the element
 const COIL_HALF = 32;
 
 const tok = (name: string) => `var(--${name})`;
+
+/**
+ * THE SHAPE OF AN ELEMENT, AND NOTHING ELSE.
+ *
+ * Path data for a contact, coil or function block centred on (cx, cy), plus the
+ * letter drawn inside it where there is one. The canvas draws real elements from
+ * this and the placement preview draws its ghost from it too, so a ghost can
+ * never look different from the element it promises.
+ */
+export interface ElementShape {
+  paths: string[];
+  letter?: string;
+}
+
+export const elementShape = (type: ElementType, cx: number, cy: number): ElementShape => {
+  if (type === 'fb') {
+    // Two cells wide less the 20 of air each side, as the block itself is drawn.
+    const half = CW - 20;
+    return { paths: [`M${cx - half} ${cy - 22}h${half * 2}v92h${-half * 2}z`] };
+  }
+  if (isCoil(type)) {
+    return {
+      paths: [
+        `M${cx - 16} ${cy - 14} A16 14 0 0 0 ${cx - 16} ${cy + 14}`,
+        `M${cx + 16} ${cy - 14} A16 14 0 0 1 ${cx + 16} ${cy + 14}`,
+      ],
+      letter: type === 'set' ? 'S' : type === 'reset' ? 'R' : undefined,
+    };
+  }
+  const paths = [`M${cx - ELEM_HALF} ${cy - 14}v28`, `M${cx + ELEM_HALF} ${cy - 14}v28`];
+  if (type === 'nc') paths.push(`M${cx - 15} ${cy + 16}L${cx + 15} ${cy - 16}`);
+  return { paths, letter: type === 'p' ? 'P' : type === 'n' ? 'N' : undefined };
+};
 
 export interface Wire {
   x1: number;
@@ -92,6 +131,12 @@ export interface Hit extends Rect {
   branchable: boolean;
   /** An element may be inserted here, with a left/right side. */
   insertable: boolean;
+  /** Left column boundary of the position — where an insert-before lands. */
+  xL: number;
+  /** Right column boundary — where an insert-after lands. */
+  xR: number;
+  /** The line's centre, which is where the element itself is drawn. */
+  cy: number;
 }
 
 /**
@@ -207,26 +252,10 @@ export function layoutLadder({
    * red when the element carries a diagnostic and otherwise follows power flow.
    */
   const drawElem = (el: LadderElement, cx: number, cy: number, ec: string) => {
-    if (el.type === 'coil' || el.type === 'set' || el.type === 'reset') {
-      glyphs.push({ d: `M${cx - 16} ${cy - 14} A16 14 0 0 0 ${cx - 16} ${cy + 14}`, stroke: ec, sw: 2 });
-      glyphs.push({ d: `M${cx + 16} ${cy - 14} A16 14 0 0 1 ${cx + 16} ${cy + 14}`, stroke: ec, sw: 2 });
-      if (el.type !== 'coil') {
-        txt(cx, cy + 4, el.type === 'set' ? 'S' : 'R', { anchor: 'middle', fw: '600', fill: ec, mono: true });
-      }
-    } else {
-      glyphs.push({ d: `M${cx - ELEM_HALF} ${cy - 14}v28`, stroke: ec, sw: 2 });
-      glyphs.push({ d: `M${cx + ELEM_HALF} ${cy - 14}v28`, stroke: ec, sw: 2 });
-      if (el.type === 'nc') {
-        glyphs.push({ d: `M${cx - 15} ${cy + 16}L${cx + 15} ${cy - 16}`, stroke: ec, sw: 2 });
-      }
-      if (el.type === 'p' || el.type === 'n') {
-        txt(cx, cy + 4, el.type === 'p' ? 'P' : 'N', {
-          anchor: 'middle',
-          fw: '600',
-          fill: ec,
-          mono: true,
-        });
-      }
+    const shape = elementShape(el.type, cx, cy);
+    shape.paths.forEach((d) => glyphs.push({ d, stroke: ec, sw: 2 }));
+    if (shape.letter) {
+      txt(cx, cy + 4, shape.letter, { anchor: 'middle', fw: '600', fill: ec, mono: true });
     }
 
     txt(cx, cy - 20, el.sym || '???', { anchor: 'middle', fill: el.sym ? tok('lab') : tok('tx3') });
@@ -268,7 +297,7 @@ export function layoutLadder({
 
     const occupiedX = new Set<number>();
     const occupiedXY = new Set<string>();
-    const slotCands: { rect: Rect; key: string; path: NodePath }[] = [];
+    const slotCands: { rect: Rect; key: string; path: NodePath; xL: number; cy: number }[] = [];
 
     /**
      * Walk one series line. Returns whether power reaches its right edge.
@@ -362,7 +391,18 @@ export function layoutLadder({
           const rect = { x: boxL - 6, y: yy - 30, w: boxR - boxL + 12, h: 104 };
           occupiedX.add(Math.round(nodeX(c) + 8));
           if (isSel) selectionRing = ring(rect);
-          hits.push({ ...rect, key, n: ni, kind: 'cell', path: kp, branchable: false, insertable: true });
+          hits.push({
+            ...rect,
+            key,
+            n: ni,
+            kind: 'cell',
+            path: kp,
+            branchable: false,
+            insertable: true,
+            xL: nodeX(c),
+            xR: nodeX(c + span),
+            cy: yy,
+          });
 
           live = false;
           prevX = boxR + 16;
@@ -376,7 +416,18 @@ export function layoutLadder({
           const rect = { x: nodeX(c) + 8, y: yy - 32, w: CW - 16, h: 70 };
           occupiedX.add(Math.round(rect.x));
           if (isSel) selectionRing = ring(rect);
-          hits.push({ ...rect, key, n: ni, kind: 'cell', path: kp, branchable: true, insertable: true });
+          hits.push({
+            ...rect,
+            key,
+            n: ni,
+            kind: 'cell',
+            path: kp,
+            branchable: true,
+            insertable: true,
+            xL: nodeX(c),
+            xR: nodeX(c + span),
+            cy: yy,
+          });
         }
 
         c += span;
@@ -400,7 +451,13 @@ export function layoutLadder({
         selectionRing = ring(slotRect);
         caret = { x: slotRect.x + 5, y1: slotRect.y + 6, y2: slotRect.y + slotRect.h - 6 };
       }
-      slotCands.push({ rect: slotRect, key: `${ni}:slot:${path.join('.')}`, path: path.slice() });
+      slotCands.push({
+        rect: slotRect,
+        key: `${ni}:slot:${path.join('.')}`,
+        path: path.slice(),
+        xL: nodeX(col + allotW),
+        cy: yy,
+      });
 
       return live;
     };
@@ -445,6 +502,9 @@ export function layoutLadder({
           path: sc.path,
           branchable: false,
           insertable: false,
+          xL: sc.xL,
+          xR: sc.xL + CW,
+          cy: sc.cy,
         });
       }
     });

@@ -24,6 +24,8 @@ After a deletion the selection follows the neighbour on the left — the one on 
 
 Where you point decides what a click means, as it does in ISPSoft. With an element tool armed, the lower band of a cell — below the glyph — branches, and either side of it inserts in series, before or after. The new element takes the armed tool's type in both cases, so branching needs no separate armed mode. The toolbar's branch command remains and overrides the pointer when used. With no tool armed, a click anywhere in a cell simply selects it.
 
+The editor shows what a click would do before it happens. While a tool is armed, every position that would accept it is outlined; hovering one that would draws a faint ghost of the element where it goes in, and hovering one that would refuse shows the reason in the status bar and a not-allowed cursor. The preview and the click ask the same legality question of the same tree, so an outlined position is always accepted and a dark one always refused. There is no preview in online mode, where nothing can be edited.
+
 Constraints — not rules of the shape, but what the editor holds fixed or refuses:
 
 - A function block occupies two cells and cannot be branched.
