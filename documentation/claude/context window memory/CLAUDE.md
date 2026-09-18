@@ -4,9 +4,10 @@ A browser-based **IEC 61131-3 Ladder Diagram IDE for ESP32**, modelled on Delta'
 The user writes ladder logic, it transpiles to C++, PlatformIO builds firmware, the browser
 flashes it over Web Serial, and the running controller is monitored live.
 
-ESP-Flow is **not standalone**. It launches from an in-house platform app launcher alongside
-FUXA (SCADA), Process Integrator, and BI. The user arrives already authenticated with a
-project open — there is no login screen and no marketing surface.
+ESP-Flow launches from an in-house platform app launcher alongside FUXA (SCADA), Process
+Integrator, and BI. The user arrives already authenticated — there is no login screen and no
+marketing surface. Beyond sign-in it is **standalone**: it has its own backend, and projects are
+created and configured inside ESP-Flow, not handed over by the launcher (decided 2026-09-16).
 
 New to the domain? Read [documentation/reference/iec-61131-3-primer.md](documentation/reference/iec-61131-3-primer.md)
 first. It explains scan cycles, POUs, variables vs. symbols vs. devices, and tasks from zero.
@@ -91,6 +92,13 @@ and implemented in `frontend/src/core/ladder/`.
   terminates (rule 7). A coil is drawn where its own logic ends, not in a shared column —
   **ISPSoft wins over the prototype on ladder canvas geometry**, decided 2026-09-12. A coil may
   only be placed where power can reach the end of the rung (`canTerminate` in `shape.ts`).
+- **Legality has exactly one home: `legality.ts`.** `verdict()` answers "may this go here?" and
+  returns the status-bar sentence when not. Mutations ask it before editing, and the canvas
+  preview (`preview.ts`) asks it before the click, so the two cannot disagree —
+  `previewAgreement.test.ts` clicks every hit and zone to prove it. Never re-check a rule inline.
+- **Pointer position decides the shape**, as in ISPSoft: with a tool armed, a cell's lower band
+  (`BRANCH_BAND`, 24 of 70) branches and either side inserts. `zoneAt` converts the pointer to a
+  fraction of the cell first, so it holds at any zoom.
 - **Slot resolution: shallowest path wins.** Trailing slots collide when a block is the last
   child of its parent. Sort candidates by path length ascending before the hit dedupe, so the
   click means "after the block", not "inside its first level" (`layout.ts`).
@@ -164,7 +172,7 @@ cd frontend && npm run dev        # Vite dev server on :5173
 cd frontend && npm run typecheck  # tsc --noEmit
 cd frontend && npm run lint       # eslint, expected 0 problems
 cd frontend && npm run build      # tsc -b && vite build
-cd frontend && npm test           # vitest run, 124 tests
+cd frontend && npm test           # vitest run, 248 tests
 ```
 
 `.claude/launch.json` defines the `esp-flow-frontend` preview server for the Browser pane.
@@ -181,7 +189,8 @@ Do not report a UI change as done on a typecheck alone:
 1. Drive the running app in the browser and confirm the behaviour.
 2. For ladder changes, exercise the rules: place, branch, insert beside a branch to widen it,
    delete to collapse a one-level parallel.
-3. Check both themes and both modes (`edit` / `online`).
+3. Check both themes and both modes (`edit` / `online`), and a zoom other than 100% — the pointer
+   zones and the preview both depend on converting pointer positions correctly.
 4. Resize to **980×640** — every region must remain present with no horizontal scrollbar.
 5. Compare side by side with the prototype: open `ESP-Flow IDE.dc.html` directly in a browser.
 
