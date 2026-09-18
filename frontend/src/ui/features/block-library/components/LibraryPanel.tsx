@@ -1,4 +1,5 @@
 import { LIBRARY } from '../../../../core/data/blockLibrary';
+import { FUNCTION_BLOCKS_ENABLED, FUNCTION_BLOCKS_UNAVAILABLE } from '../../../../core/features';
 import { useProjectStore } from '../../../../services/store/useProjectStore';
 import { useUIStore } from '../../../../services/store/useUIStore';
 import { Panel, PanelBody, PanelHeader } from '../../../shared/components/Panel';
@@ -6,8 +7,13 @@ import { Icon } from '../../../shared/icons/Icon';
 import styles from './LibraryPanel.module.css';
 
 /**
- * The block catalogue, in three groups. Items drag onto the canvas; the drop
- * indicator is drawn by the ladder canvas, which owns the geometry.
+ * The block catalogue, in three groups.
+ *
+ * Every item here is a function block, and function blocks are switched off
+ * while they are redesigned — see core/features.ts. Items were draggable, but
+ * the canvas never had a drop handler, so a drag promised a placement that
+ * could not happen. With the switch off they cannot be dragged, and a click
+ * says why. The catalogue stays visible because it is part of the design.
  */
 export function LibraryPanel() {
   const libOpen = useUIStore((s) => s.libOpen);
@@ -44,15 +50,25 @@ export function LibraryPanel() {
                   group.items.map((item) => (
                     <div
                       key={item.label}
-                      className={styles.item}
-                      draggable
+                      className={
+                        FUNCTION_BLOCKS_ENABLED ? styles.item : `${styles.item} ${styles.unavailable}`
+                      }
+                      draggable={FUNCTION_BLOCKS_ENABLED}
+                      aria-disabled={!FUNCTION_BLOCKS_ENABLED || undefined}
                       onDragStart={(e) => {
                         e.dataTransfer.setData('text/plain', item.label);
                         e.dataTransfer.effectAllowed = 'copy';
                         setStatus(`Dragging ${item.label} — drop it on a rung`);
                       }}
                       onDragEnd={() => setStatus('Ready')}
-                      title={`${item.label} — ${item.tag}`}
+                      onClick={() => {
+                        if (!FUNCTION_BLOCKS_ENABLED) setStatus(FUNCTION_BLOCKS_UNAVAILABLE);
+                      }}
+                      title={
+                        FUNCTION_BLOCKS_ENABLED
+                          ? `${item.label} — ${item.tag}`
+                          : `${item.label} — ${item.tag}. ${FUNCTION_BLOCKS_UNAVAILABLE}`
+                      }
                     >
                       <span className={group.id === 'esp' ? styles.itemIconEsp : styles.itemIcon}>
                         <Icon name="fb" size={12} strokeWidth={1.3} />

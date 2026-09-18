@@ -29,6 +29,7 @@ The editor shows what a click would do before it happens. While a tool is armed,
 Constraints — not rules of the shape, but what the editor holds fixed or refuses:
 
 - A function block occupies two cells and cannot be branched.
+- Function blocks are switched off in the editor (2026-09-18, core/features.ts) while they are redesigned to follow ISPSoft: En and Eno carrying the rung, a pin per declared input and output, and a height that grows with the pins. Nothing can create one; the model and the rules for them still hold.
 - Branching a coil requires a coil, and branching a contact requires a contact — a new leg must terminate exactly as its siblings do.
 - A program keeps at least one network; the last one cannot be deleted.
 - A rung is never drawn narrower than six columns.
