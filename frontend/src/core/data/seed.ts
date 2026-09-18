@@ -33,11 +33,13 @@ export const SEED_NETWORKS: Network[] = [
       el('coil', 'ConveyorMotor', '%QX0.1'),
     ),
   ),
+  // Carried a TON before function blocks were switched off (core/features.ts).
+  // The seed opens onto what the editor can build, so the dwell went with it.
   net(
-    '// Network 2 — 5 s dwell before drum release',
+    '// Network 2 — release the drum while the conveyor runs and the tank is full',
     ser(
       el('no', 'ConveyorMotor', '%QX0.1'),
-      el('fb', 'DelayTimer', '', { fb: 'TON', pt: 'T#5s', span: 2 }),
+      el('no', 'LevelSwitch', '%IX0.5'),
       el('set', 'DrumRelease', '%QX0.2'),
     ),
   ),
@@ -71,7 +73,6 @@ export const SEED_SYMBOLS: SymbolDecl[] = (
     ['VAR_OUTPUT', 'DrumRelease', '%QX0.2', 'BOOL', 'FALSE', 'Drum release solenoid'],
     ['VAR_OUTPUT', 'FillValve', '%QX0.3', 'BOOL', 'FALSE', 'Fill valve'],
     ['VAR', 'CycleRun', '%MX0.0', 'BOOL', 'FALSE', 'Cycle latch'],
-    ['VAR', 'DelayTimer', '', 'TON', '', 'Dwell before drum release'],
     ['VAR', 'CycleCount', '', 'DINT', '0', 'Completed bottles this shift'],
     ['VAR', 'MotorCurrent', '%IW3', 'INT', '0', 'CT clamp, 0–10 V'],
   ] as const

@@ -51,13 +51,14 @@
   transition: background var(--t-fast) linear;
 }
 
-.btn:hover:not(:disabled) {
+.btn:hover:not(:disabled):not([aria-disabled='true']) {
   background: var(--panel2);
   border-color: var(--bord);
   color: var(--tx);
 }
 
-.btn:disabled {
+.btn:disabled,
+.btn[aria-disabled='true'] {
   color: var(--dead);
   cursor: default;
 }

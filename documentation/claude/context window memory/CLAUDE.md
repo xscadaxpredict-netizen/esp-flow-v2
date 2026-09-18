@@ -95,6 +95,11 @@ and implemented in `frontend/src/core/ladder/`.
   child of its parent. Sort candidates by path length ascending before the hit dedupe, so the
   click means "after the block", not "inside its first level" (`layout.ts`).
 
+**Function blocks are switched off** — `FUNCTION_BLOCKS_ENABLED` in `core/features.ts`, since 2026-09-18.
+The drawable block was a hard-coded TON that did not follow ISPSoft. The element type, its layout
+and its tests remain; only creation is closed. Do not re-enable piecemeal — the redesign starts
+from a written proposal, as outputs-in-the-rung did.
+
 `core/ladder/layout.ts` is **pure geometry** — it takes networks and returns draw lists, emits
 colours as `var(--token)` strings, and imports nothing from React. Keep it that way: it is what
 makes the canvas component thin and the branching rules testable.

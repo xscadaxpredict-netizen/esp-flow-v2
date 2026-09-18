@@ -69,7 +69,10 @@ export function EditorLayout() {
     onChange: (v) => useUIStore.getState().setPanel('symH', v),
   });
 
-  const isLadder = tab?.kind === 'ld' || tab?.kind === 'fb';
+  // A function block tab used to open the ladder too — but there is only one
+  // ladder, Prog0's, so it showed and edited the program's networks under the
+  // block's name. Until each POU has networks of its own it says so instead.
+  const isLadder = tab?.kind === 'ld';
 
   return (
     <div className={styles.shell}>
@@ -104,6 +107,12 @@ export function EditorLayout() {
               )}
               <LadderCanvas />
             </>
+          ) : tab?.kind === 'fb' ? (
+            <EmptyState
+              icon="fb"
+              title="Function block editor"
+              detail="Not available yet. A function block needs its own symbol table and its own networks. It arrives with the function block redesign and the project model."
+            />
           ) : tab?.kind === 'st' ? (
             <EmptyState
               icon="st"

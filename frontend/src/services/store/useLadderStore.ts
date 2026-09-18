@@ -19,6 +19,7 @@ import {
 import type { Zone } from '../../core/ladder/legality';
 import { elementAt } from '../../core/ladder/path';
 import { checkProgram } from '../../core/rules/structural';
+import { FUNCTION_BLOCKS_ENABLED, FUNCTION_BLOCKS_UNAVAILABLE } from '../../core/features';
 import { SEED_NETWORKS, SEED_VALUES } from '../../core/data/seed';
 import { useCompileStore } from './useCompileStore';
 import { useUIStore } from './useUIStore';
@@ -103,6 +104,11 @@ export const useLadderStore = create<LadderState>((set, get) => {
     setHoverZone: (hoverZone) => set({ hoverZone }),
 
     setActiveTool: (activeTool) => {
+      // The toolbar button and F9 both arrive here, so one refusal covers them.
+      if (activeTool === 'fb' && !FUNCTION_BLOCKS_ENABLED) {
+        status(FUNCTION_BLOCKS_UNAVAILABLE);
+        return;
+      }
       set({ activeTool, branchArm: null });
       status(
         activeTool

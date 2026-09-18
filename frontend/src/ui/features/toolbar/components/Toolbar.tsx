@@ -1,3 +1,4 @@
+import { FUNCTION_BLOCKS_ENABLED } from '../../../../core/features';
 import { useCompileStore } from '../../../../services/store/useCompileStore';
 import { useLadderStore } from '../../../../services/store/useLadderStore';
 import { useUIStore } from '../../../../services/store/useUIStore';
@@ -66,13 +67,19 @@ function ToolbarButton({ item, groupId, index }: { item: ToolButton; groupId: st
             : false;
 
   const disabled = !!item.tool && mode === 'online';
-  const label = item.shortcut ? `${item.title} (${item.shortcut})` : item.title;
+  // Switched off rather than disabled: a disabled button fires no mouse events,
+  // so it could show neither its tooltip nor say why when clicked. This one
+  // looks unavailable, and a click reaches the store, which explains.
+  const unavailable = item.tool === 'fb' && !FUNCTION_BLOCKS_ENABLED;
+  const shortcut = item.shortcut ? `${item.title} (${item.shortcut})` : item.title;
+  const label = unavailable ? `${shortcut} — not available yet` : shortcut;
 
   return (
     <button
       type="button"
       className={armed ? `${styles.btn} ${styles.btnArmed}` : styles.btn}
       disabled={disabled}
+      aria-disabled={unavailable || undefined}
       onClick={() => {
         if (item.tool) setActiveTool(armed ? null : item.tool);
         else if (item.cmd) runCommand(item.cmd);

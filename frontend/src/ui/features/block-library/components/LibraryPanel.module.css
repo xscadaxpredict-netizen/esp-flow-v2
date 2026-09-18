@@ -57,6 +57,16 @@
   background: var(--accs);
 }
 
+/* Function blocks are switched off (core/features.ts). The item stays readable
+   but stops inviting a drag it cannot complete. */
+.unavailable,
+.unavailable:hover,
+.unavailable:active {
+  color: var(--tx3);
+  cursor: default;
+  background: transparent;
+}
+
 .itemIcon,
 .itemIconEsp {
   flex: none;
