@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="856" height="688" viewBox="0 0 856 688">
+<defs><pattern id="g" width="16" height="16" patternUnits="userSpaceOnUse">
+<path d="M16 0H0V16" fill="none" stroke="#191f27" stroke-width="1"/></pattern></defs>
+<rect width="856" height="688" fill="#0b0e12"/>
+<rect width="856" height="688" fill="url(#g)"/>
+<rect x="0" y="0" width="34" height="688" fill="#0e1216" stroke="none"/>
+<line x1="34" y1="0" x2="34" y2="688" stroke="#2a313a" stroke-width="1" stroke-linecap="square"/>
+<line x1="40" y1="14" x2="856" y2="14" stroke="#2a313a" stroke-width="1" stroke-linecap="square"/>
+<line x1="56" y1="70" x2="76" y2="70" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="76" y1="70" x2="76" y2="70" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="76" y1="70" x2="123" y2="70" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="145" y1="70" x2="192" y2="70" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="76" y1="148" x2="123" y2="148" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="145" y1="148" x2="192" y2="148" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="76" y1="70" x2="76" y2="148" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="192" y1="70" x2="192" y2="148" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="192" y1="70" x2="239" y2="70" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="261" y1="70" x2="334" y2="70" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="40" y1="206" x2="856" y2="206" stroke="#2a313a" stroke-width="1" stroke-linecap="square"/>
+<line x1="56" y1="262" x2="76" y2="262" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="76" y1="262" x2="123" y2="262" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="145" y1="262" x2="239" y2="262" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="261" y1="262" x2="334" y2="262" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="40" y1="320" x2="856" y2="320" stroke="#2a313a" stroke-width="1" stroke-linecap="square"/>
+<line x1="56" y1="376" x2="76" y2="376" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="76" y1="376" x2="123" y2="376" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="145" y1="376" x2="192" y2="376" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="192" y1="376" x2="239" y2="376" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="261" y1="376" x2="355" y2="376" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="377" y1="376" x2="450" y2="376" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="192" y1="454" x2="239" y2="454" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="261" y1="454" x2="334" y2="454" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="192" y1="376" x2="192" y2="454" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="40" y1="512" x2="856" y2="512" stroke="#2a313a" stroke-width="1" stroke-linecap="square"/>
+<line x1="56" y1="568" x2="76" y2="568" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="76" y1="568" x2="123" y2="568" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="145" y1="568" x2="192" y2="568" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="192" y1="568" x2="812" y2="568" stroke="#8e99a4" stroke-width="1.6" stroke-linecap="square"/>
+<line x1="56" y1="14" x2="56" y2="640" stroke="#8e99a4" stroke-width="2.4" stroke-linecap="square"/>
+<circle cx="76" cy="70" r="3.2" fill="#8e99a4"/>
+<circle cx="192" cy="70" r="3.2" fill="#8e99a4"/>
+<circle cx="192" cy="376" r="3.2" fill="#8e99a4"/>
+<path d="M123 56v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M145 56v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M123 134v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M145 134v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M239 56v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M261 56v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M235 86L265 54" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M350 56 A16 14 0 0 0 350 84" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M382 56 A16 14 0 0 1 382 84" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M123 248v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M145 248v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M239 248v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M261 248v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M350 248 A16 14 0 0 0 350 276" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M382 248 A16 14 0 0 1 382 276" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M123 362v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M145 362v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M239 362v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M261 362v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M355 362v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M377 362v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M351 392L381 360" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M466 362 A16 14 0 0 0 466 390" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M498 362 A16 14 0 0 1 498 390" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M239 440v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M261 440v28" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M350 440 A16 14 0 0 0 350 468" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M382 440 A16 14 0 0 1 382 468" fill="none" stroke="#8e99a4" stroke-width="2" stroke-linecap="round"/>
+<path d="M123 554v28" fill="none" stroke="#f0655c" stroke-width="2" stroke-linecap="round"/>
+<path d="M145 554v28" fill="none" stroke="#f0655c" stroke-width="2" stroke-linecap="round"/>
+<path d="M113 552l4 3 4-3 4 3 4-3 4 3 4-3" fill="none" stroke="#f0655c" stroke-width="1.2" stroke-linecap="round"/>
+<text x="56" y="32" fill="#6f9a80" font-size="11" font-weight="400" font-style="italic" text-anchor="start" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">// Network 1 — conveyor start / stop seal-in (latch)</text>
+<text x="24" y="74" fill="#6e7882" font-size="11" font-weight="400" text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">1</text>
+<text x="134" y="50" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">StartButton</text>
+<text x="134" y="98" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%IX0.0</text>
+<text x="134" y="128" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">ConveyorMotor</text>
+<text x="134" y="176" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%QX0.1</text>
+<text x="250" y="50" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">StopButton</text>
+<text x="250" y="98" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%IX0.1</text>
+<text x="366" y="50" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">ConveyorMotor</text>
+<text x="366" y="98" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%QX0.1</text>
+<text x="56" y="224" fill="#6f9a80" font-size="11" font-weight="400" font-style="italic" text-anchor="start" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">// Network 2 — release the drum while the conveyor runs and the tank is full</text>
+<text x="24" y="266" fill="#6e7882" font-size="11" font-weight="400" text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">2</text>
+<text x="134" y="242" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">ConveyorMotor</text>
+<text x="134" y="290" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%QX0.1</text>
+<text x="250" y="242" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">LevelSwitch</text>
+<text x="250" y="290" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%IX0.5</text>
+<text x="366" y="266" fill="#8e99a4" font-size="11" font-weight="600" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">S</text>
+<text x="366" y="242" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">DrumRelease</text>
+<text x="366" y="290" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%QX0.2</text>
+<text x="56" y="338" fill="#6f9a80" font-size="11" font-weight="400" font-style="italic" text-anchor="start" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">// Network 3 — one condition, two outputs with conditions of their own</text>
+<text x="24" y="380" fill="#6e7882" font-size="11" font-weight="400" text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">3</text>
+<text x="134" y="356" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">ConveyorMotor</text>
+<text x="134" y="404" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%QX0.1</text>
+<text x="250" y="356" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">LevelSwitch</text>
+<text x="250" y="404" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%IX0.5</text>
+<text x="366" y="356" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">StopButton</text>
+<text x="366" y="404" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%IX0.1</text>
+<text x="482" y="356" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">FillValve</text>
+<text x="482" y="404" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%QX0.3</text>
+<text x="250" y="458" fill="#8e99a4" font-size="11" font-weight="600" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">P</text>
+<text x="250" y="434" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">ResetBtn</text>
+<text x="250" y="482" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%IX0.3</text>
+<text x="366" y="458" fill="#8e99a4" font-size="11" font-weight="600" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">R</text>
+<text x="366" y="434" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">CycleRun</text>
+<text x="366" y="482" fill="#9aa5b1" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">%MX0.0</text>
+<text x="56" y="530" fill="#6f9a80" font-size="11" font-weight="400" font-style="italic" text-anchor="start" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">// Network 4 — TODO interlock with upstream filler</text>
+<text x="24" y="572" fill="#6e7882" font-size="11" font-weight="400" text-anchor="end" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">4</text>
+<text x="134" y="548" fill="#dde3ea" font-size="11" font-weight="400" text-anchor="middle" font-family="'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif">Motor2</text>
+<text x="134" y="596" fill="#f0655c" font-size="10" font-weight="400" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">—</text>
+<text x="206" y="558" fill="#6e7882" font-size="10" font-weight="400" text-anchor="start" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">no output</text>
+<text x="182" y="663" fill="#4b90d6" font-size="11" font-weight="600" text-anchor="middle" font-family="'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace">+ Insert network  (Ctrl+I)</text>
+<rect x="76" y="646" width="212" height="24" fill="rgba(75, 144, 214, 0.18)" stroke="#4b90d6"/>
+<rect x="84" y="38" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="84" y="116" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="200" y="38" width="100" height="70" fill="rgba(75, 144, 214, 0.18)" stroke="#4b90d6" stroke-opacity="1" stroke-dasharray="3 2"/>
+<line x1="298" y1="44" x2="298" y2="102" stroke="#4b90d6" stroke-width="2"/>
+<rect x="316" y="38" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="84" y="230" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="200" y="230" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="316" y="230" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="84" y="344" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="200" y="344" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="316" y="344" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="432" y="344" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="200" y="422" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="316" y="422" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="84" y="536" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<rect x="200" y="536" width="100" height="70" fill="none" stroke="#4b90d6" stroke-opacity="0.75" stroke-dasharray="3 2"/>
+<g opacity="0.75">
+<path d="M297 56v28" fill="none" stroke="#4b90d6" stroke-width="2" stroke-linecap="round"/>
+<path d="M319 56v28" fill="none" stroke="#4b90d6" stroke-width="2" stroke-linecap="round"/>
+<path d="M293 86L323 54" fill="none" stroke="#4b90d6" stroke-width="2" stroke-linecap="round"/>
+</g>
+</svg>
