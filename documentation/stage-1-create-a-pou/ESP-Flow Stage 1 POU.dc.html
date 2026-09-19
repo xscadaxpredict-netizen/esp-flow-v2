@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0c0f;font-family:'IBM Plex Sans',system-ui,sans-serif}
+a{color:#4b90d6}a:hover{color:#7fb4e6}
+</style>
+</helmet>
+
+<section style="display:flex;flex-direction:column;gap:26px;padding:34px 38px 60px">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="font:600 19px/1.2 'IBM Plex Sans',sans-serif;color:#e7edf4">Stage 1 — Create a POU</div>
+    <div style="font:400 12px/1.5 'IBM Plex Sans',sans-serif;color:#8d97a2;max-width:760px">Nine artboards against brief-pou-task-symbols.md §Stage 1. Every frame is 980×640 or fits inside it. Ladder canvases are the as-built pictures, not the prototype ladder. Errors are written beside the field; anything not available is shown and marked <em style="color:#e0a83c;font-style:normal">not yet</em>.</div>
+  </div>
+
+  <div id="1a" style="display:flex;flex-direction:column;gap:8px;width:980px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1a</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">Tree — Programs right-clicked</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2">Entry point. The folder menu does not exist today.</span>
+    </div>
+    <div style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--canv:#0b0e12;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--cmt:#6f9a80;--ink:#8e99a4;--dead:#454e58;--shadow:rgba(0,0,0,.55);--gutter:#0e1216;width:980px;height:640px;position:relative;overflow:hidden;background:var(--bg);border:1px solid var(--bord2);display:flex;flex-direction:column" data-screen-label="1a">
+      <div style="height:24px;flex:none;display:flex;align-items:center;padding:0 4px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">File</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Edit</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">View</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">PLC</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Tools</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Window</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Help</span>
+        <div style="flex:1"></div>
+        <span style="display:flex;align-items:center;gap:6px;height:17px;padding:0 7px;border:1px solid var(--bord2);color:var(--tx3);font:400 10px/1 'IBM Plex Mono',monospace">Command palette<span style="color:var(--tx3)">Ctrl+Shift+P</span></span>
+      </div>
+      <div style="height:44px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--panel);border-bottom:1px solid var(--bord)">
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 2h5l3 3v9H4z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 4h5l1.5 2H14v8H2z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M3 2h10v12H3zM6 2v4h4V2M5 10h6"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M3 7h7a3 3 0 110 6H7M3 7l3-3M3 7l3 3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M13 7H6a3 3 0 100 6h3M13 7l-3-3M13 7l-3 3"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M6 1h7v9H6zM3 5h7v10H3z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 3h8v11H4zM6 1h4v3H6z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3"></path></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3M3 12l10-8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#454e58" stroke-width="1.4"><path d="M4 4h8v8H4zM2 6h2M2 10h2M12 6h2M12 10h2"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 2v12M12 2v12M4 8h8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 3h12M2 13h12M8 6v4M6 8h4"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 3l4 5-4 5M9 13h5"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M8 2v7M5 6l3 3 3-3M3 13h10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 3h12v8H2zM6 13h4M8 11v2M4 7l2-2 2 3 2-3 2 2"></path></svg>
+        </div>
+      </div>
+      <div style="flex:1;min-height:0;display:flex">
+        <div style="width:206px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROJECT</div>
+          <div style="flex:1;min-height:0;padding:3px 0;position:relative">
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>BottlingLine_v3</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Hardware Configuration</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Global Symbols<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">18</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;background:var(--selbg);border:1px dashed var(--acc);font:500 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Programs</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Main<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Prog1<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▸</span>Function Blocks<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">2</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Tasks</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">CyclicTask_10ms<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">10ms</span></div>
+            <div style="position:absolute;left:62px;top:84px;width:216px;padding:3px 0;background:var(--panel2);border:1px solid var(--bord2);box-shadow:0 10px 26px var(--shadow);z-index:5">
+              <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;background:var(--accs);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">New Program…</div>
+              <div style="height:1px;background:var(--bord);margin:3px 0"></div>
+              <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Task Property…</div>
+              <div style="height:1px;background:var(--bord);margin:3px 0"></div>
+              <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">Export Program…<span style="margin-left:auto;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--amber)">not yet</span></div>
+              <div style="display:flex;align-items:center;gap:8px;height:22px;padding:0 9px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">Import Program…<span style="margin-left:auto;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--amber)">not yet</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--bg)">
+          <div style="height:24px;flex:none;display:flex;align-items:stretch;background:var(--head);border-bottom:1px solid var(--bord)">
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;background:var(--panel);border-right:1px solid var(--bord);border-top:2px solid var(--acc);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Main<span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span></div>
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;border-right:1px solid var(--bord);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Prog1<span style="width:5px;height:5px;background:var(--amber)"></span></div>
+          </div>
+          <div style="height:20px;flex:none;display:flex;align-items:center;gap:6px;padding:0 10px;background:var(--panel);border-bottom:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx2)">BottlingLine_v3<span style="color:var(--tx3)">/</span>Programs<span style="color:var(--tx3)">/</span><span style="color:var(--tx)">Main</span><span style="color:var(--tx3)">·</span>LD<span style="color:var(--tx3)">·</span>CyclicTask_10ms</div>
+          <div style="flex:1;min-height:0;overflow:hidden;background:var(--canv);position:relative">
+            <img src="assets/ladder-dark.svg" alt="Ladder — Main, at rest" style="position:absolute;left:0;top:0;width:856px;height:688px;transform:scale(.6);transform-origin:0 0">
+          </div>
+          <div style="height:96px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-top:1px solid var(--bord)">
+            <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord)">
+              <span style="font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LOCAL SYMBOLS</span>
+              <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Main · 7 declared</span>
+              <div style="flex:1"></div>
+              <span style="font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">+ New symbol</span>
+            </div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:19px;padding:0 8px;background:var(--panel);border-bottom:1px solid var(--bord);font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em"><span>CLASS</span><span>IDENTIFIER</span><span>ADDRESS</span><span>DATA TYPE</span><span>INITIAL</span><span>COMMENT</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>StartButton</span><span style="color:var(--tx2)">%IX0.0</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Start pushbutton</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>StopButton</span><span style="color:var(--tx2)">%IX0.1</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Stop, NC wired</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>ConveyorMotor</span><span style="color:var(--tx2)">%QX0.1</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Main drive contactor</span></div>
+          </div>
+        </div>
+        <div style="width:212px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-left:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LIBRARY</div>
+          <div style="flex:1;min-height:0;padding:4px 0">
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">CONTACTS &amp; COILS</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally open</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally closed</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Coil · Set · Reset</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;margin-top:5px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">FUNCTION BLOCKS</div>
+            <div style="height:19px;display:flex;align-items:center;gap:6px;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">TON · TOF · CTU<span style="margin-left:auto;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--amber)">not yet</span></div>
+          </div>
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROPERTIES</div>
+          <div style="height:126px;flex:none;display:flex;align-items:center;justify-content:center;padding:0 18px;text-align:center;font:400 10.5px/1.5 'IBM Plex Sans',sans-serif;color:var(--tx3)">No element selected.<br>Select a contact or coil on the ladder.</div>
+        </div>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--panel);border-top:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">
+        <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">COMPILE</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">PROBLEMS</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">CROSS REFERENCE</span>
+        <div style="flex:1"></div>
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">dock collapsed ▴</span>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:10px;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx2)">
+        <span>ESP32-S3</span><span style="color:var(--green)">● Connected · COM4</span><span>Network 1 · Col 1</span><span>Tool: none</span>
+        <div style="flex:1"></div>
+        <span style="color:var(--tx)">Right-click: Programs folder</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="1b" style="display:flex;flex-direction:column;gap:8px;width:440px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1b</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">New Program — empty, focus in Name</span>
+    </div>
+    <div data-dlg="base" style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--dead:#454e58;--shadow:rgba(0,0,0,.55);width:440px;background:var(--panel);border:1px solid var(--bord2);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span data-t="title" style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">New Program</span>
+        <span data-t="sub" style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3)">BottlingLine_v3 · Programs</span>
+        <div style="flex:1"></div>
+        <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span>
+      </div>
+      <div style="padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px">
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Name</label>
+          <div data-t="namefield" style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--acc);box-shadow:0 0 0 2px var(--accs);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">Prog2<span style="width:1px;height:12px;background:var(--acc);margin-left:1px"></span></div>
+            <div data-t="namemsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Suggested. At most 30 characters, no spaces or <span style="font-family:'IBM Plex Mono',monospace">* # ? \ % @</span>; single underscores, not at the end.</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label data-t="langlabel" style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Language</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div data-t="langctl" style="display:flex;border:1px solid var(--bord2);width:max-content">
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;background:var(--accs);border-right:1px solid var(--bord2);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">LD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">ST</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">FBD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">IL</span>
+            </div>
+            <div data-t="langmsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">ST, FBD and IL are <span style="color:var(--amber)">not yet</span> available. Language cannot be changed after the POU is created.</div>
+          </div>
+        </div>
+        <div data-t="taskrow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Task</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">CyclicTask_10ms<span style="margin-left:auto;color:var(--tx3)">▾</span></div>
+            <div style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">A program with no task is kept but never runs; the tree marks it <span style="font-family:'IBM Plex Mono',monospace;color:var(--amber)">unscheduled</span>.</div>
+          </div>
+        </div>
+        <div data-t="activerow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/16px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Active</label>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:12px;height:12px;background:var(--acc);border:1px solid var(--acc);display:flex;align-items:center;justify-content:center;font:600 9px/1 'IBM Plex Sans',sans-serif;color:#0b0e12">✓</span>
+            <span style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile and run this program</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Comment</label>
+          <div style="height:46px;padding:5px 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Optional</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--bord);margin-top:10px">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Enter confirms · Esc cancels</span>
+        <div style="flex:1"></div>
+        <span style="height:24px;display:flex;align-items:center;padding:0 14px;background:transparent;border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Cancel</span>
+        <span data-t="ok" style="height:24px;display:flex;align-items:center;padding:0 14px;background:var(--panel);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">Create</span>
+      </div>
+    </div>
+    <div data-t="note" style="font:400 11px/1.5 'IBM Plex Sans',sans-serif;color:#8d97a2;width:440px">Focus lands in Name with the suggested value selected. <strong style="color:#c8d2dc;font-weight:500">Create</strong> is disabled until the name is valid — the rule text stays visible rather than appearing only on failure.</div>
+  </div>
+  <div id="1c" style="display:flex;flex-direction:column;gap:8px;width:980px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1c</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">Main artboard — dialog filled and valid (dark)</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2">980×640. Create enabled.</span>
+    </div>
+    <div style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--canv:#0b0e12;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--cmt:#6f9a80;--ink:#8e99a4;--dead:#454e58;--shadow:rgba(0,0,0,.55);--gutter:#0e1216;width:980px;height:640px;position:relative;overflow:hidden;background:var(--bg);border:1px solid var(--bord2);display:flex;flex-direction:column" data-screen-label="1c">
+      <div style="height:24px;flex:none;display:flex;align-items:center;padding:0 4px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">File</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Edit</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">View</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">PLC</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Tools</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Window</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Help</span>
+        <div style="flex:1"></div>
+        <span style="display:flex;align-items:center;gap:6px;height:17px;padding:0 7px;border:1px solid var(--bord2);color:var(--tx3);font:400 10px/1 'IBM Plex Mono',monospace">Command palette<span style="color:var(--tx3)">Ctrl+Shift+P</span></span>
+      </div>
+      <div style="height:44px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--panel);border-bottom:1px solid var(--bord)">
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 2h5l3 3v9H4z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 4h5l1.5 2H14v8H2z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M3 2h10v12H3zM6 2v4h4V2M5 10h6"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M3 7h7a3 3 0 110 6H7M3 7l3-3M3 7l3 3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M13 7H6a3 3 0 100 6h3M13 7l-3-3M13 7l-3 3"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M6 1h7v9H6zM3 5h7v10H3z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 3h8v11H4zM6 1h4v3H6z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3"></path></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3M3 12l10-8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#454e58" stroke-width="1.4"><path d="M4 4h8v8H4zM2 6h2M2 10h2M12 6h2M12 10h2"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 2v12M12 2v12M4 8h8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 3h12M2 13h12M8 6v4M6 8h4"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 3l4 5-4 5M9 13h5"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M8 2v7M5 6l3 3 3-3M3 13h10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 3h12v8H2zM6 13h4M8 11v2M4 7l2-2 2 3 2-3 2 2"></path></svg>
+        </div>
+      </div>
+      <div style="flex:1;min-height:0;display:flex">
+        <div style="width:206px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROJECT</div>
+          <div style="flex:1;min-height:0;padding:3px 0;position:relative">
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>BottlingLine_v3</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Hardware Configuration</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Global Symbols<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">18</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Programs</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Main<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Prog1<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▸</span>Function Blocks<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">2</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Tasks</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">CyclicTask_10ms<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">10ms</span></div>
+            
+          </div>
+        </div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--bg)">
+          <div style="height:24px;flex:none;display:flex;align-items:stretch;background:var(--head);border-bottom:1px solid var(--bord)">
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;background:var(--panel);border-right:1px solid var(--bord);border-top:2px solid var(--acc);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Main<span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span></div>
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;border-right:1px solid var(--bord);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Prog1<span style="width:5px;height:5px;background:var(--amber)"></span></div>
+          </div>
+          <div style="height:20px;flex:none;display:flex;align-items:center;gap:6px;padding:0 10px;background:var(--panel);border-bottom:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx2)">BottlingLine_v3<span style="color:var(--tx3)">/</span>Programs<span style="color:var(--tx3)">/</span><span style="color:var(--tx)">Main</span><span style="color:var(--tx3)">·</span>LD<span style="color:var(--tx3)">·</span>CyclicTask_10ms</div>
+          <div style="flex:1;min-height:0;overflow:hidden;background:var(--canv);position:relative">
+            <img src="assets/ladder-dark.svg" alt="Ladder — Main, at rest" style="position:absolute;left:0;top:0;width:856px;height:688px;transform:scale(.6);transform-origin:0 0">
+          </div>
+          <div style="height:96px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-top:1px solid var(--bord)">
+            <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord)">
+              <span style="font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LOCAL SYMBOLS</span>
+              <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Main · 7 declared</span>
+              <div style="flex:1"></div>
+              <span style="font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">+ New symbol</span>
+            </div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:19px;padding:0 8px;background:var(--panel);border-bottom:1px solid var(--bord);font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em"><span>CLASS</span><span>IDENTIFIER</span><span>ADDRESS</span><span>DATA TYPE</span><span>INITIAL</span><span>COMMENT</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>StartButton</span><span style="color:var(--tx2)">%IX0.0</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Start pushbutton</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>StopButton</span><span style="color:var(--tx2)">%IX0.1</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Stop, NC wired</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>ConveyorMotor</span><span style="color:var(--tx2)">%QX0.1</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Main drive contactor</span></div>
+          </div>
+        </div>
+        <div style="width:212px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-left:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LIBRARY</div>
+          <div style="flex:1;min-height:0;padding:4px 0">
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">CONTACTS &amp; COILS</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally open</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally closed</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Coil · Set · Reset</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;margin-top:5px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">FUNCTION BLOCKS</div>
+            <div style="height:19px;display:flex;align-items:center;gap:6px;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">TON · TOF · CTU<span style="margin-left:auto;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--amber)">not yet</span></div>
+          </div>
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROPERTIES</div>
+          <div style="height:126px;flex:none;display:flex;align-items:center;justify-content:center;padding:0 18px;text-align:center;font:400 10.5px/1.5 'IBM Plex Sans',sans-serif;color:var(--tx3)">No element selected.<br>Select a contact or coil on the ladder.</div>
+        </div>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--panel);border-top:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">
+        <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">COMPILE</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">PROBLEMS</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">CROSS REFERENCE</span>
+        <div style="flex:1"></div>
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">dock collapsed ▴</span>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:10px;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx2)">
+        <span>ESP32-S3</span><span style="color:var(--green)">● Connected · COM4</span><span>Network 1 · Col 1</span><span>Tool: none</span>
+        <div style="flex:1"></div>
+        <span style="color:var(--tx)">New Program dialog · Name is valid</span>
+      </div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:flex-start;justify-content:center;padding-top:88px">
+        <div data-dlg="valid" style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--dead:#454e58;--shadow:rgba(0,0,0,.55);width:440px;background:var(--panel);border:1px solid var(--bord2);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span data-t="title" style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">New Program</span>
+        <span data-t="sub" style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3)">BottlingLine_v3 · Programs</span>
+        <div style="flex:1"></div>
+        <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span>
+      </div>
+      <div style="padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px">
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Name</label>
+          <div data-t="namefield" style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--acc);box-shadow:0 0 0 2px var(--accs);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">FillControl<span style="width:1px;height:12px;background:var(--acc);margin-left:1px"></span></div>
+            <div data-t="namemsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Valid. 30 characters or fewer, no spaces or <span style="font-family:'IBM Plex Mono',monospace">* # ? \ % @</span>, single underscores.</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label data-t="langlabel" style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Language</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div data-t="langctl" style="display:flex;border:1px solid var(--bord2);width:max-content">
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;background:var(--accs);border-right:1px solid var(--bord2);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">LD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">ST</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">FBD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">IL</span>
+            </div>
+            <div data-t="langmsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">ST, FBD and IL are <span style="color:var(--amber)">not yet</span> available. Language cannot be changed after the POU is created.</div>
+          </div>
+        </div>
+        <div data-t="taskrow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Task</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">CyclicTask_10ms<span style="margin-left:auto;color:var(--tx3)">▾</span></div>
+            <div style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">A program with no task is kept but never runs; the tree marks it <span style="font-family:'IBM Plex Mono',monospace;color:var(--amber)">unscheduled</span>.</div>
+          </div>
+        </div>
+        <div data-t="activerow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/16px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Active</label>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:12px;height:12px;background:var(--acc);border:1px solid var(--acc);display:flex;align-items:center;justify-content:center;font:600 9px/1 'IBM Plex Sans',sans-serif;color:#0b0e12">✓</span>
+            <span style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile and run this program</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Comment</label>
+          <div style="height:46px;padding:5px 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Optional</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--bord);margin-top:10px">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Enter confirms · Esc cancels</span>
+        <div style="flex:1"></div>
+        <span style="height:24px;display:flex;align-items:center;padding:0 14px;background:transparent;border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Cancel</span>
+        <span data-t="ok" style="height:24px;display:flex;align-items:center;padding:0 14px;background:var(--acc);border:1px solid var(--acc);font:500 11.5px/1 'IBM Plex Sans',sans-serif;color:#fff">Create</span>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="1d" style="display:flex;flex-direction:column;gap:8px;width:440px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1d</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">Invalid name — disallowed characters</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2">Reason written beside the field.</span>
+    </div>
+    <div data-dlg="base" style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--dead:#454e58;--shadow:rgba(0,0,0,.55);width:440px;background:var(--panel);border:1px solid var(--bord2);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span data-t="title" style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">New Program</span>
+        <span data-t="sub" style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3)">BottlingLine_v3 · Programs</span>
+        <div style="flex:1"></div>
+        <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span>
+      </div>
+      <div style="padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px">
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Name</label>
+          <div data-t="namefield" style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--red);box-shadow:0 0 0 2px rgba(240,101,92,.16);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">Motor 1*<span style="width:1px;height:12px;background:var(--red);margin-left:1px"></span></div>
+            <div data-t="namemsg" style="display:flex;gap:5px;font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--red)"><span>⚠</span><span>Not allowed: a space and <span style="font-family:'IBM Plex Mono',monospace">*</span>. Use letters, digits and single underscores — <span style="font-family:'IBM Plex Mono',monospace">Motor_1</span> is valid.</span></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label data-t="langlabel" style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Language</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div data-t="langctl" style="display:flex;border:1px solid var(--bord2);width:max-content">
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;background:var(--accs);border-right:1px solid var(--bord2);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">LD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">ST</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">FBD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">IL</span>
+            </div>
+            <div data-t="langmsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">ST, FBD and IL are <span style="color:var(--amber)">not yet</span> available. Language cannot be changed after the POU is created.</div>
+          </div>
+        </div>
+        <div data-t="taskrow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Task</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">CyclicTask_10ms<span style="margin-left:auto;color:var(--tx3)">▾</span></div>
+            <div style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">A program with no task is kept but never runs; the tree marks it <span style="font-family:'IBM Plex Mono',monospace;color:var(--amber)">unscheduled</span>.</div>
+          </div>
+        </div>
+        <div data-t="activerow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/16px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Active</label>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:12px;height:12px;background:var(--acc);border:1px solid var(--acc);display:flex;align-items:center;justify-content:center;font:600 9px/1 'IBM Plex Sans',sans-serif;color:#0b0e12">✓</span>
+            <span style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile and run this program</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Comment</label>
+          <div style="height:46px;padding:5px 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Optional</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--bord);margin-top:10px">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Enter confirms · Esc cancels</span>
+        <div style="flex:1"></div>
+        <span style="height:24px;display:flex;align-items:center;padding:0 14px;background:transparent;border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Cancel</span>
+        <span data-t="ok" style="height:24px;display:flex;align-items:center;padding:0 14px;background:var(--panel);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">Create</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="1e" style="display:flex;flex-direction:column;gap:8px;width:440px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1e</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">Invalid name — already in use</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2"></span>
+    </div>
+    <div data-dlg="base" style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--dead:#454e58;--shadow:rgba(0,0,0,.55);width:440px;background:var(--panel);border:1px solid var(--bord2);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span data-t="title" style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">New Program</span>
+        <span data-t="sub" style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3)">BottlingLine_v3 · Programs</span>
+        <div style="flex:1"></div>
+        <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span>
+      </div>
+      <div style="padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px">
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Name</label>
+          <div data-t="namefield" style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--red);box-shadow:0 0 0 2px rgba(240,101,92,.16);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">Prog1<span style="width:1px;height:12px;background:var(--red);margin-left:1px"></span></div>
+            <div data-t="namemsg" style="display:flex;gap:5px;font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--red)"><span>⚠</span><span>A POU called <span style="font-family:'IBM Plex Mono',monospace">Prog1</span> already exists under Programs. Names are unique across the project.</span></div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label data-t="langlabel" style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Language</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div data-t="langctl" style="display:flex;border:1px solid var(--bord2);width:max-content">
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;background:var(--accs);border-right:1px solid var(--bord2);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">LD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">ST</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">FBD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">IL</span>
+            </div>
+            <div data-t="langmsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">ST, FBD and IL are <span style="color:var(--amber)">not yet</span> available. Language cannot be changed after the POU is created.</div>
+          </div>
+        </div>
+        <div data-t="taskrow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Task</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">CyclicTask_10ms<span style="margin-left:auto;color:var(--tx3)">▾</span></div>
+            <div style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">A program with no task is kept but never runs; the tree marks it <span style="font-family:'IBM Plex Mono',monospace;color:var(--amber)">unscheduled</span>.</div>
+          </div>
+        </div>
+        <div data-t="activerow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/16px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Active</label>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:12px;height:12px;background:var(--acc);border:1px solid var(--acc);display:flex;align-items:center;justify-content:center;font:600 9px/1 'IBM Plex Sans',sans-serif;color:#0b0e12">✓</span>
+            <span style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile and run this program</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Comment</label>
+          <div style="height:46px;padding:5px 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Optional</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--bord);margin-top:10px">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Enter confirms · Esc cancels</span>
+        <div style="flex:1"></div>
+        <span style="height:24px;display:flex;align-items:center;padding:0 14px;background:transparent;border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Cancel</span>
+        <span data-t="ok" style="height:24px;display:flex;align-items:center;padding:0 14px;background:var(--panel);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">Create</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="1f" style="display:flex;flex-direction:column;gap:8px;width:440px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1f</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">New Function Block</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2">No Task, no Active — a block is called, never scheduled.</span>
+    </div>
+    <div data-dlg="base" style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--dead:#454e58;--shadow:rgba(0,0,0,.55);width:440px;background:var(--panel);border:1px solid var(--bord2);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span data-t="title" style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">New Function Block</span>
+        <span data-t="sub" style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3)">BottlingLine_v3 · Function Blocks</span>
+        <div style="flex:1"></div>
+        <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span>
+      </div>
+      <div style="padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px">
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Name</label>
+          <div data-t="namefield" style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--acc);box-shadow:0 0 0 2px var(--accs);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">FB1<span style="width:1px;height:12px;background:var(--acc);margin-left:1px"></span></div>
+            <div data-t="namemsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Valid. The block is called by a program, so it has no task and no active switch.</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label data-t="langlabel" style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Language</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div data-t="langctl" style="display:flex;border:1px solid var(--bord2);width:max-content">
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;background:var(--accs);border-right:1px solid var(--bord2);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">LD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">ST</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">FBD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">IL</span>
+            </div>
+            <div data-t="langmsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">ST, FBD and IL are <span style="color:var(--amber)">not yet</span> available. Language cannot be changed after the POU is created.</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Comment</label>
+          <div style="height:46px;padding:5px 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Optional</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--bord);margin-top:10px">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Enter confirms · Esc cancels</span>
+        <div style="flex:1"></div>
+        <span style="height:24px;display:flex;align-items:center;padding:0 14px;background:transparent;border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Cancel</span>
+        <span data-t="ok" style="height:24px;display:flex;align-items:center;padding:0 14px;background:var(--acc);border:1px solid var(--acc);font:500 11.5px/1 'IBM Plex Sans',sans-serif;color:#fff">Create</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="1g" style="display:flex;flex-direction:column;gap:8px;width:440px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1g</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">Program Properties — Language locked</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2"></span>
+    </div>
+    <div data-dlg="base" style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--dead:#454e58;--shadow:rgba(0,0,0,.55);width:440px;background:var(--panel);border:1px solid var(--bord2);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span data-t="title" style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Program Properties</span>
+        <span data-t="sub" style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3)">BottlingLine_v3 · Programs · Main</span>
+        <div style="flex:1"></div>
+        <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span>
+      </div>
+      <div style="padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px">
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Name</label>
+          <div data-t="namefield" style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">Main<span style="width:1px;height:12px;background:var(--acc);margin-left:1px"></span></div>
+            <div data-t="namemsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Renaming updates every reference on the ladder and in the cross reference.</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label data-t="langlabel" style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Language</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;gap:7px;padding:0 7px;width:max-content;min-width:120px;background:var(--panel);border:1px solid var(--bord2);opacity:.65;font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--dead)">LD<span style="margin-left:auto">🔒</span></div>
+            <div data-t="langmsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Locked — a POU's language is fixed when it is created, because its body cannot be translated. Create a new POU to use another language.</div>
+          </div>
+        </div>
+        <div data-t="taskrow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Task</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">CyclicTask_10ms<span style="margin-left:auto;color:var(--tx3)">▾</span></div>
+            <div style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">A program with no task is kept but never runs; the tree marks it <span style="font-family:'IBM Plex Mono',monospace;color:var(--amber)">unscheduled</span>.</div>
+          </div>
+        </div>
+        <div data-t="activerow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/16px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Active</label>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:12px;height:12px;background:var(--acc);border:1px solid var(--acc);display:flex;align-items:center;justify-content:center;font:600 9px/1 'IBM Plex Sans',sans-serif;color:#0b0e12">✓</span>
+            <span style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile and run this program</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Comment</label>
+          <div style="height:46px;padding:5px 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Optional</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--bord);margin-top:10px">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Enter confirms · Esc cancels</span>
+        <div style="flex:1"></div>
+        <span style="height:24px;display:flex;align-items:center;padding:0 14px;background:transparent;border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Cancel</span>
+        <span data-t="ok" style="height:24px;display:flex;align-items:center;padding:0 14px;background:var(--acc);border:1px solid var(--acc);font:500 11.5px/1 'IBM Plex Sans',sans-serif;color:#fff">OK</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="1h" style="display:flex;flex-direction:column;gap:8px;width:980px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1h</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">After OK — new POU in the tree and open in its tab</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2">Empty ladder and empty symbol table, both labelled.</span>
+    </div>
+    <div style="--bg:#0e1114;--panel:#171b21;--panel2:#1d222a;--head:#131720;--bord:#2a313a;--bord2:#3d4650;--tx:#dde3ea;--tx2:#9aa5b1;--tx3:#6e7882;--acc:#4b90d6;--accs:rgba(75,144,214,.18);--selbg:#1b3350;--canv:#0b0e12;--input:#0b0e12;--red:#f0655c;--green:#3fd67f;--amber:#e0a83c;--cmt:#6f9a80;--ink:#8e99a4;--dead:#454e58;--shadow:rgba(0,0,0,.55);--gutter:#0e1216;width:980px;height:640px;position:relative;overflow:hidden;background:var(--bg);border:1px solid var(--bord2);display:flex;flex-direction:column" data-screen-label="1h">
+      <div style="height:24px;flex:none;display:flex;align-items:center;padding:0 4px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">File</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Edit</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">View</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">PLC</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Tools</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Window</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Help</span>
+        <div style="flex:1"></div>
+        <span style="display:flex;align-items:center;gap:6px;height:17px;padding:0 7px;border:1px solid var(--bord2);color:var(--tx3);font:400 10px/1 'IBM Plex Mono',monospace">Command palette<span style="color:var(--tx3)">Ctrl+Shift+P</span></span>
+      </div>
+      <div style="height:44px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--panel);border-bottom:1px solid var(--bord)">
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 2h5l3 3v9H4z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 4h5l1.5 2H14v8H2z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M3 2h10v12H3zM6 2v4h4V2M5 10h6"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M3 7h7a3 3 0 110 6H7M3 7l3-3M3 7l3 3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M13 7H6a3 3 0 100 6h3M13 7l-3-3M13 7l-3 3"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M6 1h7v9H6zM3 5h7v10H3z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 3h8v11H4zM6 1h4v3H6z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3"></path></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3M3 12l10-8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#454e58" stroke-width="1.4"><path d="M4 4h8v8H4zM2 6h2M2 10h2M12 6h2M12 10h2"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 2v12M12 2v12M4 8h8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 3h12M2 13h12M8 6v4M6 8h4"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M4 3l4 5-4 5M9 13h5"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M8 2v7M5 6l3 3 3-3M3 13h10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#dde3ea" stroke-width="1.4"><path d="M2 3h12v8H2zM6 13h4M8 11v2M4 7l2-2 2 3 2-3 2 2"></path></svg>
+        </div>
+      </div>
+      <div style="flex:1;min-height:0;display:flex">
+        <div style="width:206px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROJECT</div>
+          <div style="flex:1;min-height:0;padding:3px 0;position:relative">
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>BottlingLine_v3</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Hardware Configuration</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Global Symbols<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">18</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Programs</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Main<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Prog1<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;background:var(--selbg);font:500 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">FillControl<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--acc)">LD · new</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▸</span>Function Blocks<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">2</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Tasks</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">CyclicTask_10ms<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">10ms</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 46px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Main</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 46px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">FillControl<span style="margin-left:auto;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--acc)">new</span></div>
+            
+          </div>
+        </div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--bg)">
+          <div style="height:24px;flex:none;display:flex;align-items:stretch;background:var(--head);border-bottom:1px solid var(--bord)">
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;border-right:1px solid var(--bord);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Main</div>
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;border-right:1px solid var(--bord);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Prog1<span style="width:5px;height:5px;background:var(--amber)"></span></div>
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;background:var(--panel);border-right:1px solid var(--bord);border-top:2px solid var(--acc);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">FillControl<span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span></div>
+          </div>
+          <div style="height:20px;flex:none;display:flex;align-items:center;gap:6px;padding:0 10px;background:var(--panel);border-bottom:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx2)">BottlingLine_v3<span style="color:var(--tx3)">/</span>Programs<span style="color:var(--tx3)">/</span><span style="color:var(--tx)">FillControl</span><span style="color:var(--tx3)">·</span>LD<span style="color:var(--tx3)">·</span>CyclicTask_10ms<span style="color:var(--tx3)">·</span>Active</div>
+          <div style="flex:1;min-height:0;overflow:hidden;background:var(--canv);position:relative">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px">
+              <div style="font:400 12px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">No networks yet</div>
+              <div style="font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">A new POU starts empty.</div>
+              <div style="margin-top:4px;height:22px;display:flex;align-items:center;padding:0 10px;background:var(--accs);border:1px solid var(--acc);font:500 10.5px/1 'IBM Plex Mono',monospace;color:var(--acc)">+ Insert network (Ctrl+I)</div>
+            </div>
+          </div>
+          <div style="height:96px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-top:1px solid var(--bord)">
+            <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord)">
+              <span style="font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LOCAL SYMBOLS</span>
+              <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">FillControl · 0 declared</span>
+              <div style="flex:1"></div>
+              <span style="font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">+ New symbol</span>
+            </div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:19px;padding:0 8px;background:var(--panel);border-bottom:1px solid var(--bord);font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em"><span>CLASS</span><span>IDENTIFIER</span><span>ADDRESS</span><span>DATA TYPE</span><span>INITIAL</span><span>COMMENT</span></div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">No symbols declared — <span style="color:var(--acc);margin-left:4px">+ New symbol</span></div>
+          
+          </div>
+        </div>
+        <div style="width:212px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-left:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LIBRARY</div>
+          <div style="flex:1;min-height:0;padding:4px 0">
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">CONTACTS &amp; COILS</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally open</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally closed</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Coil · Set · Reset</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;margin-top:5px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">FUNCTION BLOCKS</div>
+            <div style="height:19px;display:flex;align-items:center;gap:6px;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">TON · TOF · CTU<span style="margin-left:auto;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--amber)">not yet</span></div>
+          </div>
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROPERTIES</div>
+          <div style="height:126px;flex:none;display:flex;align-items:center;justify-content:center;padding:0 18px;text-align:center;font:400 10.5px/1.5 'IBM Plex Sans',sans-serif;color:var(--tx3)">No element selected.<br>Select a contact or coil on the ladder.</div>
+        </div>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--panel);border-top:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">
+        <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">COMPILE</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">PROBLEMS</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">CROSS REFERENCE</span>
+        <div style="flex:1"></div>
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">dock collapsed ▴</span>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:10px;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx2)">
+        <span>ESP32-S3</span><span style="color:var(--green)">● Connected · COM4</span><span>Network 1 · Col 1</span><span>Tool: none</span>
+        <div style="flex:1"></div>
+        <span style="color:var(--tx)">FillControl created · opened in a new tab</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="1i" style="display:flex;flex-direction:column;gap:8px;width:980px">
+    <div style="display:flex;align-items:baseline;gap:9px">
+      <span style="font:600 10px/1 'IBM Plex Mono',monospace;color:#0b0e12;background:#4b90d6;padding:4px 6px">1i</span>
+      <span style="font:500 13px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">Main artboard — light theme</span>
+      <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:#8d97a2">Same state as 1c.</span>
+    </div>
+    <div style="--bg:#e5e8ec;--panel:#f3f4f7;--panel2:#fbfbfd;--head:#e9ebef;--bord:#ccd2d9;--bord2:#a9b1ba;--tx:#1b2126;--tx2:#525c66;--tx3:#7c858f;--acc:#1a68b8;--accs:rgba(26,104,184,.14);--selbg:#cadff6;--canv:#fcfcfb;--input:#ffffff;--red:#c0342a;--green:#0f7a41;--amber:#8f5c05;--cmt:#3f7a58;--ink:#414b55;--dead:#aab2ba;--shadow:rgba(0,0,0,.22);--gutter:#eef0f3;width:980px;height:640px;position:relative;overflow:hidden;background:var(--bg);border:1px solid var(--bord2);display:flex;flex-direction:column" data-screen-label="1i">
+      <div style="height:24px;flex:none;display:flex;align-items:center;padding:0 4px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">File</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Edit</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">View</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">PLC</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Tools</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Window</span>
+        <span style="padding:0 7px;font:400 11.5px/24px 'IBM Plex Sans',sans-serif;color:var(--tx)">Help</span>
+        <div style="flex:1"></div>
+        <span style="display:flex;align-items:center;gap:6px;height:17px;padding:0 7px;border:1px solid var(--bord2);color:var(--tx3);font:400 10px/1 'IBM Plex Mono',monospace">Command palette<span style="color:var(--tx3)">Ctrl+Shift+P</span></span>
+      </div>
+      <div style="height:44px;flex:none;display:flex;flex-direction:column;justify-content:center;gap:2px;background:var(--panel);border-bottom:1px solid var(--bord)">
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M4 2h5l3 3v9H4z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M2 4h5l1.5 2H14v8H2z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M3 2h10v12H3zM6 2v4h4V2M5 10h6"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M3 7h7a3 3 0 110 6H7M3 7l3-3M3 7l3 3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M13 7H6a3 3 0 100 6h3M13 7l-3-3M13 7l-3 3"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M6 1h7v9H6zM3 5h7v10H3z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M4 3h8v11H4zM6 1h4v3H6z"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M7 2a5 5 0 100 10A5 5 0 007 2M11 11l3 3"></path></svg>
+        </div>
+        <div style="display:flex;align-items:center;gap:3px;padding:0 6px">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M1 8h3M4 3v10M12 3v10M12 8h3M3 12l10-8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M1 8h3M15 8h-3M5 3a6.5 6.5 0 000 10M11 3a6.5 6.5 0 010 10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#aab2ba" stroke-width="1.4"><path d="M4 4h8v8H4zM2 6h2M2 10h2M12 6h2M12 10h2"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M4 2v12M12 2v12M4 8h8"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M2 3h12M2 13h12M8 6v4M6 8h4"></path></svg>
+          <span style="width:1px;height:14px;background:var(--bord);margin:0 3px"></span>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M4 3l4 5-4 5M9 13h5"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M8 2v7M5 6l3 3 3-3M3 13h10"></path></svg>
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#1b2126" stroke-width="1.4"><path d="M2 3h12v8H2zM6 13h4M8 11v2M4 7l2-2 2 3 2-3 2 2"></path></svg>
+        </div>
+      </div>
+      <div style="flex:1;min-height:0;display:flex">
+        <div style="width:206px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROJECT</div>
+          <div style="flex:1;min-height:0;padding:3px 0;position:relative">
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>BottlingLine_v3</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Hardware Configuration</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 24px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Global Symbols<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">18</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Programs</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Main<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Prog1<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">LD</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▸</span>Function Blocks<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">2</span></div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 18px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)"><span style="color:var(--acc)">▾</span>Tasks</div>
+            <div style="display:flex;align-items:center;gap:6px;height:20px;padding:0 8px 0 32px;font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">CyclicTask_10ms<span style="margin-left:auto;font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">10ms</span></div>
+            
+          </div>
+        </div>
+        <div style="flex:1;min-width:0;display:flex;flex-direction:column;background:var(--bg)">
+          <div style="height:24px;flex:none;display:flex;align-items:stretch;background:var(--head);border-bottom:1px solid var(--bord)">
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;background:var(--panel);border-right:1px solid var(--bord);border-top:2px solid var(--acc);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Main<span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span></div>
+            <div style="display:flex;align-items:center;gap:7px;padding:0 10px;border-right:1px solid var(--bord);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">Prog1<span style="width:5px;height:5px;background:var(--amber)"></span></div>
+          </div>
+          <div style="height:20px;flex:none;display:flex;align-items:center;gap:6px;padding:0 10px;background:var(--panel);border-bottom:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx2)">BottlingLine_v3<span style="color:var(--tx3)">/</span>Programs<span style="color:var(--tx3)">/</span><span style="color:var(--tx)">Main</span><span style="color:var(--tx3)">·</span>LD<span style="color:var(--tx3)">·</span>CyclicTask_10ms</div>
+          <div style="flex:1;min-height:0;overflow:hidden;background:var(--canv);position:relative">
+            <img src="assets/ladder-light.svg" alt="Ladder — Main, at rest" style="position:absolute;left:0;top:0;width:856px;height:688px;transform:scale(.6);transform-origin:0 0">
+          </div>
+          <div style="height:96px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-top:1px solid var(--bord)">
+            <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord)">
+              <span style="font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LOCAL SYMBOLS</span>
+              <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Main · 7 declared</span>
+              <div style="flex:1"></div>
+              <span style="font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">+ New symbol</span>
+            </div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:19px;padding:0 8px;background:var(--panel);border-bottom:1px solid var(--bord);font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em"><span>CLASS</span><span>IDENTIFIER</span><span>ADDRESS</span><span>DATA TYPE</span><span>INITIAL</span><span>COMMENT</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>StartButton</span><span style="color:var(--tx2)">%IX0.0</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Start pushbutton</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>StopButton</span><span style="color:var(--tx2)">%IX0.1</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Stop, NC wired</span></div>
+            <div style="display:grid;grid-template-columns:74px 1fr 84px 70px 62px 1fr;align-items:center;height:18px;padding:0 8px;font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx)"><span style="color:var(--tx2)">VAR</span><span>ConveyorMotor</span><span style="color:var(--tx2)">%QX0.1</span><span style="color:var(--tx2)">BOOL</span><span style="color:var(--tx2)">FALSE</span><span style="font-family:'IBM Plex Sans',sans-serif;color:var(--tx2)">Main drive contactor</span></div>
+          </div>
+        </div>
+        <div style="width:212px;flex:none;display:flex;flex-direction:column;background:var(--panel);border-left:1px solid var(--bord)">
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">LIBRARY</div>
+          <div style="flex:1;min-height:0;padding:4px 0">
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">CONTACTS &amp; COILS</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally open</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Normally closed</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Coil · Set · Reset</div>
+            <div style="height:19px;display:flex;align-items:center;padding:0 9px;margin-top:5px;font:500 10px/1 'IBM Plex Sans',sans-serif;color:var(--tx3);letter-spacing:.03em">FUNCTION BLOCKS</div>
+            <div style="height:19px;display:flex;align-items:center;gap:6px;padding:0 9px 0 16px;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">TON · TOF · CTU<span style="margin-left:auto;font:400 9.5px/1 'IBM Plex Mono',monospace;color:var(--amber)">not yet</span></div>
+          </div>
+          <div style="height:22px;flex:none;display:flex;align-items:center;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);border-bottom:1px solid var(--bord);font:600 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx2);letter-spacing:.04em">PROPERTIES</div>
+          <div style="height:126px;flex:none;display:flex;align-items:center;justify-content:center;padding:0 18px;text-align:center;font:400 10.5px/1.5 'IBM Plex Sans',sans-serif;color:var(--tx3)">No element selected.<br>Select a contact or coil on the ladder.</div>
+        </div>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px;background:var(--panel);border-top:1px solid var(--bord);font:400 10.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx2)">
+        <span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">COMPILE</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">PROBLEMS</span><span style="font-family:'IBM Plex Mono',monospace;color:var(--tx3)">CROSS REFERENCE</span>
+        <div style="flex:1"></div>
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">dock collapsed ▴</span>
+      </div>
+      <div style="height:22px;flex:none;display:flex;align-items:center;gap:10px;padding:0 8px;background:var(--head);border-top:1px solid var(--bord);font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx2)">
+        <span>ESP32-S3</span><span style="color:var(--green)">● Connected · COM4</span><span>Network 1 · Col 1</span><span>Tool: none</span>
+        <div style="flex:1"></div>
+        <span style="color:var(--tx)">New Program dialog · Name is valid</span>
+      </div>
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.42);display:flex;align-items:flex-start;justify-content:center;padding-top:88px">
+        <div data-dlg="valid" style="--bg:#e5e8ec;--panel:#f3f4f7;--panel2:#fbfbfd;--head:#e9ebef;--bord:#ccd2d9;--bord2:#a9b1ba;--tx:#1b2126;--tx2:#525c66;--tx3:#7c858f;--acc:#1a68b8;--accs:rgba(26,104,184,.14);--selbg:#cadff6;--input:#ffffff;--red:#c0342a;--green:#0f7a41;--amber:#8f5c05;--dead:#aab2ba;--shadow:rgba(0,0,0,.22);width:440px;background:var(--panel);border:1px solid var(--bord2);box-shadow:0 20px 56px rgba(0,0,0,.6);display:flex;flex-direction:column">
+      <div style="height:28px;flex:none;display:flex;align-items:center;gap:8px;padding:0 10px;background:var(--head);border-bottom:1px solid var(--bord)">
+        <span data-t="title" style="font:600 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">New Program</span>
+        <span data-t="sub" style="font:400 10.5px/1 'IBM Plex Mono',monospace;color:var(--tx3)">BottlingLine_v3 · Programs</span>
+        <div style="flex:1"></div>
+        <span style="font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--tx3)">✕</span>
+      </div>
+      <div style="padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px">
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Name</label>
+          <div data-t="namefield" style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--acc);box-shadow:0 0 0 2px var(--accs);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">FillControl<span style="width:1px;height:12px;background:var(--acc);margin-left:1px"></span></div>
+            <div data-t="namemsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Valid. 30 characters or fewer, no spaces or <span style="font-family:'IBM Plex Mono',monospace">* # ? \ % @</span>, single underscores.</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label data-t="langlabel" style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Language</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div data-t="langctl" style="display:flex;border:1px solid var(--bord2);width:max-content">
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;background:var(--accs);border-right:1px solid var(--bord2);font:500 11px/1 'IBM Plex Sans',sans-serif;color:var(--acc)">LD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">ST</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;border-right:1px solid var(--bord2);font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">FBD</span>
+              <span style="padding:0 11px;height:22px;display:flex;align-items:center;font:400 11px/1 'IBM Plex Sans',sans-serif;color:var(--dead)">IL</span>
+            </div>
+            <div data-t="langmsg" style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">ST, FBD and IL are <span style="color:var(--amber)">not yet</span> available. Language cannot be changed after the POU is created.</div>
+          </div>
+        </div>
+        <div data-t="taskrow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Task</label>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="height:22px;display:flex;align-items:center;padding:0 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--tx)">CyclicTask_10ms<span style="margin-left:auto;color:var(--tx3)">▾</span></div>
+            <div style="font:400 10.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">A program with no task is kept but never runs; the tree marks it <span style="font-family:'IBM Plex Mono',monospace;color:var(--amber)">unscheduled</span>.</div>
+          </div>
+        </div>
+        <div data-t="activerow" style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/16px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Active</label>
+          <div style="display:flex;align-items:center;gap:7px">
+            <span style="width:12px;height:12px;background:var(--acc);border:1px solid var(--acc);display:flex;align-items:center;justify-content:center;font:600 9px/1 'IBM Plex Sans',sans-serif;color:#fff">✓</span>
+            <span style="font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Compile and run this program</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:92px 1fr;align-items:start;gap:9px">
+          <label style="font:400 11.5px/22px 'IBM Plex Sans',sans-serif;color:var(--tx2)">Comment</label>
+          <div style="height:46px;padding:5px 7px;background:var(--input);border:1px solid var(--bord2);font:400 11.5px/1.4 'IBM Plex Sans',sans-serif;color:var(--tx3)">Optional</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px 14px;border-top:1px solid var(--bord);margin-top:10px">
+        <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--tx3)">Enter confirms · Esc cancels</span>
+        <div style="flex:1"></div>
+        <span style="height:24px;display:flex;align-items:center;padding:0 14px;background:transparent;border:1px solid var(--bord2);font:400 11.5px/1 'IBM Plex Sans',sans-serif;color:var(--tx)">Cancel</span>
+        <span data-t="ok" style="height:24px;display:flex;align-items:center;padding:0 14px;background:var(--acc);border:1px solid var(--acc);font:500 11.5px/1 'IBM Plex Sans',sans-serif;color:#fff">Create</span>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:9px;width:980px;padding:14px 16px;background:#12161b;border:1px solid #2a313a">
+    <div style="font:600 12px/1 'IBM Plex Sans',sans-serif;color:#e7edf4">Open questions — answered</div>
+    <div style="font:400 11.5px/1.6 'IBM Plex Sans',sans-serif;color:#9aa5b1"><strong style="color:#dde3ea;font-weight:500">A program with no task is allowed.</strong> Leaving Task empty keeps the POU compilable but unscheduled; the tree writes <span style="font-family:'IBM Plex Mono',monospace;color:#e0a83c">unscheduled</span> where the task name would go, in the same slot that carries <span style="font-family:'IBM Plex Mono',monospace">LD</span>, and the program does not appear under any task. The hint under the Task field says so before the engineer commits.</div>
+    <div style="font:400 11.5px/1.6 'IBM Plex Sans',sans-serif;color:#9aa5b1"><strong style="color:#dde3ea;font-weight:500">Rename… reuses this dialog</strong>, in its Properties form (<a href="#1g">1g</a>) with focus in Name — not in-place tree editing. The same validation, the same written reasons, and one place where a name is judged. In-place editing would have to grow its own error surface inside a 20px tree row.</div>
+    <div style="font:400 11.5px/1.6 'IBM Plex Sans',sans-serif;color:#9aa5b1"><strong style="color:#dde3ea;font-weight:500">Deferred:</strong> what the compiler accepts. Per ADR-001 the browser only renders the verdict, so <a href="#1d">1d</a> and <a href="#1e">1e</a> fix <em style="font-style:normal;color:#dde3ea">where</em> the message sits and <em style="font-style:normal;color:#dde3ea">how</em> it reads; the rules quoted are ISPSoft's, for realism only.</div>
+  </div>
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1100,&quot;height&quot;:760}}"></script>
+</body>
+</html>
